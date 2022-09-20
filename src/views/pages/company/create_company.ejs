@@ -1,0 +1,225 @@
+<div class="content-wrapper">
+    <section class="content-header">
+        <div class="container-fluid">
+            <div class="row mb-2">
+                <div class="col-sm-6">
+                    <h1>Company create</h1>
+                </div>
+                <div class="col-sm-6">
+                    <ol class="breadcrumb float-sm-right">
+                        <li class="breadcrumb-item">
+                            <a href="/admin/company">Company list</a>
+                        </li>
+                        <li class="breadcrumb-item active">Company create</li>
+                    </ol>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="content">
+        <div class="container-fluid">
+            <div class="card card-primary">
+                <div class="card-header">
+                    <h3 class="card-title">Create Company</h3>
+                </div>
+
+                <div>
+                    <% if(message != '') { %>
+                        <div class="p-3">
+                            <div class="alert mb-0" style="
+                background-color: rgb(141, 228, 141);
+                border: none;
+                color: rgb(2, 120, 28);
+              " role="alert">
+                                <%= message %>
+                            </div>
+                        </div>
+
+                        <% } else if(error != ''){ %>
+                            <div class="p-3">
+                                <div class="alert alert-dismissible mb-0" style="
+                background-color: rgb(237 183 183);
+                border: none;
+                color: rgb(120 2 2);
+              " role="alert">
+                                    <%= error %>
+                                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+                                </div>
+                            </div>
+                            <% } %>
+                </div>
+                <form method="post" action="/admin/create-company" enctype="multipart/form-data" autocomplete="off">
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label>Company name</label>
+                                    <input type="text" class="form-control" name="name" placeholder="Company name" value="<%= formValue && formValue.name ? formValue.name :'' %>" />
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label>Company E-mail</label>
+                                    <input type="email" class="form-control" name="email" placeholder="Company email" value="<%= formValue && formValue.email ? formValue.email :'' %>" />
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label>Mobile No.</label>
+                                    <input type="number" class="form-control mobileNumberField" name="mobile" value="<%= formValue && formValue.mobile ? formValue.mobile :'' %>" placeholder="Company Mobile no." />
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label>Company Link</label>
+                                    <input type="text" class="form-control" name="company_link" value="<%= formValue && formValue.company_link ? formValue.company_link :'' %>" placeholder="Company Website Link" />
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label>Company Description</label>
+                                    <input type="text" class="form-control" name="company_description" value="<%= formValue && formValue.company_description ? formValue.company_description :'' %>" placeholder="Company Description" />
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label>Address Line 1</label>
+                                    <input type="text" class="form-control" name="address_line1" value="<%= formValue && formValue.address_line1 ? formValue.address_line1 :'' %>" placeholder="Company Address 1" />
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label>Address Line 2</label>
+                                    <input type="text" class="form-control" name="address_line2" value="<%= formValue && formValue.address_line2 ? formValue.address_line2 :'' %>" placeholder="Company Address 2" />
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label>Pin Code</label>
+                                    <input type="text" class="form-control pincodeNumberField" id="pincode-text-field" name="pin_code" value="<%= formValue && formValue.pin_code ? formValue.pin_code :'' %>" placeholder="Pin code" />
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label>State</label>
+                                    <select class="form-control select2bs4" style="width: 100%" id="state-dropdown" name="state_id">
+                    <option value="">Select State</option>
+                    <% statedata.forEach((state) => { %>
+                    <option value="<%= state.id %>" <%= formValue && formValue.state_id == state.id ? 'selected' : '' %>><%= state.name %></option>
+                    <% }) %>
+                  </select>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label>City</label>
+                                    <select class="form-control select2bs4" style="width: 100%" id="city-dropdown" name="city_id">
+                    <option value="">Select City</option>
+                    <% citydata.forEach((city) => { %>
+                        <option value="<%= city.id %>" <%= formValue && formValue.city_id == city.id ? 'selected' : '' %>><%= city.name %></option>
+                        <% }) %>
+                  </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label>Industry</label>
+                                    <select class="form-control select2bs4" style="width: 100%" name="industry_id">
+                    <option value="">Select Industry</option>
+                    <% industrydata.forEach((industry) => { %>
+                    <option value="<%= industry.id %>" <%= formValue && formValue.industry_id == industry.id ? 'selected' : '' %>><%= industry.name %></option>
+                    <% }) %>
+                  </select>
+                                </div>
+                            </div>
+
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label>Referrer Code</label>
+                                    <input type="text" class="form-control" name="referrer_code" value="<%= formValue && formValue.referrer_code ? formValue.referrer_code :'' %>" placeholder="Refer code" />
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label>Upload Company Logo</label> <br />
+                                    <input type="file" name="image" />
+                                </div>
+                            </div>
+                        </div>
+                        <hr />
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label>status</label>
+                                    <select class="form-control select2bs4" style="width: 100%" name="status">
+                    <option value="1" >Active</option>
+                    <option value="0" >Inactive</option>
+                    <option value="4" >Un-Verfiy</option>
+                  </select>
+                                </div>
+                            </div>
+                            <div class="col-md-6"></div>
+                        </div>
+                        <hr />
+                        <h3>User Details</h3>
+                        <br />
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label>Your Full Name</label>
+                                    <input type="text" class="form-control" name="your_full_name" value="<%= formValue && formValue.your_full_name ? formValue.your_full_name :'' %>" placeholder="Full Name" />
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label>Your Designation</label>
+                                    <input type="text" class="form-control" name="your_designation" value="<%= formValue && formValue.your_designation ? formValue.your_designation :'' %>" placeholder="Your Designation" />
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label>Password</label>
+                                    <input type="password" class="form-control" name="password" placeholder="Password" />
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label>Confirm Password</label>
+                                    <input type="password" class="form-control" name="confirm_password" placeholder="Confirm Password" />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- /.card-body -->
+
+                    <div class="card-footer">
+                        <button type="submit" class="btn btn-sm btn-primary">Submit</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </section>
+</div>

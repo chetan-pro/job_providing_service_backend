@@ -1,0 +1,123 @@
+<div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <section class="content-header">
+        <div class="container-fluid">
+            <div class="row mb-2">
+                <div class="col-sm-6">
+                    <h1>Candidates Applied Detail</h1>
+                </div>
+                <div class="col-sm-6">
+                    <ol class="breadcrumb float-sm-right">
+                        <li class="breadcrumb-item active">
+                            <a href="/admin/company">Candidates Applied List</a>
+                        </li>
+                        <li class="breadcrumb-item active">Candidate Applied Detail</li>
+                    </ol>
+                </div>
+            </div>
+        </div>
+        <!-- /.container-fluid -->
+    </section>
+
+    <!-- Main content -->
+    <section class="content">
+        <!-- Default box -->
+        <div class="card">
+            <div class="card-header">
+                <h3 class="card-title">Candidate Applied Detail</h3>
+            </div>
+            <div class="card-body">
+                <div class="container px-4 row">
+                    <div class="col-6">
+                        <div class="row mb-2" style="font-size: 18px">
+                            <div class="col-md-6 text-muted">Candidate Applied Name:</div>
+                            <div class="col-md-6">
+                                <%= alldata.User.name ? alldata.User.name : 'Nil' %>
+                            </div>
+                        </div>
+                        <hr />
+                        <div class="row mb-2">
+                            <div class="col-md-6 text-muted">Email :</div>
+                            <div class="col-md-6">
+                                <%= alldata.User.email ? alldata.User.email : 'Nil' %>
+                            </div>
+                        </div>
+                        <hr />
+                        <div class="row mb-2" style="font-size: 18px">
+                            <div class="col-md-6 text-muted">Gender :</div>
+                            <div class="col-md-6">
+                                <%= alldata.User.gender ? alldata.User.gender : 'Nil' %>
+                            </div>
+                        </div>
+                        <hr />
+                        <div class="row mb-2" style="font-size: 18px">
+                            <div class="col-md-6 text-muted">DOB :</div>
+                            <div class="col-md-6">
+                                <%= alldata.User.dob ? moment(alldata.User.dob).format( 'DD-MM-YYYY') :
+                'Nil' %>
+                            </div>
+                        </div>
+                        <hr />
+                        <div class="row mb-2" style="font-size: 18px">
+                            <div class="col-md-6 text-muted">Mobile Number :</div>
+                            <div class="col-md-6">
+                                <%= alldata.User.mobile ? alldata.User.mobile : 'Nil' %>
+                            </div>
+                        </div>
+                        <hr />
+                        <div class="row mb-2" style="font-size: 18px">
+                            <div class="col-md-6 text-muted">Resume :</div>
+                            <div class="col-md-6">
+                                <a href="/assets/resume/<%= alldata.separate_resume ? alldata.separate_resume : alldata.User.resume %>">
+                                    <%= alldata.separate_resume ? alldata.separate_resume : alldata.User.resume %>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-1"></div>
+                    <div class="col-5">
+                        <div class="row mb-2" style="font-size: 18px">
+                            <div class="col-md-6 text-muted">State :</div>
+                            <div class="col-md-6">
+                                <%= alldata.User.state.name %>
+                            </div>
+                        </div>
+                        <hr />
+                        <div class="row mb-2" style="font-size: 18px">
+                            <div class="col-md-6 text-muted">City :</div>
+                            <div class="col-md-6">
+                                <%= alldata.User.city.name %>
+                            </div>
+                        </div>
+                        <hr />
+                        <div class="row mb-2" style="font-size: 18px">
+                            <div class="col-md-6 text-muted">Pin code :</div>
+                            <div class="col-md-6">
+                                <%= alldata.User.pin_code ? alldata.User.pin_code : 'Nil' %>
+                            </div>
+                        </div>
+                        <hr />
+                        <div class="row mb-2" style="font-size: 18px">
+                            <div class="col-md-6 text-muted">First Address :</div>
+                            <div class="col-md-6">
+                                <%= alldata.User.address_line1 ? alldata.User.address_line1 : 'Nil' %>
+                            </div>
+                        </div>
+                        <hr />
+                        <div class="row mb-2" style="font-size: 18px">
+                            <div class="col-md-6 text-muted">Second Address :</div>
+                            <div class="col-md-6">
+                                <%= alldata.User.address_line2 ? alldata.User.address_line2 : 'Nil' %>
+                            </div>
+                        </div>
+                    </div>
+
+                    <hr />
+                </div>
+            </div>
+            <!-- /.card-body -->
+        </div>
+        <!-- /.card -->
+    </section>
+    <!-- /.content -->
+</div>

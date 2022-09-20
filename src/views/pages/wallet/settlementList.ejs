@@ -1,0 +1,294 @@
+<div class="content-wrapper">
+    <section class="content-header">
+        <div class="container-fluid">
+            <div class="row mb-2">
+                <div class="col-sm-6">
+                    <% if(pageName=="PendingList" ){ %>
+                        <h1>Candidate and Home Service Provider Pending Payments Requests</h1>
+                        <% } else { %>
+                            <h1>Candidate and Home Service Provider Active Payments Requests</h1>
+                            <% }%>
+                </div>
+                <div class="col-sm-6">
+                    <ol class="breadcrumb float-sm-right">
+                        <% if(pageName=="PendingList" ){ %>
+                            <li class="breadcrumb-item active">
+                                Pending Payments Requests list
+                            </li>
+                            <% } else { %>
+                                <li class="breadcrumb-item active">
+                                    Active Payments Requests list
+                                </li>
+                                <% }%>
+                    </ol>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="content">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-12">
+                    <div class="card">
+                        <div class="card-header">
+                            <div class="d-flex justify-content-between align-items-center">
+                                <form action="/admin/pending-payment-requests" method="get">
+                                    <div class="input-group">
+                                        <input type="text" class="form-control form-control-lg" name="search" value="<%= searchVal %>" placeholder="Search here !" />
+                                        <div class="input-group-append">
+                                            <button type="submit" class="btn btn-lg btn-default">
+                        <i class="fa fa-search"></i>
+                      </button>
+                                        </div>
+                                    </div>
+                                </form>
+                                <div>
+                                    <% if(pageName=="PendingList" ){ %>
+                                        <a href="/admin/active-payment-requests" class="btn btn-sm btn-primary">Active Payment Requests </a
+                  >&nbsp; <% } else { %>
+                  <a
+                    href="/admin/pending-payment-requests"
+                    class="btn btn-sm btn-primary"
+                    >Pending Payment Requests </a
+                  >&nbsp; <% }%>
+                </div>
+              </div>
+            </div>
+
+            <% if(message !='' ) { %>
+            <div class="p-3">
+              <div
+                class="alert mb-0"
+                style="
+                  background-color: rgb(141, 228, 141);
+                  border: none;
+                  color: rgb(2, 120, 28);
+                "
+                role="alert"
+              >
+                <%= message %>
+              </div>
+            </div>
+            > <% } else if(error !='' ) { %>
+            <div class="p-3">
+              <div
+                class="alert mb-0"
+                style="
+                  background-color: rgb(233, 153, 153);
+                  border: none;
+                  color: rgb(120 2 2);
+                "
+                role="alert"
+              >
+                <%= error %>
+              </div>
+            </div>
+            <% } else {%>
+            <div class="card-body">
+              <table id="example2" class="table table-bordered table-hover">
+                <thead>
+                  <tr>
+                    <th>S no.</th>
+                    <th>Name</th>
+                    <th>User Role</th>
+                    <th>Amount</th>
+                    <th>Transaction ID</th>
+
+                    <% if(pageName=="PendingList" ){ %>
+                    <th>Actions</th>
+                    <% } else { %>
+                    <th>Status</th>
+                    <% }%>
+                  </tr>
+                </thead>
+                <tbody>
+                  <% data.rows.forEach((data, index)=> { %>
+                  <tr>
+                    <td><%= index + 1 + ((pageNo - 1) * limit) %></td>
+
+                    <td>
+                      <%= data.Users[0].name ? data.Users[0].name : 'Nil' %>
+                    </td>
+                    <td>
+                      <%= data.Users[0].user_role_type ?
+                      data.Users[0].user_role_type : 'Nil' %>
+                    </td>
+                    <td><%= data.amount ? data.amount : 'Nil' %></td>
+                    <td>
+                      <%= data.transaction_id ? data.transaction_id : 'Nil' %>
+                    </td>
+                    <td>
+                      <% if(pageName=="PendingList" ){ %>
+
+                      <button
+                        class="btn btn-sm btn-outline-success"
+                        data-toggle="modal"
+                        data-target="#exampleAcceptModalCenter<%= index+1 %>"
+                      >
+                        Accept
+                      </button>
+                      &nbsp;
+                      <button
+                        class="btn btn-sm btn-outline-danger"
+                        data-toggle="modal"
+                        data-target="#exampleModalCenter<%= index+1 %>"
+                      >
+                        Reject
+                      </button>
+
+                      <% } else { %> <% if(data.status=="a" ){ %> Accepted <% }
+                      else if(data.status=="r" ){ %> Rejected <% } else { %> Nil
+                      <% }%> <% }%>
+                    </td>
+                  </tr>
+                  <div
+                    class="modal fade"
+                    id="exampleAcceptModalCenter<%= index+1 %>"
+                    tabindex="-1"
+                    role="dialog"
+                    aria-labelledby="exampleModalCenterTitle"
+                    aria-hidden="true"
+                  >
+                    <div
+                      class="modal-dialog modal-dialog-centered"
+                      role="document"
+                    >
+                      <div class="modal-content">
+                        <div class="modal-header">
+                          <h5 class="modal-title" id="exampleModalLongTitle">
+                            Do you really want to delete this data ?
+                          </h5>
+                          <button
+                            type="button"
+                            class="close"
+                            data-dismiss="modal"
+                            aria-label="Close"
+                          >
+                            <span aria-hidden="true">&times;</span>
+                          </button>
+                        </div>
+                        <form action="/admin/pending-payment-requests/accept/<%= data.id %>" method="POST" enctype="multipart/form-data">
+                          <div class="modal-body">
+                            <div class="row">
+                              <div class="form-group">
+                                <label>Attach Screenshot of transaction</label>
+                                <br />
+                                <input type="file" name="transactionFile" />
+                              </div>
+                            </div>
+                          </div>
+                          <div class="modal-footer">
+                            <button
+                              type="button"
+                              class="btn btn-outline-secondary"
+                              data-dismiss="modal"
+                            >
+                              Close
+                            </button>
+                            <button
+                            type="submit"
+                              class="btn btn-outline-success"
+                              >Accept</a
+                            >
+                          </div>
+                        </form>
+                      </div>
+                    </div>
+                  </div>
+                  <div
+                    class="modal fade"
+                    id="exampleModalCenter<%= index+1 %>"
+                    tabindex="-1"
+                    role="dialog"
+                    aria-labelledby="exampleModalCenterTitle"
+                    aria-hidden="true"
+                  >
+                    <div
+                      class="modal-dialog modal-dialog-centered"
+                      role="document"
+                    >
+                      <div class="modal-content">
+                        <div class="modal-header">
+                          <h5 class="modal-title" id="exampleModalLongTitle">
+                            Do you really want to delete this data ?
+                          </h5>
+                          <button
+                            type="button"
+                            class="close"
+                            data-dismiss="modal"
+                            aria-label="Close"
+                          >
+                            <span aria-hidden="true">&times;</span>
+                          </button>
+                        </div>
+                        <div class="modal-footer">
+                          <button
+                            type="button"
+                            class="btn btn-outline-secondary"
+                            data-dismiss="modal"
+                          >
+                            Close
+                          </button>
+                          <a
+                            href="/admin/pending-payment-requests/reject/<%= data.id %>"
+                            class="btn btn-outline-danger"
+                            >Reject</a
+                          >
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <%} ) %>
+                </tbody>
+              </table>
+            </div>
+            <% } %>
+
+            <div class="paginationWrapper" style="padding-right: 1rem">
+              <% if (extra.pages> 0) { %>
+              <ul class="pagination d-flex justify-content-end">
+                <% var i=(Number(extra.pageNo)> 5 ? Number(extra.pageNo) - 4 :
+                1) %> <% if (i !==1) { %>
+                <li class="page-item disabled">
+                  <a class="page-link">...</a>
+                                        </li>
+                                        <% } %>
+                                            <% for (; i <=(Number(extra.pageNo) + 4) && i
+                <=extra.pages; i++) { %>
+                                                <% if (i==extra.pageNo) { %>
+                                                    <li class="page-item active">
+                                                        <a class="page-link">
+                                                            <%= i %>
+                                                        </a>
+                                                    </li>
+                                                    <% } else { %>
+                                                        <li class="page-item">
+                                                            <% if(pageName=="PendingList" ){ %>
+                                                                <a class="page-link" href="/admin/pending-payment-requests/?page=<%= i %>&search=<%= searchVal %>">
+                                                                    <%= i %>
+                                                                </a>
+                                                                <% } else { %>
+                                                                    <a class="page-link" href="/admin/active-payment-requests/?page=<%= i %>&search=<%= searchVal %>">
+                                                                        <%= i %>
+                                                                    </a>
+                                                                    <% }%>
+                                                        </li>
+
+                                                        <% } %>
+                                                            <% if (i==Number(extra.pageNo) + 4 && i < extra.pages) {
+                %>
+                                                                <li class="page-item disabled">
+                                                                    <a class="page-link">...</a>
+                                                                </li>
+                                                                <% } %>
+                                                                    <% } %>
+                                                                        </ul>
+                                                                        <% } %>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+    </section>
+    </div>

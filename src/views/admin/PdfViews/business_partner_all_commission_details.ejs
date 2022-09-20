@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+        html {
+            zoom: 0.5;
+        }
+    </style>
+</head>
+
+<body>
+
+    <table style="width: 100%" style="border: 1px solid black">
+        <thead>
+            <center>
+                <h3 style="border: 1px solid black">
+                    Business Partner Commision details
+                </h3>
+            </center>
+        </thead>
+        <thead>
+            <tr>
+                <th style="border: 1px solid black">S no.</th>
+                <th style="border: 1px solid black">Name</th>
+                <th style="border: 1px solid black">User Role</th>
+                <th style="border: 1px solid black">Organization Name</th>
+                <th style="border: 1px solid black">JS/HSP/HSS/LH Registered</th>
+                <th style="border: 1px solid black">Recruiter Registered</th>
+                <th style="border: 1px solid black">
+                    JS/HSP/HSS/LH Subscribed Registered
+                </th>
+                <th style="border: 1px solid black">Recruiter Subscribed</th>
+                <th style="border: 1px solid black">
+                    Turnover(after deduction 18% GST)
+                </th>
+                <th style="border: 1px solid black">Net Profit</th>
+            </tr>
+        </thead>
+        <tbody>
+            <% data.rows.forEach((dets, index)=> { %>
+                <tr>
+                    <%= console.log(dets) %>
+                        <td style="border: 1px solid black">
+                            <%= index + 1%>
+                        </td>
+
+                        <td style="border: 1px solid black">
+                            <%= dets.name%>
+                        </td>
+                        <td style="border: 1px solid black">
+                            <%= dets.user_role_type%>
+                        </td>
+
+                        <td style="border: 1px solid black">
+                            <%= dets.currentBussiness.current_bussiness%>
+                        </td>
+
+                        <td style="border: 1px solid black">
+                            <%= dets.dataValues.total_registrees%>
+                        </td>
+
+                        <td style="border: 1px solid black">
+                            <%= dets.dataValues.registrees_company_currently_on_subscription%>
+                        </td>
+
+                        <td style="border: 1px solid black">
+                            <%=
+            dets.dataValues.registrees_js_currently_on_subscription+dets.dataValues.registrees_hss_currently_on_subscription+dets.dataValues.registrees_lh_currently_on_subscription+dets.dataValues.registrees_hsp_currently_on_subscription%>
+                        </td>
+
+                        <td style="border: 1px solid black">
+                            <%= dets.dataValues.registrees_company_currently_on_subscription%>
+                        </td>
+
+                        <%let totalAmount = 0; dets.WalletTransactions.forEach((e)=>
+          totalAmount +=Number(e['amount'])); %>
+                            <td style="border: 1px solid black">
+                                <%=totalAmount%>
+                            </td>
+
+                            <td style="border: 1px solid black">
+                                <%= (totalAmount-(totalAmount*18)/100)%>
+                            </td>
+                </tr>
+                <%} ) %>
+        </tbody>
+    </table>
+</body>
+
+</html

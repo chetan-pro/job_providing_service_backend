@@ -1,0 +1,31 @@
+<%- include('../header') -%>
+
+<tr>
+    <td>
+        <table style='border: 0; border-spacing: 0; border-collapse: separate; -mso-table-lspace: 0pt; -mso-table-rspace: 0pt; width: 100%; padding: 0 20px;'>
+            <tr>
+                <td style='font-family: sans-serif; font-size: 14px; vertical-align: top;'>
+                    <h3 style='font-family: sans-serif; font-size: 14px; font-weight: bold; Margin-bottom: 8px; margin-top: 20px; color: #5A443D;'>Hi <%= username %>,</h3>
+                    <p style='font-family: sans-serif; font-size: 14px; Margin-top: 0; Margin-bottom: 20px; color: #5A443D; font-weight: 400; line-height: 1.5em;'>
+                        | Thank you for requesting password change, <%= appName %>! You are just one step away from accessing all the amazing features! 
+                    </p>
+                    <h3 style='font-family: sans-serif; font-size: 14px; font-weight: bold; Margin-bottom: 8px; margin-top: 20px; color: #5A443D;'>
+                        <a style='font-family: sans-serif; font-size: 14px; Margin-top: 0; Margin-bottom: 20px; color: #5A443D; font-weight: bold; line-height: 1.5em;'>
+                            Your password has been changed with <%= username %> , by using the otp
+                            <% if(otp === ''){ %>
+                                <%= otp %>
+                            <% }else{ %>
+                                change password
+                            <% } %>
+                            The changed password is <%= password %>;
+                        </a>
+                    </h3>
+                    <h3 style='font-family: sans-serif; font-size: 14px; font-weight: bold; Margin-bottom: 0; margin-top: 20px; color: #5A443D;'>Thank you,</h3>
+                    <p style='font-family: sans-serif; font-size: 14px; Margin-top: 0; Margin-bottom: 20px; color: #5A443D; font-weight: 400; line-height: 1.5em;'>Team <%= appName %></p>
+                </td>
+            </tr>
+        </table>
+    </td>
+</tr>
+
+<%- include('../footer') -%>

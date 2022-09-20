@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+        html {
+            zoom: 0.5;
+        }
+    </style>
+</head>
+
+<body>
+    <table style="width: 100%" style="border: 1px solid black">
+        <thead>
+            <center>
+                <h3 style="border: 1px solid black">
+                    <%=role%> Data</h3>
+            </center>
+        </thead>
+        <tbody>
+            <tr>
+                <th style="border: 1px solid black">S.No</th>
+
+                <th style="border: 1px solid black">Name</th>
+
+                <%if(role=='COMPANY'){%>
+                    <th style="border: 1px solid black">Company Name</th>
+                    <%}%>
+                        <th style="border: 1px solid black">Email</th>
+                        <%if(role=='HSP'||role=='JS'){%>
+                            <th style="border: 1px solid black">Plan</th>
+                            <%}%>
+                                <%if(role=='JS'){%>
+                                    <th style="border: 1px solid black">Skills</th>
+                                    <th style="border: 1px solid black">Qualification</th>
+                                    <%}%>
+                                        <%if(role=='COMPANY'){%>
+                                            <th style="border: 1px solid black">Validity Plan</th>
+                                            <th style="border: 1px solid black">Company Branding Plan</th>
+                                            <th style="border: 1px solid black">Resume Data Access Plan</th>
+                                            <th style="border: 1px solid black">Industry</th>
+                                            <%}%>
+                                                <th style="border: 1px solid black">State</th>
+                                                <th style="border: 1px solid black">City</th>
+            </tr>
+            <% data.forEach((data, index)=> { %>
+                <tr>
+                    <td style="border: 1px solid black">
+                        <%=index+1%>
+                    </td>
+                    <%if(role=='COMPANY'){%>
+                        <td style="border: 1px solid black">
+                            <%=data.your_full_name%>
+                        </td>
+                        <%}%>
+                            <td style="border: 1px solid black">
+                                <%=data.name%>
+                            </td>
+
+                            <td style="border: 1px solid black">
+                                <%=data.email%>
+                            </td>
+                            <%if((role=='JS'||role=='HSP') && data.SubscribedUsers){%>
+                                <td style="border: 1px solid black">
+                                    <% data.SubscribedUsers.forEach((subscribedData, index)=> { %>
+                                        <%=subscribedData.SubscriptionPlan?.discounted_amount%><br />
+                                            <%} ) %>
+                                </td>
+                                <%}%>
+                                    <%if(role=='JS'){%>
+                                        <td style="border: 1px solid black">
+                                            <% data.UserSkills.forEach((skillData, index)=> { %>
+                                                <%=skillData.SkillSubCategory.name%><br />
+                                                    <%} ) %>
+                                        </td>
+                                        <td style="border: 1px solid black">
+                                            <% data.Education.forEach((educationData, index)=> { %>
+                                                <%=educationData.EducationDatum.name%><br />
+                                                    <%} ) %>
+                                        </td>
+                                        <%}%>
+                                            <%if(role=='COMPANY'){%>
+                                                <td style="border: 1px solid black">
+                                                    <% data.SubscribedUsers.forEach((subscribedData, index)=> { %>
+                                                        <%if(subscribedData.plan_type=='Validity_Plan'){%> ₹
+                                                            <%=subscribedData.SubscriptionPlan.discounted_amount%>
+                                                                <br />
+                                                                <%} %>
+                                                                    <%} ) %>
+                                                </td>
+                                                <td style="border: 1px solid black">
+                                                    <% data.SubscribedUsers.forEach((subscribedData, index)=> { %>
+                                                        <%if(subscribedData.plan_type=='Company_Branding_Plan'){%>₹
+                                                            <%=subscribedData.SubscriptionPlan.discounted_amount%>
+                                                                <br />
+                                                                <%} %>
+                                                                    <%} ) %>
+                                                </td>
+                                                <td style="border: 1px solid black">
+                                                    <% data.SubscribedUsers.forEach((subscribedData, index)=> { %>
+                                                        <%if(subscribedData.plan_type=='Resume_Data_Access_Plan'){%>₹
+                                                            <%=subscribedData.SubscriptionPlan.discounted_amount%> <br />
+                                                                <%} %>
+                                                                    <%} ) %>
+                                                </td>
+                                                <td style="border: 1px solid black">
+                                                    <%=data.Industry?.name%>
+                                                </td>
+                                                <%}%>
+
+                                                    <td style="border: 1px solid black">
+                                                        <%=data.state?.name%>
+                                                    </td>
+                                                    <td style="border: 1px solid black">
+                                                        <%=data.city?.name%>
+                                                    </td>
+                </tr>
+                <%} ) %>
+        </tbody>
+    </table>
+</body>
+
+</html>

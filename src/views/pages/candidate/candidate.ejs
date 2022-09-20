@@ -1,0 +1,359 @@
+<div class="content-wrapper">
+    <section class="content-header">
+        <div class="container-fluid">
+            <div class="row mb-2">
+                <div class="col-sm-6">
+                    <h1>Candidate Table</h1>
+                </div>
+                <div class="col-sm-6">
+                    <ol class="breadcrumb float-sm-right">
+                        <li class="breadcrumb-item active">
+                            <a href="/admin/candidate">Candidate list</a>
+                        </li>
+                    </ol>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="content">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-12">
+                    <div class="card">
+                        <div class="card-header">
+                            <div class="row">
+                                <div class="col-10">
+                                    <form action="/admin/candidate/" method="get">
+                                        <div class="row">
+                                            <div class="col-2">
+                                                <div class="input-group">
+                                                    <input style="font-size: 14px; color: grey" type="text" class="form-control form-control-lg" name="search" value="<%= searchVal %>" placeholder="Search here !" />
+                                                </div>
+                                                <br />
+                                                <div class="input-group">
+                                                    <select class="form-control form-control-lg" style="font-size: 14px; color: grey" id="dropdown" name="education_id">
+                            <option value="">
+                              <% if(educationId === '' || !educationId) { %>
+                              Select qualification <% } else { %>
+                              <%=educationdata[Number(educationId)-1].name%> <%
+                              } %>
+                            </option>
+                            <% educationdata.forEach((education) => { %>
+                            <option value="<%= education.id %>">
+                              <%= education.name %>
+                            </option>
+                            <% }) %>
+                          </select>
+                                                </div>
+                                            </div>
+                                            <div class="col-2">
+                                                <div class="input-group">
+                                                    <input style="font-size: 14px; color: grey" type="text" class="form-control form-control-lg pincodeNumberField" name="pincode" id="pincode-text-field" value="<%= pinCode %>" placeholder="Search by pincode" />
+                                                </div>
+                                                <br />
+                                                <div class="input-group">
+                                                    <input style="font-size: 14px; color: grey" type="date" class="form-control form-control-lg" name="by_date" value="" placeholder="Searc
+                                                    h by Date !" />
+                                                </div>
+                                            </div>
+                                            <div class="col-2">
+                                                <div class="input-group">
+                                                    <select class="form-control form-control-lg" style="font-size: 14px; color: grey" id="state-dropdown" name="state_id">
+                            <option value="">
+                              <% if(stateId === '' || !stateId) { %> Select
+                              state <% } else { %>
+                              <%=statedata[Number(stateId)-1].name%> <% } %>
+                            </option>
+                            <% statedata.forEach((state) => { %>
+                            <option value="<%= state.id %>">
+                              <%= state.name %>
+                            </option>
+                            <% }) %>
+                          </select>
+                                                </div>
+                                            </div>
+                                            <div class="col-2">
+                                                <div class="input-group">
+                                                    <select class="form-control form-control-lg" style="font-size: 14px; color: grey" id="city-dropdown" name="city_id">
+                            <option value="">Select City</option>
+                          </select>
+                                                </div>
+                                            </div>
+                                            <br />
+
+                                            <div class="col-2">
+                                                <div class="input-group">
+                                                    <select class="form-control form-control-lg" style="font-size: 14px; color: grey" name="status">
+                            <option value="" selected>
+                              <% if(statusfilter === '') { %> Select status <% }
+                              else if(Number(statusfilter) === 0) { %> Inactive
+                              <% } else if(Number(statusfilter) === 1) { %>
+                              Active <% } %>
+                            </option>
+                            <option value="">Select status</option>
+                            <option value="0">InActive</option>
+                            <option value="1">Active</option>
+                          </select>
+                                                </div>
+                                            </div>
+                                            <div class="col-3">
+                                                <div class="input-group">
+                                                    <select class="form-control form-control-lg" style="font-size: 14px; color: grey" name="subscription_status">
+                            <option value="" selected>
+                              <% if(subscriptionStatusfilter === '') { %>
+                              Subscription Status <% } else
+                              if(Number(subscriptionStatusfilter) === 0) { %>
+                              Active <% } else
+                              if(Number(subscriptionStatusfilter) === 1) { %>
+                              All <% } %>
+                            </option>
+                            <option value="">Subscription Status</option>
+                            <option value="0">Active</option>
+                            <option value="1">All</option>
+                          </select>
+                                                </div>
+                                            </div>
+
+                                            <div class="col-2 py-3">
+                                                <button type="submit" class="btn btn-primary">
+                          Search
+                        </button>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+
+                                <div class="col-2">
+                                    <a href="/admin/create-candidate" class="btn btn-sm btn-primary">Add Candidate Details</a
+                  >
+                </div>
+              </div>
+            </div>
+
+            <div>
+              <% if(message != 0) { %>
+              <div class="p-3">
+                <div
+                  class="alert mb-0"
+                  style="
+                    background-color: rgb(188 252 188);
+                    border: none;
+                    color: rgb(2, 120, 28);
+                  "
+                  role="alert"
+                >
+                  <%= message %>
+                </div>
+              </div>
+
+              <% } else if(error != 0){ %>
+              <div class="p-3">
+                <div
+                  class="alert mb-0"
+                  style="
+                    background-color: rgb(237 183 183);
+                    border: none;
+                    color: rgb(120 2 2);
+                  "
+                  role="alert"
+                >
+                  <%= error %>
+                </div>
+              </div>
+
+              <% } %>
+            </div>
+
+            <% if(data.count != 0) { %>
+
+            <div class="card-body">
+              <table id="example2" class="table table-bordered table-hover">
+                <thead>
+                  <tr>
+                    <th>S no.</th>
+                    <th>Candidate Name</th>
+                    <th>Email</th>
+                    <th>Qualification</th>
+                    <th>Pincode</th>
+                    <th>State</th>
+                    <th>City</th>
+                    <th>Profile Status</th>
+                    <th>Account Status</th>
+                    <th>Actions</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <% data.rows.forEach((data, index)=> { %>
+                  <tr>
+                    <td><%= index + 1 + ((pageNo - 1) * limit) %></td>
+                    <td><%= data.name %></td>
+                    <td><%= data.email %></td>
+                    <td>
+                      <% data.Education.forEach((educationData, index)=> { %>
+                      <%=educationData.EducationDatum.name%><br />
+                      <%} ) %>
+                    </td>
+                    <td><%= data.pin_code %></td>
+                    <td><%= data.state?.name %></td>
+                    <td><%= data.city?.name %></td>
+                    <td>
+                      <% if(data.SubscribedUsers.length>0) { %> Active <% } else
+                      { %> InActive <% } %>
+                    </td>
+                    <td>
+                      <% if(data.status === 0) { %> Inactive <% } else
+                      if(data.status === 1) { %> Active <% } else if(data.status
+                      === 4) { %> Un-verify <% } %>
+                    </td>
+                    <td>
+                      <a
+                        href="/admin/view-details-candidate/<%= data.id %>"
+                        class="btn btn-sm btn-outline-primary"
+                        >View Detail</a
+                      >
+                      &nbsp;
+                      <a
+                        href="/admin/view-chats-candidate/<%= data.id %>"
+                        class="btn btn-sm btn-outline-primary"
+                        >View Chats</a
+                      >
+                      &nbsp;
+                      <a
+                        href="/admin/candidate/view-candidate-subcriptions/<%= data.id %>"
+                        class="btn btn-sm btn-outline-primary"
+                        >View Subcriptions</a
+                      >
+                      &nbsp;
+                      <a
+                        href="/admin/candidate/applied-job/<%= data.id %>"
+                        class="btn btn-sm btn-outline-primary"
+                        >Candidate Applied Job</a
+                      >
+                      &nbsp;
+                      <a
+                        href="/admin/edit-candidate/<%= data.id %>"
+                        class="btn btn-sm btn-outline-primary"
+                        >Edit</a
+                      >
+                      &nbsp;
+                      <button
+                        class="btn btn-sm btn-outline-danger"
+                        data-toggle="modal"
+                        data-target="#exampleModalCenter<%= index+1 %>"
+                      >
+                        Delete
+                      </button>
+                    </td>
+                  </tr>
+                  <div
+                    class="modal fade"
+                    id="exampleModalCenter<%= index+1 %>"
+                    tabindex="-1"
+                    role="dialog"
+                    aria-labelledby="exampleModalCenterTitle"
+                    aria-hidden="true"
+                  >
+                    <div
+                      class="modal-dialog modal-dialog-centered"
+                      role="document"
+                    >
+                      <div class="modal-content">
+                        <div class="modal-header">
+                          <h5 class="modal-title" id="exampleModalLongTitle">
+                            Do you really want to delete this data ?
+                          </h5>
+                          <button
+                            type="button"
+                            class="close"
+                            data-dismiss="modal"
+                            aria-label="Close"
+                          >
+                            <span aria-hidden="true">&times;</span>
+                          </button>
+                        </div>
+                        <div class="modal-footer">
+                          <button
+                            type="button"
+                            class="btn btn-outline-secondary"
+                            data-dismiss="modal"
+                          >
+                            Close
+                          </button>
+                          <a
+                            href="/admin/delete-candidate/<%= data.id %>"
+                            class="btn btn-outline-danger"
+                            >Delete</a
+                          >
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <%} ) %>
+                </tbody>
+              </table>
+            </div>
+            <% } %>
+            <div class="row">
+              <div
+                class="col-sm-2 m-2 col-4 ml-auto justify-content-start mt-5"
+              >
+                <div
+                  class="row"
+                  style="width: 490px; justify-content: space-between"
+                >
+                  <a
+                    href="/admin/candidate-pdf-download/JS?type=excel&<%=str%>"
+                  >
+                    <div class="btn btn-sm bg-info">
+                      Download Candidate Details as Excel
+                    </div>
+                  </a>
+                                    <a href="/admin/candidate-pdf-download/JS?<%=str%>">
+                                        <div class="btn btn-sm bg-info">
+                                            Download Candidate Details as PDF
+                                        </div>
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="col-sm-2 m-2 col-4 paginationWrapper ml-auto justify-content-end" style="padding-right: 1rem">
+                                <% if (extra.pages> 0) { %>
+                                    <ul class="pagination d-flex justify-content-end">
+                                        <% var i=(Number(extra.pageNo) > 5 ? Number(extra.pageNo) - 4
+                  : 1) %>
+                                            <% if (i !==1) { %>
+                                                <li class="page-item disabled">
+                                                    <a class="page-link">...</a>
+                                                </li>
+                                                <% } %>
+                                                    <% for (; i <=(Number(extra.pageNo) + 4) && i
+                  <=extra.pages; i++) { %>
+                                                        <% if (i==extra.pageNo) { %>
+                                                            <li class="page-item active">
+                                                                <a class="page-link">
+                                                                    <%= i %>
+                                                                </a>
+                                                            </li>
+                                                            <% } else { %>
+                                                                <li class="page-item">
+                                                                    <a class="page-link" href="/admin/candidate/?page=<%= i %>&search=<%= searchVal %>&status=<%= statusfilter %>">
+                                                                        <%= i %>
+                                                                    </a>
+                                                                </li>
+                                                                <% } %>
+                                                                    <% if (i==Number(extra.pageNo) + 4 && i < extra.pages)
+                  { %>
+                                                                        <li class="page-item disabled">
+                                                                            <a class="page-link">...</a>
+                                                                        </li>
+                                                                        <% } %>
+                                                                            <% } %>
+                                    </ul>
+                                    <% } %>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>

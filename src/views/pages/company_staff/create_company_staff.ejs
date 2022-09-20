@@ -1,0 +1,186 @@
+<div class="content-wrapper">
+    <section class="content-header">
+        <div class="container-fluid">
+            <div class="row mb-2">
+                <div class="col-sm-6">
+                    <h1>Company Staff create</h1>
+                </div>
+                <div class="col-sm-6">
+                    <ol class="breadcrumb float-sm-right">
+                        <li class="breadcrumb-item">
+                            <a href="/admin/company-staff">Company Staff list</a>
+                        </li>
+                        <li class="breadcrumb-item active">Company Staff create</li>
+                    </ol>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="content">
+        <div class="container-fluid">
+            <div class="card card-primary">
+                <div class="card-header">
+                    <h3 class="card-title">Create Company Staff</h3>
+                </div>
+
+                <div>
+                    <% if(message != '') { %>
+                        <div class="p-3">
+                            <div class="alert mb-0" style="
+                background-color: rgb(141, 228, 141);
+                border: none;
+                color: rgb(2, 120, 28);
+              " role="alert">
+                                <%= message %>
+                            </div>
+                        </div>
+
+                        <% } else if(error != ''){ %>
+                            <div class="p-3">
+                                <div class="alert alert-dismissible mb-0" style="
+                background-color: rgb(237 183 183);
+                border: none;
+                color: rgb(120 2 2);
+              " role="alert">
+                                    <%= error %>
+                                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+                                </div>
+                            </div>
+
+                            <% } %>
+                </div>
+
+                <form method="post" action="/admin/create-company-staff/<%= id %>" enctype="multipart/form-data">
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label>Company Staff name</label>
+                                    <input type="text" class="form-control" name="name" placeholder="Company Staff name" value="<%= formValue && formValue.name ? formValue.name :'' %>" />
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label>Staff E-mail</label>
+                                    <input type="email" class="form-control" name="email" placeholder="Company Staff email" value="<%= formValue && formValue.email ? formValue.email :'' %>" />
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label>Mobile No.</label>
+                                    <input type="number" class="form-control mobileNumberField" name="mobile" value="<%= formValue && formValue.mobile ? formValue.mobile :'' %>" placeholder="Company Staff Mobile no." />
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label>Gender</label>
+                                    <select class="form-control" style="width: 100%" name="gender">
+                    <option value="">
+                      Select Gender
+                    </option>
+                    <option value="male" 
+                    <%= formValue && formValue.gender == 'male' ? 'selected':'' %>>Male</option>
+                    <option value="female"  <%= formValue && formValue.gender == 'female' ? 'selected':'' %>>Female</option>
+                    <option value="transgender"  <%= formValue && formValue.gender == 'transgender' ? 'selected':'' %>>Trans-Gender</option>
+                  </select>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label>Date of Birth</label>
+                                    <input type="date" class="form-control" name="dob" value="<%= formValue && formValue.dob ? formValue.dob :'' %>" placeholder="Date of birth" />
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label>Address Line 1</label>
+                                    <input type="text" class="form-control" name="address_line1" value="<%= formValue && formValue.address_line1 ? formValue.address_line1 :userData.address_line1 %>" placeholder="Company Staff Address 1" />
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label>Address Line 2</label>
+                                    <input type="text" class="form-control" name="address_line2" value="<%= formValue && formValue.address_line2 ? formValue.address_line2 :userData.address_line2 %>" placeholder="Company Address 2" />
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label>Pin Code</label>
+                                    <input type="text" class="form-control pincodeNumberField" id="pincode-text-field" name="pin_code" value="<%= formValue && formValue.pin_code ? formValue.pin_code :userData.pin_code %>" placeholder="Pin code" />
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label>State</label>
+                                    <select class="form-control select2bs4" style="width: 100%" id="state-dropdown" name="state_id">
+                    <option value="<%=userData.state?userData.state.id:''%>">
+                      <%= userData.state?userData.state.name:'Select State' %>
+                    </option>
+
+                    <% statedata.forEach((state) => { %>
+                    <option value="<%= state.id %>"><%= state.name %></option>
+                    <% }) %>
+                  </select>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label>City</label>
+                                    <select class="form-control select2bs4" style="width: 100%" id="city-dropdown" name="city_id">
+                    <option value="<%=userData.city?userData.city.id:''%>">
+                      <%= userData.city?userData.city.name:'Select City' %>
+                    </option>
+                  </select>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label>image</label> <br />
+                                    <input type="file" name="image" />
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label>Password</label>
+                                    <input type="password" class="form-control" name="password" placeholder="Password" />
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label>Confirm Password</label>
+                                    <input type="password" class="form-control" name="confirm_password" placeholder="Confirm Password" />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- /.card-body -->
+
+                    <div class="card-footer">
+                        <button type="submit" class="btn btn-sm btn-primary">Submit</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </section>
+</div>

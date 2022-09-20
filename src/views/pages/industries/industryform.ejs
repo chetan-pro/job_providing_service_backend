@@ -1,0 +1,66 @@
+<div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <section class="content-header">
+        <div class="container-fluid">
+            <div class="row mb-2">
+                <div class="col-sm-6">
+                    <h1>Industry create</h1>
+                </div>
+                <div class="col-sm-6">
+                    <ol class="breadcrumb float-sm-right">
+                        <li class="breadcrumb-item" ><a href="#" style="color: #979090;">Home</a></li>
+                        <li class="breadcrumb-item" ><a href="/admin/industries"  style="color: #979090;">Industry list</a></li>
+                        <li class="breadcrumb-item active"><a href="/admin/industries/create">Industry create</a></li>
+                    </li>
+                    </ol>
+                </div>
+            </div>
+        </div><!-- /.container-fluid -->
+    </section>
+
+    <section class="content">
+        <div class="container-fluid">
+            <div class="card card-primary">
+                <div class="card-header">
+                    <h3 class="card-title">Create Industry</h3>
+                </div>
+
+                <div>
+                    
+                    <% if(message != '') { %>
+                        <div class="p-3">
+                            <div class="alert mb-0" style="background-color: rgb(141, 228, 141); border: none; color: rgb(2, 120, 28);" role="alert">
+                                <%= message %>
+                            </div>
+                        </div>
+                        
+                    <% } else if(error != ''){ %>
+                        <div class="p-3">
+                            <div class="alert mb-0" style="background-color: rgb(233, 153, 153); border: none; color: rgb(120 2 2);" role="alert">
+                                <%= error %>
+                            </div>
+                        </div>
+
+                    <% } %>
+                    
+                </div>
+                <!-- /.card-header -->
+                <!-- form start -->
+                <form method="post" action="/admin/industries/create">
+                    <div class="card-body">
+                        <div class="form-group">
+                            <label for="exampleInputEmail1">Industry Name</label>
+                            <input type="text" class="form-control" id="exampleInputEmail1" name="name"
+                                placeholder="Enter Industry Name">
+                        </div>
+                    </div>
+                    <!-- /.card-body -->
+
+                    <div class="card-footer">
+                        <button type="submit" class="btn btn-sm btn-primary">Submit</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </section>
+</div>

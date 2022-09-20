@@ -1,0 +1,202 @@
+<div class="content-wrapper">
+    <section class="content-header">
+        <div class="container-fluid">
+            <div class="row mb-2">
+                <div class="col-sm-6">
+                    <% if(pageName=="pendingList" ) { %>
+                        <h1>Local Hunar Pending Video Permissions </h1>
+                        <% } else { %>
+                            <h1>Local Hunar Active Video Permissions </h1>
+                            <% }%>
+                </div>
+                <div class="col-sm-6">
+                    <ol class="breadcrumb float-sm-right">
+                        <li class="breadcrumb-item active">Video List</li>
+
+                    </ol>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="content">
+        <div class="container-fluid">
+            <div class="card">
+                <div class="card-header">
+                    <div class=" d-flex justify-content-between align-items-center">
+                        <% if(pageName=="pendingList" ) { %>
+                            <form action="/admin/local-hunar-videos/pending-permissions" method="get">
+                                <% } else { %>
+                                    <form action="/admin/local-hunar-videos/active-permissions" method="get">
+                                        <% } %>
+                                            <div class="input-group">
+                                                <input type="text" class="form-control form-control-lg" name="search"
+                                                    value="<%= searchVal %>" placeholder="Search here by video Title!">
+                                                <div class="input-group-append">
+                                                    <button type="submit" class="btn btn-lg btn-default">
+                                                        <i class="fa fa-search"></i>
+                                                    </button>
+                                                </div>
+                                            </div>
+                                    </form>
+                                    <div>
+
+                                        <% if(pageName=="pendingList" ){ %>
+                                            <a href="/admin/local-hunar-videos/active-permissions"
+                                                class="btn btn-sm btn-primary">Active Video Requests
+                                            </a>&nbsp;
+                                            <% } else { %>
+                                                <a href="/admin/local-hunar-videos/pending-permissions"
+                                                    class="btn btn-sm btn-primary">Pending Video Requests
+                                                </a>&nbsp;
+                                                <% }%>
+
+                                    </div>
+                    </div>
+                </div>
+                <div>
+                    <% if(message !=0) { %>
+                        <div class="p-3">
+                            <div class="alert mb-0"
+                                style="background-color: rgb(188 252 188); border: none; color: rgb(2, 120, 28);"
+                                role="alert">
+                                <%= message %>
+                            </div>
+                        </div>
+
+                        <% } else if(error !=0){ %>
+                            <div class="p-3">
+                                <div class="alert mb-0"
+                                    style="background-color: rgb(237 183 183); border: none; color: rgb(120 2 2);"
+                                    role="alert">
+                                    <%= error %>
+                                </div>
+                            </div>
+
+                            <% } %>
+                </div>
+
+                <% if(data.count !=0) { %>
+
+                    <div class="card-body">
+                        <table id="example2" class="table table-bordered table-hover">
+                            <thead>
+                                <tr>
+                                    <th>S no.</th>
+                                    <th>User Name</th>
+                                    <th>Url</th>
+                                    <th>Title</th>
+                                    <th>Description</th>
+                                    <% if(pageName=="pendingList" ){ %>
+                                        <th>Actions</th>
+                                        <% } else { %>
+                                            <th>Status</th>
+                                            <th>Actions</th>
+                                            <% } %>
+
+                            </thead>
+                            </tr>
+                            <tbody>
+                                <% data.rows.forEach((data, index)=> { %>
+                                    <tr>
+                                        <td>
+                                            <%= index + 1 + ((pageNo - 1) * limit) %>
+                                        </td>
+                                        <td>
+                                            <%= data.User.name ? data.User.name : 'Nil' %>
+                                        </td>
+                                        <td>
+                                            <a href=" <%= data.url %>" target="_blank">
+                                                <%= data.url ? data.url : 'Nil' %>
+                                            </a>
+                                        </td>
+                                        <td>
+                                            <%= data.title ? data.title : Nil %>
+                                        </td>
+                                        <td>
+                                            <%= data.description ? data.description : 'Nil' %>
+                                        </td>
+
+                                        <td>
+
+                                            <% if(pageName=="pendingList" ){ %>
+                                                <a href="/admin/local-hunar-videos/approve/<%= data.id %>"
+                                                    class="btn btn-sm btn-outline-success">Approve</a>&nbsp;
+
+                                                <a href="/admin/local-hunar-videos/disapprove/<%= data.id %>"
+                                                    class="btn btn-sm btn-outline-danger">Disapprove</a> &nbsp;
+                                                <% } else { %>
+                                                    <% if(data.approved=='y') { %>
+                                                        Approved
+                                                        <% } else if(data.approved=='n') { %>
+                                                            Disapproved
+                                                            <% } else { %>
+                                                                Pending
+                                                                <% } %>
+                                                <% } %>
+                                        </td>
+
+                                        <% if(pageName=="pendingList" ){} else{ %>
+                                            <td>
+                                                <% if(data.approved=='y' ){ %>
+                                                         <a href="/admin/local-hunar-videos/disapprove/<%= data.id %>"
+                                                         class="btn btn-sm btn-outline-danger">Disapprove</a> &nbsp;
+                                                <% } else { %>
+                                                         <a href="/admin/local-hunar-videos/approve/<%= data.id %>"
+                                                           class="btn btn-sm btn-outline-success">Approve</a>&nbsp;
+                                                <% } %>
+                                            </td>
+                                        <% } %>
+                                    </tr>
+                                    <%} ) %>
+                            </tbody>
+                        </table>
+                    </div>
+                    <% } %>
+
+
+                        <div class="paginationWrapper" style="padding-right: 1rem;">
+                            <% if (extra.pages> 0) { %>
+                                <ul class="pagination d-flex justify-content-end">
+                                    <% var i=(Number(extra.pageNo)> 5 ? Number(extra.pageNo) - 4 : 1) %>
+                                        <% if (i !==1) { %>
+                                            <li class="page-item disabled">
+                                                <a class="page-link">...</a>
+                                            </li>
+                                            <% } %>
+                                                <% for (; i <=(Number(extra.pageNo) + 4) && i <=extra.pages; i++) { %>
+                                                    <% if (i==extra.pageNo) { %>
+                                                        <li class="page-item active">
+                                                            <a class="page-link">
+                                                                <%= i %>
+                                                            </a>
+                                                        </li>
+                                                        <% } else { %>
+                                                            <li class="page-item">
+                                                                <% if(pageName=="pendingList" ){ %>
+                                                                    <a class="page-link"
+                                                                    href="/admin/local-hunar-videos/pending-permissions/?page=<%= i %>&search=<%= searchVal %>">
+                                                                    <%= i %>
+                                                                </a>
+                                                               <% } else{ %>
+                                                                <a class="page-link"
+                                                                    href="/admin/local-hunar-videos/active-permissions/?page=<%= i %>&search=<%= searchVal %>">
+                                                                    <%= i %>
+                                                                </a>
+                                                                <% } %>
+                                                            </li>
+                                                            <% } %>
+                                                                <% if (i==Number(extra.pageNo) + 4 && i < extra.pages) {
+                                                                    %>
+                                                                    <li class="page-item disabled">
+                                                                        <a class="page-link">...</a>
+                                                                    </li>
+                                                                    <% } %>
+                                                                        <% } %>
+                                </ul>
+                                <% } %>
+                        </div>
+            </div>
+        </div>
+    </section>
+</div>

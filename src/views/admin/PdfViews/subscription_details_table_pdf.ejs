@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+        html {
+            zoom: 0.5;
+        }
+    </style>
+</head>
+
+<body>
+    <table style="width: 100%" style="border: 1px solid black">
+        <thead>
+            <tr>
+                <th style="border: 1px solid black">S no.</th>
+                <th style="border: 1px solid black">Subscription Plan</th>
+                <th style="border: 1px solid black">Plan Details</th>
+                <th style="border: 1px solid black">Amount</th>
+                <th style="border: 1px solid black">Mode of payment</th>
+                <th style="border: 1px solid black">Transaction Id</th>
+                <th style="border: 1px solid black">Order Id</th>
+                <th style="border: 1px solid black">Expiry Date</th>
+                <th style="border: 1px solid black">Current Status</th>
+            </tr>
+        </thead>
+        <tbody>
+            <% data.rows.forEach((data, index)=> { %>
+                <tr>
+                    <td style="border: 1px solid black">
+                        <%= index + 1 %>
+                    </td>
+                    <td style="border: 1px solid black">
+                        <%= data.SubscribedUser.SubscriptionPlan.title %>
+                    </td>
+                    <td style="border: 1px solid black">
+                        <%= data.SubscribedUser.SubscriptionPlan.description %>
+                    </td>
+                    <td style="border: 1px solid black">
+                        <%= data.SubscribedUser.SubscriptionPlan.discounted_amount %>
+                    </td>
+                    <td style="border: 1px solid black">
+                        <%=
+            data.payment_type==='E'?'Razorpay':data.payment_type==='EW'?'Both':'Wallet'%>
+                    </td>
+                    <td style="border: 1px solid black">
+                        <%= data.tnx_id %>
+                    </td>
+                    <td style="border: 1px solid black">
+                        <%= data.order_id %>
+                    </td>
+                    <td style="border: 1px solid black">
+                        <%= moment(data.SubscribedUser.expiry_date).format('DD-MM-YYYY') %>
+                    </td>
+                    <td style="border: 1px solid black">
+                        <% if(data.SubscribedUser.status === 0) { %> Inactive
+                            <% } else
+            if(data.SubscribedUser.status === 1) { %> Active
+                                <% } %>
+                    </td>
+                </tr>
+                <%} ) %>
+        </tbody>
+    </table>
+</body>
+
+</html>

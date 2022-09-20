@@ -1,0 +1,57 @@
+<div class="content-wrapper">
+    <section class="content-header">
+        <div class="container-fluid">
+            <div class="row mb-2">
+                <div class="col-sm-6">
+                    <h1>
+                        <%= label %>
+                    </h1>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="content">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-12">
+                    <div class="card">
+                        <div>
+                            <% if(message != 0) { %>
+                                <div class="p-3">
+                                    <div class="alert mb-0" style="
+                    background-color: rgb(188 252 188);
+                    border: none;
+                    color: rgb(2, 120, 28);
+                  " role="alert">
+                                        <%= message %>
+                                    </div>
+                                </div>
+
+                                <% } else if(error != 0){ %>
+                                    <div class="p-3">
+                                        <div class="alert mb-0" style="
+                    background-color: rgb(237 183 183);
+                    border: none;
+                    color: rgb(120 2 2);
+                  " role="alert">
+                                            <%= error %>
+                                        </div>
+                                    </div>
+
+                                    <% } %>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="content">
+        <div class="container-fluid">
+            <div class="card-body">
+                <div class="card p-4">
+                    <%-data %>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>

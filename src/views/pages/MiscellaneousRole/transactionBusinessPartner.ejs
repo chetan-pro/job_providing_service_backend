@@ -1,0 +1,168 @@
+<div class="content-wrapper">
+    <section class="content-header">
+        <div class="container-fluid">
+            <div class="row mb-2">
+                <div class="col-sm-6">
+                    <h1>Business Partner Transaction</h1>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="content">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-12">
+                    <div class="card">
+                        <div>
+                            <% if(message != 0) { %>
+                                <div class="p-3">
+                                    <div class="alert mb-0" style="
+                    background-color: rgb(188 252 188);
+                    border: none;
+                    color: rgb(2, 120, 28);
+                  " role="alert">
+                                        <%= message %>
+                                    </div>
+                                </div>
+
+                                <% } else if(error != 0){ %>
+                                    <div class="p-3">
+                                        <div class="alert mb-0" style="
+                    background-color: rgb(237 183 183);
+                    border: none;
+                    color: rgb(120 2 2);
+                  " role="alert">
+                                            <%= error %>
+                                        </div>
+                                    </div>
+
+                                    <% } %>
+                        </div>
+
+                        <% if(data) { %>
+                            <div class="card-body">
+                                <table id="example2" class="table table-bordered table-hover">
+                                    <thead>
+                                        <tr>
+                                            <th>Bill No.</th>
+                                            <th>Business Partner Name</th>
+                                            <th>Business Partner Code</th>
+                                            <th>Bill Period</th>
+                                            <th>Bill Apply Date</th>
+                                            <th>Bill Amount</th>
+                                            <th>Bill Pending/Processed/Success</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <% data.rows.forEach((viewData, index)=> { %>
+                                            <tr>
+                                                <td>
+                                                    <%= index + 1 + ((extra.pageNo - 1) * extra.limit) %>
+                                                </td>
+                                                <td>
+                                                    <%= viewData.Users[0].name %>
+                                                </td>
+                                                <td>
+                                                    <%= viewData.Users[0].referrer_code %>
+                                                </td>
+                                                <%var from = moment(viewData.start_date).format(
+                    'DD-MM-YYYY')%>
+                                                    <%var to =
+                    moment(viewData.createdAt).format( 'DD-MM-YYYY')%>
+                                                        <td>
+                                                            <%= moment(to,
+                      'DD-MM-YYYY').startOf('day').diff(moment(from,
+                      'DD-MM-YYYY').startOf('day'), 'days')%>days
+                                                        </td>
+                                                        <td>
+                                                            <%= moment(viewData.createdAt).format( 'DD-MM-YYYY')%>
+                                                        </td>
+
+                                                        <td>
+                                                            <%= viewData.amount %>
+                                                        </td>
+                                                        <td>
+                                                            <%=
+                      viewData.status==='p'?'Pending':viewData.status==='r'?'Reject':'Success'
+                      %>
+                                                        </td>
+                                            </tr>
+
+                                            <div class="modal fade" id="exampleModalCenter<%= index+1 %>" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                                                <div class="modal-dialog modal-dialog-centered" role="document">
+                                                    <div class="modal-content">
+                                                        <div class="modal-header">
+                                                            <h5 class="modal-title" id="exampleModalLongTitle">
+                                                                Do you really want to delete this data ?
+                                                            </h5>
+                                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                          </button>
+                                                        </div>
+                                                        <div class="modal-footer">
+                                                            <button type="button" class="btn btn-outline-secondary" data-dismiss="modal">
+                            Close
+                          </button>
+                                                            <a href="/admin/delete-miscellaneous-role/<%= data.id %>" class="btn btn-outline-danger">Delete</a
+                          >
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <%} ) %>
+                </tbody>
+              </table>
+            </div>
+            <% } %>
+
+            <div class="row">
+              <div
+                class="col-sm-2 m-2 col-4 ml-auto justify-content-start mt-5"
+              >
+                <a href="/admin/bill-claim-download">
+                  <div class="btn btn-sm bg-info">Download Bill Claim PDF</div>
+                </a>
+                                                        </div>
+
+                                                        <div class="col-sm-2 m-2 col-4 paginationWrapper ml-auto justify-content-end" style="padding-right: 1rem">
+                                                            <% if (extra.pages > 0) { %>
+                                                                <ul class="pagination d-flex justify-content-end">
+                                                                    <% var i=(Number(extra.pageNo) > 5 ? Number(extra.pageNo) - 4
+                  : 1) %>
+                                                                        <% if (i !==1) { %>
+                                                                            <li class="page-item disabled">
+                                                                                <a class="page-link">...</a>
+                                                                            </li>
+                                                                            <% } %>
+                                                                                <% for (; i <=(Number(extra.pageNo) + 4) && i
+                  <=extra.pages; i++) { %>
+                                                                                    <% if (i==extra.pageNo) { %>
+                                                                                        <li class="page-item active">
+                                                                                            <a class="page-link">
+                                                                                                <%= i %>
+                                                                                            </a>
+                                                                                        </li>
+                                                                                        <% } else { %>
+                                                                                            <li class="page-item">
+                                                                                                <a class="page-link" href="/admin/miscellaneous-roles/?page=<%= i %>">
+                                                                                                    <%= i %>
+                                                                                                </a>
+                                                                                            </li>
+                                                                                            <% } %>
+                                                                                                <% if (i==Number(extra.pageNo) + 4 && i < extra.pages)
+                  { %>
+                                                                                                    <li class="page-item disabled">
+                                                                                                        <a class="page-link">...</a>
+                                                                                                    </li>
+                                                                                                    <% } %>
+                                                                                                        <% } %>
+                                                                </ul>
+                                                                <% } %>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                            </div>
+                    </div>
+    </section>
+    </div>

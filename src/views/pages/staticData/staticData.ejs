@@ -1,0 +1,95 @@
+<div class="content-wrapper">
+    <section class="content-header">
+        <div class="container-fluid">
+            <div class="row mb-2">
+                <div class="col-sm-6">
+                    <h1>Static Data</h1>
+                </div>
+                <div class="col-sm-6">
+                    <ol class="breadcrumb float-sm-right"></ol>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="content">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-12">
+                    <div class="card">
+                        <div class="card-header">
+                            <div class="row">
+                                <div class="col-10"></div>
+                            </div>
+                        </div>
+
+                        <div>
+                            <% if(message != 0) { %>
+                                <div class="p-3">
+                                    <div class="alert mb-0" style="
+                    background-color: rgb(188 252 188);
+                    border: none;
+                    color: rgb(2, 120, 28);
+                  " role="alert">
+                                        <%= message %>
+                                    </div>
+                                </div>
+
+                                <% } else if(error != 0){ %>
+                                    <div class="p-3">
+                                        <div class="alert mb-0" style="
+                    background-color: rgb(237 183 183);
+                    border: none;
+                    color: rgb(120 2 2);
+                  " role="alert">
+                                            <%= error %>
+                                        </div>
+                                    </div>
+
+                                    <% } %>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="content">
+        <div class="container-fluid">
+            <div class="card-body">
+                <div class="card p-4">
+                    <table id="example2" class="table table-bordered table-hover">
+                        <thead>
+                            <tr>
+                                <th>S no.</th>
+                                <th>Label</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <% for(var i=0; i < data.length; i++) { %>
+                                <tr>
+                                    <td>
+                                        <%= data[i].id %>
+                                    </td>
+                                    <td>
+                                        <%= data[i].label %>
+                                    </td>
+                                    <td>
+                                        <a href="/admin/preview-html/<%= data[i].key %>" class="btn btn-sm btn-outline-primary">Preview</a
+                  >&nbsp;
+
+                  <a
+                    href="/admin/add-html/<%= data[i].key %>"
+                    class="btn btn-sm btn-outline-primary"
+                    >Edit</a
+                  >
+                  &nbsp;
+                </td>
+              </tr>
+              <% } %>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>

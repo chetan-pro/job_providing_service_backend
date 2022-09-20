@@ -1,0 +1,214 @@
+<div class="content-wrapper">
+    <section class="content-header">
+        <div class="container-fluid">
+            <div class="row mb-2">
+                <div class="col-sm-6">
+                    <h1>Ratings and Reviews Table</h1>
+                </div>
+                <div class="col-sm-6">
+                    <ol class="breadcrumb float-sm-right">
+                        <li class="breadcrumb-item">
+                            <a href="/admin/service-provider-details/<%= id %>">Service Provider Deatils</a
+              >
+            </li>
+            <li class="breadcrumb-item active">Ratings and Reviews list</li>
+          </ol>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="content">
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-12">
+          <div class="card">
+            <div class="card-header">
+              <div class="row">
+                <div class="col-4">
+                  <form
+                    action="/admin/service-provider/view-ratings-reviews/<%= data.id %>"
+                    method="get"
+                  >
+                    <div class="input-group">
+                      <input
+                        type="text"
+                        class="form-control form-control-lg"
+                        name="search"
+                        value="<%= searchVal %>"
+                        placeholder="Search here !"
+                      />
+                      <div class="input-group-append">
+                        <button type="submit" class="btn btn-lg btn-default">
+                          <i class="fa fa-search"></i>
+                        </button>
+                      </div>
+                    </div>
+                  </form>
+                </div>
+
+                <div class="col-3"></div>
+              </div>
+            </div>
+
+            <% if(message !='' ) { %>
+            <div class="p-3">
+              <div
+                class="alert mb-0"
+                style="
+                  background-color: rgb(141, 228, 141);
+                  border: none;
+                  color: rgb(2, 120, 28);
+                "
+                role="alert"
+              >
+                <%= message %>
+              </div>
+            </div>
+            > <% } else if(error !='' ) { %>
+            <div class="p-3">
+              <div
+                class="alert mb-0"
+                style="
+                  background-color: rgb(233, 153, 153);
+                  border: none;
+                  color: rgb(120 2 2);
+                "
+                role="alert"
+              >
+                <%= error %>
+              </div>
+            </div>
+            <% } else {%>
+            <div class="card-body">
+              <table id="example2" class="table table-bordered table-hover">
+                <thead>
+                  <tr>
+                    <th>S no.</th>
+                    <th>User Name</th>
+                    <th>User Email</th>
+                    <th>Stars</th>
+                    <th>Comments</th>
+                    <th>Actions</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <% data.rows.forEach((data, index)=> { %>
+
+                  <tr>
+                    <td><%= index + 1 + ((pageNo - 1) * limit) %></td>
+
+                    <% if(data.User) { %>
+
+                    <td><%= data.User.name ? data.User.name : 'Nil' %></td>
+
+                    <td><%= data.User.email ? data.User.email : 'Nil' %></td>
+
+                    <% } else { %>
+
+                    <td>User does not exist</td>
+                    <td>User does not exist</td>
+
+                    <% }%>
+
+                    <td><%= data.star ? data.star : 'Nil' %></td>
+                    <td><%= data.comment ? data.comment : 'Nil' %></td>
+                    <td>
+                      <button
+                        class="btn btn-sm btn-outline-danger"
+                        data-toggle="modal"
+                        data-target="#exampleModalCenter<%= index+1 %>"
+                      >
+                        Delete
+                      </button>
+                    </td>
+                  </tr>
+                  <div
+                    class="modal fade"
+                    id="exampleModalCenter<%= index+1 %>"
+                    tabindex="-1"
+                    role="dialog"
+                    aria-labelledby="exampleModalCenterTitle"
+                    aria-hidden="true"
+                  >
+                    <div
+                      class="modal-dialog modal-dialog-centered"
+                      role="document"
+                    >
+                      <div class="modal-content">
+                        <div class="modal-header">
+                          <h5 class="modal-title" id="exampleModalLongTitle">
+                            Do you really want to delete this review ?
+                          </h5>
+                          <button
+                            type="button"
+                            class="close"
+                            data-dismiss="modal"
+                            aria-label="Close"
+                          >
+                            <span aria-hidden="true">&times;</span>
+                          </button>
+                        </div>
+                        <div class="modal-footer">
+                          <button
+                            type="button"
+                            class="btn btn-outline-secondary"
+                            data-dismiss="modal"
+                          >
+                            Close
+                          </button>
+                          <a
+                            href="/admin/delete-rating-review/<%= data.id %>?provider_id=<%=id %>"
+                            class="btn btn-outline-danger"
+                            >Delete</a
+                          >
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <%} ) %>
+                </tbody>
+              </table>
+            </div>
+            <% } %>
+
+            <div class="paginationWrapper" style="padding-right: 1rem">
+              <% if (extra.pages> 0) { %>
+              <ul class="pagination d-flex justify-content-end">
+                <% var i=(Number(extra.pageNo)> 5 ? Number(extra.pageNo) - 4 :
+                1) %> <% if (i !==1) { %>
+                <li class="page-item disabled">
+                  <a class="page-link">...</a>
+                        </li>
+                        <% } %>
+                            <% for (; i <=(Number(extra.pageNo) + 4) && i
+                <=extra.pages; i++) { %>
+                                <% if (i==extra.pageNo) { %>
+                                    <li class="page-item active">
+                                        <a class="page-link">
+                                            <%= i %>
+                                        </a>
+                                    </li>
+                                    <% } else { %>
+                                        <li class="page-item">
+                                            <a class="page-link" href="/admin/service-provider/view-ratings-reviews/<%= data.id %>/?page=<%= i %>">
+                                                <%= i %>
+                                            </a>
+                                        </li>
+                                        <% } %>
+                                            <% if (i==Number(extra.pageNo) + 4 && i < extra.pages) {
+                %>
+                                                <li class="page-item disabled">
+                                                    <a class="page-link">...</a>
+                                                </li>
+                                                <% } %>
+                                                    <% } %>
+                                                        </ul>
+                                                        <% } %>
+                </div>
+            </div>
+        </div>
+</div>
+</div>
+</section>
+</div>

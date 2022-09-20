@@ -1,0 +1,183 @@
+<div class="content-wrapper">
+    <section class="content-header">
+        <div class="container-fluid">
+            <div class="row mb-2">
+                <div class="col-sm-6">
+                    <h1>User Commission Details</h1>
+                </div>
+                <div class="col-sm-6">
+                    <ol class="breadcrumb float-sm-right">
+                        <a href="/admin/miscellaneous-role-reference-table/<%= user_id %>">
+                            <li>User Reference Table</li>
+                        </a>
+                    </ol>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="content">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-12">
+                    <div class="card">
+                        <div class="card-header">
+                            <div class=" row">
+                                <div class="col-10">
+                                    <form action="/admin/miscellaneous-commission-details/<%= user_id %>" method="get">
+                                        <div class="row">
+                                            <!-- <div class="col-4">
+                                                <div class="input-group">
+                                                    <select class="form-control form-control-lg" style="font-size: 17px; color: grey;" name="year">
+                                                        <option value="2022" selected>2022</option>
+                                                        <option value="2023">2023</option>  
+                                                        <option value="2024">2024</option>
+                                                        <option value="2025">2025</option>
+                                                        <option value="2026">2026</option>
+                                                        <option value="2027">2027</option>
+                                                        <option value="2028">2028</option>
+                                                        <option value="2029">2029</option>
+                                                        <option value="2030">2030</option>
+                                                    </select>
+                                                    <div class="input-group-append">
+                                                        <button type="submit" class="btn btn-lg btn-default">
+                                                            <i class="fa fa-search"></i>
+                                                        </button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-4">
+                                                <div class="input-group">
+                                                    <select class="form-control form-control-lg" style="font-size: 17px; color: grey;" name="month">
+                                                        <option selected value=''>Slect Month</option>
+                                                        <option value=1>January</option>
+                                                        <option value=2>February</option>
+                                                        <option value=3>March</option>
+                                                        <option value=4>April</option>
+                                                        <option value=5> May</option>
+                                                        <option value=6>June</option>
+                                                        <option value=7>July</option>
+                                                        <option value=8>August</option>
+                                                        <option value=9>September</option>
+                                                        <option value=10>October</option>
+                                                        <option value=11>November</option>
+                                                        <option value=12>December</option>
+                                                    </select>
+                                                    <div class="input-group-append">
+                                                        <button type="submit" class="btn btn-lg btn-default">
+                                                            <i class="fa fa-search"></i>
+                                                        </button>
+                                                    </div>
+                                                </div>
+                                            </div> -->
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                        <div>
+                            <% if(message != 0) { %>
+                                <div class="p-3">
+                                    <div class="alert mb-0" style="background-color: rgb(188 252 188); border: none; color: rgb(2, 120, 28);" role="alert">
+                                        <%= message %>
+                                    </div>
+                                </div>
+
+                                <% } else if(error != 0){ %>
+                                    <div class="p-3">
+                                        <div class="alert mb-0" style="background-color: rgb(237 183 183); border: none; color: rgb(120 2 2);" role="alert">
+                                            <%= error %>
+                                        </div>
+                                    </div>
+                                    <% } %>
+                        </div>
+
+                        <% if(data.rows.length > 0) { %>
+                            <table id="example2" class="table table-bordered table-hover">
+                                <thead>
+                                    <tr>
+                                        <th>S no.</th>
+                                        <th>Reason</th>
+                                        <th>Date</th>
+                                        <th>Commission Recieved</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <% data.rows.forEach((dets, index)=> { %>
+                                        <tr>
+                                            <%= console.log(dets) %>
+                                                <td>
+                                                    <%= index + 1%>
+                                                </td>
+                                                <td>
+                                                    <%= dets.dataValues.Reason  %>
+                                                </td>
+                                                <td>
+                                                    <%= dets.dataValues.date  %>
+                                                </td>
+                                                <td>
+                                                    <%= dets.dataValues.my_commission_amount  %>
+                                                </td>
+                                        </tr>
+                                        <%} ) %>
+                                </tbody>
+                            </table>
+                    </div>
+                    <% } %>
+                        <div class="row">
+                            <div style="display: contents;" class=" col-sm-2 m-2 col-4 justify-content-start mt-5">
+
+                                <a href="/admin/commission-details-download/<%= user_id %>?type=excel">
+                                    <div class="btn btn-sm bg-info">
+                                        Download Commision Details Excel
+                                    </div>
+                                </a>
+                                &nbsp;
+                                <a href="/admin/commission-details-download/<%= user_id %>">
+                                    <div class="btn btn-sm bg-info">
+                                        Download Commision Details PDf
+                                    </div>
+                                </a>
+                            </div>
+
+                            <div class="col-sm-2 m-2 col-4 paginationWrapper ml-auto justify-content-end" style="padding-right: 1rem;">
+                                <% if (extra.pages > 0) { %>
+                                    <ul class="pagination d-flex justify-content-end">
+                                        <% var i=(Number(extra.pageNo) > 5 ? Number(extra.pageNo) - 4 : 1) %>
+                                            <% if (i !==1) { %>
+                                                <li class="page-item disabled">
+                                                    <a class="page-link">...</a></li>
+                                                <% } %>
+                                                    <% for (; i <=(Number(extra.pageNo) + 4) && i <=extra.pages; i++) { %>
+
+
+                                                        <% if (i==extra.pageNo) { %>
+                                                            <li class="page-item active">
+                                                                <a class="page-link">
+                                                                    <%= i %>
+                                                                </a>
+                                                            </li>
+                                                            <% } else { %>
+                                                                <li class="page-item">
+                                                                    <a class="page-link" href="/admin/miscellaneous-commission-details/<%= user_id %>?page=<%= i %>">
+                                                                        <%= i %>
+                                                                    </a>
+                                                                </li>
+                                                                <% } %>
+
+                                                                    <% if (i==Number(extra.pageNo) + 4 && i < extra.pages) { %>
+                                                                        <li class="page-item disabled">
+                                                                            <a class="page-link">...</a></li>
+                                                                        <% } %>
+                                                                            <% } %>
+                                    </ul>
+                                    <% } %>
+                            </div>
+                        </div>
+
+                </div>
+            </div>
+        </div>
+</div>
+</section>
+</div>

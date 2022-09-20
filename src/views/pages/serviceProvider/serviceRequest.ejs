@@ -1,0 +1,212 @@
+<div class="content-wrapper">
+    <section class="content-header">
+        <div class="container-fluid">
+            <div class="row mb-2">
+                <div class="col-sm-6">
+                    <h1>Services Request Table</h1>
+                </div>
+                <div class="col-sm-6">
+                    <ol class="breadcrumb float-sm-right">
+                        <li class="breadcrumb-item active">All Request List</li>
+                    </ol>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="content">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-12">
+                    <div class="card">
+                        <div class="card-header">
+                            <div class="row">
+                                <div class="col-10">
+                                    <form action="/admin/service-seeker-all-services/<%= id %>" method="get">
+                                        <div class="row">
+                                            <div class="col-4">
+                                                <div class="input-group">
+                                                    <input type="text" class="form-control form-control-lg" name="search" value="<%= searchVal %>" placeholder="Search here !" />
+                                                    <div class="input-group-append">
+                                                        <button type="submit" class="btn btn-lg btn-default">
+                              <i class="fa fa-search"></i>
+                            </button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-4">
+                                                <div class="input-group">
+                                                    <select class="form-control form-control-lg" style="font-size: 17px; color: grey" name="filter">
+                            <% if(filterVal==='' ) { %>
+                            <option value="" selected>SELECT STATUS</option>
+                            <option value="PENDING">PENDING</option>
+                            <option value="ACCEPTED">ACCEPTED</option>
+                            <option value="REJECTED">REJECTED</option>
+                            <option value="CANCELED">CANCELED</option>
+                            <option value="COMPLETED">COMPLETED</option>
+                            <% } else if(filterVal ==='PENDING' ) { %>
+                            <option value="PENDING" selected>PENDING</option>
+                            <option value="ACCEPTED">ACCEPTED</option>
+                            <option value="REJECTED">REJECTED</option>
+                            <option value="CANCELED">CANCELED</option>
+                            <option value="COMPLETED">COMPLETED</option>
+                            <% } else if(filterVal ==='ACCEPTED' ) { %>
+                            <option value="PENDING">PENDING</option>
+                            <option value="ACCEPTED" selected>ACCEPTED</option>
+                            <option value="REJECTED">REJECTED</option>
+                            <option value="CANCELED">CANCELED</option>
+                            <option value="COMPLETED">COMPLETED</option>
+                            <% } else if(filterVal === 'REJECTED') { %>
+                            <option value="PENDING">PENDING</option>
+                            <option value="ACCEPTED">ACCEPTED</option>
+                            <option value="REJECTED" selected>REJECTED</option>
+                            <option value="CANCELED">CANCELED</option>
+                            <option value="COMPLETED">COMPLETED</option>
+                            <% } else if(filterVal ==='CANCELED' ) {%>
+                            <option value="PENDING">PENDING</option>
+                            <option value="ACCEPTED">ACCEPTED</option>
+                            <option value="REJECTED">REJECTED</option>
+                            <option value="CANCELED" selected>CANCELED</option>
+                            <option value="COMPLETED">COMPLETED</option>
+                            <% } else if(filterVal === 'COMPLETED' ) { %>
+                            <option value="PENDING">PENDING</option>
+                            <option value="ACCEPTED">ACCEPTED</option>
+                            <option value="REJECTED">REJECTED</option>
+                            <option value="CANCELED">CANCELED</option>
+                            <option value="COMPLETED" selected>
+                              COMPLETED
+                            </option>
+                            <% } %>
+                          </select>
+                                                    <div class="input-group-append">
+                                                        <button type="submit" class="btn btn-lg btn-default">
+                              <i class="fa fa-search"></i>
+                            </button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+
+                        <% if(message !='' ) { %>
+                            <div class="p-3">
+                                <div class="alert mb-0" style="
+                  background-color: rgb(141, 228, 141);
+                  border: none;
+                  color: rgb(2, 120, 28);
+                " role="alert">
+                                    <%= message %>
+                                </div>
+                            </div>
+                            >
+                            <% } else if(error !='' ) { %>
+                                <div class="p-3">
+                                    <div class="alert mb-0" style="
+                  background-color: rgb(233, 153, 153);
+                  border: none;
+                  color: rgb(120 2 2);
+                " role="alert">
+                                        <%= error %>
+                                    </div>
+                                </div>
+                                <% } else {%>
+                                    <div class="card-body">
+                                        <table id="example2" class="table table-bordered table-hover">
+                                            <thead>
+                                                <tr>
+                                                    <th>S no.</th>
+                                                    <th>User Name</th>
+                                                    <th>Charge</th>
+                                                    <th>Branch Name</th>
+                                                    <th>Provider Status</th>
+                                                    <th>User Status</th>
+                                                    <th>Action</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <% data.rows.forEach((data, index)=> { %>
+                                                    <tr>
+                                                        <td>
+                                                            <%= index + 1 + ((pageNo - 1) * limit) %>
+                                                        </td>
+
+                                                        <td>
+                                                            <% if(data.User) { %>
+                                                                <%= data.User.name %>
+                                                                    <% } else { %>
+                                                                        Service Deleted
+                                                                        <% } %>
+                                                        </td>
+
+                                                        <td>
+                                                            <% if(data.service) { %>
+                                                                <%= data.service.service_charge
+                      %>
+                                                                    <% } else { %> Service Deleted
+                                                                        <% } %>
+                                                        </td>
+                                                        <td>
+                                                            <%= data.serviceProviderBranch.shop_name + ', ' +
+                      data.serviceProviderBranch.address1 %>
+                                                        </td>
+                                                        <td>
+                                                            <%= data.service_provider_status %>
+                                                        </td>
+                                                        <td>
+                                                            <%= data.user_status %>
+                                                        </td>
+                                                        <td>
+                                                            <a href="/admin/view-details-candidate/<%= data.user_id %>" class="btn btn-sm btn-outline-primary">View Detail</a
+                      >
+                      &nbsp;
+                    </td>
+                  </tr>
+                  <%} ) %>
+                </tbody>
+              </table>
+            </div>
+            <% } %>
+
+            <div class="paginationWrapper" style="padding-right: 1rem">
+              <% if (extra.pages> 0) { %>
+              <ul class="pagination d-flex justify-content-end">
+                <% var i=(Number(extra.pageNo)> 5 ? Number(extra.pageNo) - 4 :
+                1) %> <% if (i !==1) { %>
+                <li class="page-item disabled">
+                  <a class="page-link">...</a>
+                                                            </li>
+                                                            <% } %>
+                                                                <% for (; i <=(Number(extra.pageNo) + 4) && i
+                <=extra.pages; i++) { %>
+                                                                    <% if (i==extra.pageNo) { %>
+                                                                        <li class="page-item active">
+                                                                            <a class="page-link">
+                                                                                <%= i %>
+                                                                            </a>
+                                                                        </li>
+                                                                        <% } else { %>
+                                                                            <li class="page-item">
+                                                                                <a class="page-link" href="/admin/service-seeker-all-services/id/?page=<%= i %>&search=<%= searchVal %>">
+                                                                                    <%= i %>
+                                                                                </a>
+                                                                            </li>
+                                                                            <% } %>
+                                                                                <% if (i==Number(extra.pageNo) + 4 && i < extra.pages) {
+                %>
+                                                                                    <li class="page-item disabled">
+                                                                                        <a class="page-link">...</a>
+                                                                                    </li>
+                                                                                    <% } %>
+                                                                                        <% } %>
+                                                                                            </ul>
+                                                                                            <% } %>
+                                    </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>

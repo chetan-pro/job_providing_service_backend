@@ -1,0 +1,325 @@
+<div class="content-wrapper">
+    <section class="content-header">
+        <div class="container-fluid">
+            <div class="row mb-2">
+                <div class="col-sm-6">
+                    <h1>Bussiness Details</h1>
+                </div>
+                <div class="col-sm-6">
+                    <ol class="breadcrumb float-sm-right">
+                        <!-- <li class="breadcrumb-item"><a href="/admin/service-provider">Service Provider list</a></li> -->
+                        <li class="breadcrumb-item active">Bussiness Details</li>
+                    </ol>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="content">
+        <div class="container-fluid">
+            <div class="card card-success">
+                <div class="card-header">
+                    <h3 class="card-title">Create Bussiness Details</h3>
+                </div>
+
+                <% if(message != '') { %>
+                    <div class="p-3">
+                        <div class="alert mb-0" style="
+              background-color: rgb(141, 228, 141);
+              border: none;
+              color: rgb(2, 120, 28);
+            " role="alert">
+                            <%= message %>
+                        </div>
+                    </div>
+
+                    <% } else if(error != ''){ %>
+                        <div class="p-3">
+                            <div class="alert alert-dismissible mb-0" style="
+              background-color: rgb(237 183 183);
+              border: none;
+              color: rgb(120 2 2);
+            " role="alert">
+                                <%= error %>
+                                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+                            </div>
+                        </div>
+                        <% } %>
+
+                            <form method="post" action="/admin/add-miscellaneous-bussiness-details/<%= user_id %>" enctype="multipart/form-data">
+                                <div class="card-body">
+                                    <div class="row">
+                                        <div class="col-md-4">
+                                            <div class="form-group">
+                                                <label class="form-label">Current Bussiness</label>
+                                                <select class="form-control" style="width: 100%" name="current_bussiness">
+                                                    <option disabled selected value hidden>
+                                                        Current Business
+                                                    </option>
+                                                    <option value="College">College</option>
+                                                    <option value="Institute">Institute</option>
+                                                    <option value="Kiosk">Kiosk</option>
+                                                    <option value="Petrol Pump">Petrol Pump</option>
+                                                    <option value="Agriculture">Agriculture</option>
+                                                    <option value="Poultry">Poultry</option>
+                                                    <option value="Dairy (Animal Husbandry)">Dairy (Animal Husbandry)</option>
+                                                    <option value="Trading">Trading</option>
+                                                    <option value="Other">Other</option>
+                                                  </select>
+
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <div class="form-group">
+                                                <label class="form-label">Business Type</label>
+                                                <select class="form-control" style="width: 100%" name="bussiness_type">
+                                                    <option disabled selected value hidden>
+                                                        Business Type
+                                                    </option>
+                                                    <option value="Proprietorship">Proprietorship</option>
+                                                    <option value="Partnership">Partnership</option>
+                                                    <option value="Family Business">Family Business</option>
+                                                    <option value="Society">Society</option>
+                                                  </select>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <div class="form-group">
+                                                <label class="form-label">Bussiness Name</label>
+                                                <input type="text" class="form-control" name="bussiness_name" value="" placeholder="Bussiness Name" />
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-3">
+                                            <div class="form-group">
+                                                <label class="form-label">House Name</label>
+                                                <input type="text" class="form-control" name="house_name" value="" placeholder="House Name" />
+                                            </div>
+                                        </div>
+                                        <div class="col-md-3">
+                                            <div class="form-group">
+                                                <label class="form-label">Street No/Name </label>
+                                                <input type="text" class="form-control" name="street_no_name" value="" placeholder="Street No/Name" />
+                                            </div>
+                                        </div>
+                                        <div class="col-md-3">
+                                            <div class="form-group">
+                                                <label class="form-label">Ward / Village</label>
+                                                <input type="number" class="form-control" name="ward" value="" placeholder="Ward No./Village" />
+                                            </div>
+                                        </div>
+                                        <div class="col-md-3">
+                                            <div class="form-group">
+                                                <label class="form-label">Municipality</label>
+                                                <input type="text" class="form-control" name="municipality" value="" placeholder="Municipality" />
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label class="form-label">State</label>
+                                                <select class="form-control select2bs4" style="width: 100%" id="state-dropdown" name="state_id">
+                    <option disabled selected value hidden>Select State</option>
+                    <% statedata.forEach((state) => { %>
+                    <option value="<%= state.id %>"><%= state.name %></option>
+                    <% }) %>
+                  </select>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label class="form-label">City</label>
+                                                <select class="form-control select2bs4" style="width: 100%" id="city-dropdown" name="city_id">
+                    <option disabled selected value hidden>Select City</option>
+                  </select>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-4">
+                                            <div class="form-group">
+                                                <label class="form-label">Pincode</label>
+                                                <input type="number" class="form-control pincodeNumberField" id="pincode-text-field" name="pincode" value="" placeholder="Pin code" />
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <div class="form-group">
+                                                <label class="form-label">Bussiness Years</label>
+                                                <input type="number" class="form-control mobileNumberField" name="bussiness_years" placeholder="eg. 4" />
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <div class="form-group">
+                                                <label class="form-label">dimensions</label>
+                                                <input type="number" class="form-control mobileNumberField" name="dimensions" placeholder="12 x 24" />
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-4">
+                                            <div class="form-group">
+                                                <label class="form-label">Bussiness Img</label>
+                                                <input type="file" name="bussiness_img" value="" placeholder="Bussiness Img" />
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <div class="form-group">
+                                                <div class="form-group">
+                                                    <label class="form-label">Available Infrastructure</label>
+                                                    <select class="form-control" style="width: 100%" name="infrastructure_available" multiple>
+                      <option disabled selected value hidden>
+                        Select Available Infrastructure
+                      </option>
+                      <option value="Table and chair">Table and chair</option>
+                      <option value="Telephone">Telephone</option>
+                      <option value="Internet">Internet</option>
+                      <option value="Computer">Computer</option>
+                      <option value="Other">Other</option>
+                    </select>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <div class="form-group">
+                                                <label class="form-label">Current Income(PA)</label>
+                                                <input type="number" class="form-control mobileNumberField" name="current_income_pa" value="" placeholder="eg. 12000" />
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <hr />
+                                    <div class="row">
+                                        <div class="col-md-4">
+                                            <div class="form-group">
+                                                <label class="form-label">No of Customers</label>
+                                                <input type="number" class="form-control mobileNumberField" name="no_customers" value="" placeholder="No of Customers" />
+                                            </div>
+                                        </div>
+                                        <div id="popular-create-bussiness" class="col-md-4">
+                                            <div class="form-group">
+                                                <label class="form-label">Is it popular ?</label>
+                                                <select class="form-control" style="width: 100%" name="popular">
+                    <option disabled selected value hidden>
+                      Is it popular
+                    </option>
+                    <option value="Y">Yes</option>
+                    <option value="N">No</option>
+                  </select>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <div class="form-group">
+                                                <label class="form-label">Customers Served</label>
+                                                <input type="number" class="form-control mobileNumberField" name="customers_served" value="" placeholder="130,140" />
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-4">
+                                            <div class="form-group">
+                                                <label class="form-label">Achievement 1</label>
+                                                <input type="text" class="form-control" name="achievement1" value="" placeholder="Achievement 1" />
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <div class="form-group">
+                                                <label class="form-label">Achievement 2</label>
+                                                <input type="text" class="form-control" name="achievement2" value="" placeholder="Achievement 2" />
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <div class="form-group">
+                                                <label class="form-label">Achievement 3</label>
+                                                <input type="text" class="form-control" name="achievement3" value="" placeholder="Achievement 3" />
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-3">
+                                            <div class="form-group">
+                                                <label class="form-label">Reference 1 name</label>
+                                                <input type="text" class="form-control" name="ref1_name" value="" placeholder="Name" />
+                                            </div>
+                                        </div>
+                                        <div class="col-md-3">
+                                            <div class="form-group">
+                                                <label class="form-label">Reference 1 Occupation</label>
+                                                <input type="text" class="form-control" name="ref1_occupation" value="" placeholder="Occupation 2" />
+                                            </div>
+                                        </div>
+                                        <div class="col-md-3">
+                                            <div class="form-group">
+                                                <label class="form-label">Reference 1 Address</label>
+                                                <input type="text" class="form-control" name="ref1_address" value="" placeholder="Address" />
+                                            </div>
+                                        </div>
+                                        <div class="col-md-3">
+                                            <div class="form-group">
+                                                <label class="form-label">Reference 1 Mobile</label>
+                                                <input type="number" class="form-control mobileNumberField" name="ref1_mobile" value="" placeholder="Mobile" />
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-3">
+                                            <div class="form-group">
+                                                <label class="form-label">Reference 2 name</label>
+                                                <input type="text" class="form-control" name="ref2_name" value="" placeholder="Name" />
+                                            </div>
+                                        </div>
+                                        <div class="col-md-3">
+                                            <div class="form-group">
+                                                <label class="form-label">Reference 2 Occupation</label>
+                                                <input type="text" class="form-control" name="ref2_occupation" value="" placeholder="Occupation 2" />
+                                            </div>
+                                        </div>
+                                        <div class="col-md-3">
+                                            <div class="form-group">
+                                                <label class="form-label">Reference 2 Address</label>
+                                                <input type="text" class="form-control" name="ref2_address" value="" placeholder="Address" />
+                                            </div>
+                                        </div>
+                                        <div class="col-md-3">
+                                            <div class="form-group">
+                                                <label class="form-label">Reference 2 Mobile</label>
+                                                <input type="number" class="form-control mobileNumberField" name="ref2_mobile" value="" placeholder="Mobile" />
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label class="form-label">No of Towns where Customers Come From</label
+                  >
+                  <input
+                    type="number"
+                    class="form-control mobileNumberField"
+                    name="no_towns"
+                    value=""
+                    placeholder="No of Towns where Customers Come From"
+                  />
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="form-group">
+                  <label class="form-label"
+                    >Name of Towns where Customers Come From
+                  </label>
+                                                <input type="text" class="form-control" name="name_towns" value="" placeholder="Name" />
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- /.card-body -->
+                                <div class="card-footer">
+                                    <button type="submit" class="btn btn-sm btn-primary">Submit</button>
+                                </div>
+                            </form>
+            </div>
+        </div>
+    </section>
+    </div

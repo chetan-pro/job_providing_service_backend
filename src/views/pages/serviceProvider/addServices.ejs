@@ -1,0 +1,171 @@
+<div class="content-wrapper">
+    <section class="content-header">
+        <div class="container-fluid">
+            <div class="row mb-2">
+                <div class="col-sm-6">
+                    <h1>Create Service</h1>
+                </div>
+                <div class="col-sm-6">
+                    <ol class="breadcrumb float-sm-right">
+                        <li class="breadcrumb-item">
+                            <a href="/admin/service-provider">Service Provider Service list</a
+              >
+            </li>
+            <li class="breadcrumb-item active">Create Service</li>
+          </ol>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="content">
+    <div class="container-fluid">
+      <div class="card card-primary">
+        <div class="card-header">
+          <h3 class="card-title">Create Service</h3>
+        </div>
+        <!-- 
+        <div>
+          <div class="p-3">
+            <div
+              class="alert mb-0"
+              style="
+                background-color: rgb(141, 228, 141);
+                border: none;
+                color: rgb(2, 120, 28);
+              "
+              role="alert"
+            >
+              message
+            </div>
+          </div>
+
+          <div class="p-3">
+            <div
+              class="alert alert-dismissible mb-0"
+              style="
+                background-color: rgb(237 183 183);
+                border: none;
+                color: rgb(120 2 2);
+              "
+              role="alert"
+            >
+              error
+              <button
+                type="button"
+                class="close"
+                data-dismiss="alert"
+                aria-label="Close"
+              >
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+          </div>
+        </div> -->
+
+        <form
+          method="post"
+          action="/admin/create-service/<%= id %>"
+          enctype="multipart/form-data"
+        >
+          <div class="card-body">
+            <div class="row">
+              <div class="col-md-6">
+                <div class="form-group">
+                  <label class="form-label">Service Name</label>
+                  <input
+                    type="text"
+                    class="form-control"
+                    name="service_name"
+                    value=""
+                    placeholder=""
+                  />
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-6">
+                <div class="form-group">
+                  <label class="form-label">Category</label>
+                  <select
+                    class="form-control select2bs4"
+                    style="width: 100%"
+                    id="state-dropdown"
+                    name="service_categories"
+                  >
+                    <option value="">Select Category</option>
+                    <% category.forEach((data) => { %>
+                    <option value="<%= data.id %>">
+                      <%= data.category_name %>
+                    </option>
+                    <% }) %>
+                  </select>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="form-group">
+                  <label class="form-label"
+                    >Specify Service Charges (in ₹)</label
+                  >
+                  <input
+                    type="text"
+                    class="form-control"
+                    name="service_charge"
+                    value=""
+                    placeholder=""
+                  />
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-6">
+                <div class="form-group">
+                  <label class="form-label"
+                    >Days Available Week For Booking</label
+                  >
+                  <br />
+                  <div class="row">
+                    <% days.forEach((data) => { %>
+                    <div class="m-2">
+                      <input
+                        type="checkbox"
+                        name="days_available_<%=data.id%>"
+                        id="<%=data.id%>"
+                        value="<%=data.day_name%>"
+                      />
+                      <h6><%=data.day_name%></h6>
+                    </div>
+                    <% }) %>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-6">
+                <div class="form-group">
+                  <label class="form-label">Service Photos</label>
+                  <br />
+                      <input
+                        type="file"
+                        name="photos"
+                        id="image-picker-input"
+                        value=""
+                        accept="image/png, image/gif, image/jpeg"
+                        multiple 
+                      />
+                  </div>
+                  <div id="imageBox"  style="display: flex;">
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- /.card-body -->
+          <div class="card-footer">
+            <button type="submit" class="btn btn-sm btn-primary">Submit</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </section>
+</div>

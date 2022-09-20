@@ -1,0 +1,92 @@
+<div class="content-wrapper">
+    <section class="content-header">
+        <div class="container-fluid">
+            <div class="row mb-2">
+                <div class="col-sm-6">
+                    <h1>Wallet Table </h1>
+
+                </div>
+                <div class="col-sm-6">
+                    <ol class="breadcrumb float-sm-right">
+                        <li class="breadcrumb-item active">All Transactions List</li>
+                    </ol>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="content">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-12">
+                    <div class="card">
+                        <div class="card-header">
+                            <h1>Wallet Transactions</h1>
+                        </div>
+
+                        <% if(message != '') { %>
+                            <div class="p-3">
+                                <div class="alert  mb-0" style="background-color: rgb(141, 228, 141); border: none; color: rgb(2, 120, 28);" role="alert">
+                                    <%= message %>
+                                </div>
+                            </div>>
+                            <% } else if(error != '') { %>
+                                <div class="p-3">
+                                    <div class="alert mb-0" style="background-color: rgb(233, 153, 153); border: none; color: rgb(120 2 2);" role="alert">
+                                        <%= error %>
+                                    </div>
+                                </div>
+                                <% }  else {%>
+                                    <div class="card-body">
+                                        <table id="example2" class="table table-bordered table-hover">
+                                            <thead>
+                                                <tr>
+                                                    <th>S no.</th>
+                                                    <th>Previous Amount</th>
+                                                    <th>Amount</th>
+                                                    <th>Total Amount</th>
+                                                    <th>Transaction Type</th>
+                                                    <th>Reason</th>
+                                                    <th>Details</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <% data.rows.forEach((data, index) => { %>
+                                                    <tr>
+                                                        <td>
+                                                            <%= index + 1 + ((pageNo - 1) * limit) %>
+                                                        </td>
+
+                                                        <td>
+                                                            <%= data.previous_amount %>
+                                                        </td>
+                                                        <td>
+                                                            <%= data.amount %>
+                                                        </td>
+                                                        <td>
+                                                            <%= data.total_amount %>
+                                                        </td>
+                                                        <td>
+                                                            <%= data.type %>
+                                                        </td>
+                                                        <td>
+                                                            <%= data.reason %>
+                                                        </td>
+                                                        <td>
+                                                            <%= data.details %>
+                                                        </td>
+
+                                                    </tr>
+                                                    <%} ) %>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                    <% } %>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+</div>

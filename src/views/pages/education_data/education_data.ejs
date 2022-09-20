@@ -1,0 +1,187 @@
+<div class="content-wrapper">
+    <section class="content-header">
+        <div class="container-fluid">
+            <div class="row mb-2">
+                <div class="col-sm-6">
+                    <h1>Education Data Table </h1>
+                </div>
+                <div class="col-sm-6">
+                    <ol class="breadcrumb float-sm-right">
+                        <li class="breadcrumb-item active"><a href="/admin/education_data">Education Data list</a></li>
+                    </ol>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="content">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-12">
+                    <div class="card">
+                        <div class="card-header">
+                            <div class=" row">
+                                <div class="col-10">
+                                    <form action="/admin/education_data/" method="get">
+                                        <div class="row">
+                                            <div class="col-4">
+                                                <div class="input-group" >
+                                                    <input type="text" class="form-control form-control-lg" name="search" style="font-size: 17px; color: grey;"
+                                                        value="<%= searchVal %>" placeholder="search here !">
+                                                    <div class="input-group-append">
+                                                        <button type="submit" class="btn btn-lg btn-default">
+                                                            <i class="fa fa-search"></i>
+                                                        </button>
+                                                    </div>
+                                                </div>
+                                            </div> 
+                                            <div class="col-4">
+                                                <div class="input-group">
+                                                    <select class="form-control form-control-lg" style="font-size: 17px; color: grey;"  name="status">
+                                                        <option value="" selected>
+                                                            <% if(statusfilter === '') { %>
+                                                                select status
+                                                            <% } else if(Number(statusfilter) === 0) { %>
+                                                                Inactive
+                                                            <% } else if(Number(statusfilter) === 1) { %>
+                                                                Active
+                                                            <% } %>
+                                                        </option>
+                                                        <option value="0">InActive</option>
+                                                        <option value="1">Active</option>
+                                                        
+                                                    </select>
+                                                    <div class="input-group-append">
+                                                        <button type="submit" class="btn btn-lg btn-default">
+                                                            <i class="fa fa-search"></i>
+                                                        </button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+                                
+                                <div class="col-2">
+                                    <a href="/admin/create-education_data" style="margin-top: 9px;" class="btn btn-sm btn-primary">Add Education Data</a>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div>
+                            <% if(message != 0) { %>
+                            <div class="p-3">
+                                <div class="alert mb-0"
+                                    style="background-color: rgb(188 252 188); border: none; color: rgb(2, 120, 28);"
+                                    role="alert">
+                                    <%= message %>
+                                </div>
+                            </div>
+        
+                            <% } else if(error != 0){ %>
+                            <div class="p-3">
+                                <div class="alert mb-0"
+                                    style="background-color: rgb(237 183 183); border: none; color: rgb(120 2 2);"
+                                    role="alert">
+                                    <%= error %>
+                                </div>
+                            </div>
+        
+                            <% } %>
+                        </div>
+                        <% if(data.count != 0) { %>
+                            <div class="card-body">
+                                <table id="example2" class="table table-bordered table-hover">
+                                    <thead>
+                                        <tr>
+                                            <th>S no.</th>
+                                            <th>Education Data Name</th>
+                                            <th>Status</th>
+                                            <th>Actions</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <% data.rows.forEach((data, index)=> { %>
+                                            <tr>                    
+                                                <td>
+                                                    <%= index + 1 + ((pageNo - 1) * limit) %>
+                                                </td>                                                    
+                                                <td><%= data.name %></td>
+                                                
+                                                <td>
+                                                    <% if(data.status === 0) { %>
+                                                         Inactive
+                                                    <% } else if(data.status === 1) { %>
+                                                        Active
+                                                    <% } %>
+                                                </td>
+                                                <td>
+                                                    <a href="/admin/edit-education_data/<%= data.id %>"
+                                                        class="btn btn-sm btn-outline-primary">Edit</a> &nbsp;
+                                                    <button class="btn btn-sm btn-outline-danger"
+                                                        data-toggle="modal" data-target="#exampleModalCenter<%= index+1 %>">Delete</button>
+                                                </td>
+                                            </tr>
+
+                                            <div class="modal fade" id="exampleModalCenter<%= index+1 %>" tabindex="-1"
+                                                role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                                                    <div class="modal-dialog modal-dialog-centered" role="document">
+                                                        <div class="modal-content">
+                                                            <div class="modal-header">
+                                                                <h5 class="modal-title" id="exampleModalLongTitle">Do you really want to delete this data ?</h5>
+                                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                                    <span aria-hidden="true">&times;</span>
+                                                                </button>
+                                                            </div>
+                                                            <div class="modal-footer">
+                                                                <button type="button" class="btn btn-outline-secondary"
+                                                                            data-dismiss="modal">Close</button>
+                                                                <a href="/admin/delete-education_data/<%= data.id %>"
+                                                                            class="btn btn-outline-danger">Delete</a>
+
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                            </div>
+                                        <%} ) %>
+                                    </tbody>
+                                </table>
+                            </div>
+                     
+                        <% } %>
+                        
+ 
+                        <div class="paginationWrapper" style="padding-right: 1rem;">
+                            <% if (extra.pages> 0) { %>
+                                <ul class="pagination d-flex justify-content-end">
+                                    <% var i=(Number(extra.pageNo) > 5 ? Number(extra.pageNo) - 4 : 1) %>
+                                        <% if (i !==1) { %>
+                                            <li class="page-item disabled">
+                                                <a class="page-link">...</a></li>
+                                        <% } %>
+                                        <% for (; i <=(Number(extra.pageNo) + 4) && i <=extra.pages; i++) { %>
+                                            <% if (i==extra.pageNo) { %>
+                                                <li class="page-item active">
+                                                    <a class="page-link"><%= i %></a>
+                                                </li>
+                                            <% } else { %>
+                                                <li class="page-item">
+                                                    <a class="page-link"
+                                                        href="/admin/education_data/?page=<%= i %>&search=<%= searchVal %>">
+                                                    <%= i %> </a>
+                                                </li>
+                                            <% } %>
+                                            <% if (i==Number(extra.pageNo) + 4 && i < extra.pages) { %>
+                                                <li class="page-item disabled">
+                                                    <a class="page-link">...</a></li>
+                                            <% } %>
+                                        <% } %>
+                                </ul>
+                            <% } %>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>

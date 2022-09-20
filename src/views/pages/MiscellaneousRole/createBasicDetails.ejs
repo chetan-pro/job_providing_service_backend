@@ -1,0 +1,214 @@
+<div class="content-wrapper">
+    <section class="content-header">
+        <div class="container-fluid">
+            <div class="row mb-2">
+                <div class="col-sm-6">
+                    <h1>Basic Details</h1>
+                </div>
+                <div class="col-sm-6">
+                    <ol class="breadcrumb float-sm-right">
+                        <!-- <li class="breadcrumb-item"><a href="/admin/service-provider">Service Provider list</a></li> -->
+                        <li class="breadcrumb-item active">Basic Details</li>
+                    </ol>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="content">
+        <div class="container-fluid">
+            <div class="card card-info">
+                <div class="card-header">
+                    <h3 class="card-title">Create Basic Details</h3>
+                </div>
+
+                <% if(message != '') { %>
+                    <div class="p-3">
+                        <div class="alert mb-0" style="
+              background-color: rgb(141, 228, 141);
+              border: none;
+              color: rgb(2, 120, 28);
+            " role="alert">
+                            <%= message %>
+                        </div>
+                    </div>
+
+                    <% } else if(error != ''){ %>
+                        <div class="p-3">
+                            <div class="alert alert-dismissible mb-0" style="
+              background-color: rgb(237 183 183);
+              border: none;
+              color: rgb(120 2 2);
+            " role="alert">
+                                <%= error %>
+                                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+                            </div>
+                        </div>
+                        <% } %>
+
+                            <form method="post" action="/admin/add-miscellaneous-basic-details/<%= user_id %>" enctype="multipart/form-data">
+                                <div class="card-body">
+                                    <div class="row">
+                                        <div class="col-md-4">
+                                            <div class="form-group">
+                                                <label class="form-label">Residence No</label>
+                                                <input type="number" class="form-control mobileNumberField" name="residence_no" value="" placeholder="Residence No" />
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <div class="form-group">
+                                                <label class="form-label">Office No</label>
+                                                <input type="number" class="form-control mobileNumberField" name="office_no" value="" placeholder="Office No" />
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <div class="form-group">
+                                                <label class="form-label">Whatsapp No</label>
+                                                <input type="number" class="form-control mobileNumberField" name="whatsapp_no" value="" placeholder="Whatsapp No" />
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-4">
+                                            <div class="form-group">
+                                                <label class="form-label">Pan No</label>
+                                                <input type="text" class="form-control panNumberField" name="pan_no" value="" placeholder="Pan No" />
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <div class="form-group">
+                                                <label class="form-label">Pan Image Front</label>
+                                                <input type="file" name="pan_img_front" />
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <div class="form-group">
+                                                <label class="form-label">Pan Image Back</label>
+                                                <input type="file" name="pan_img_back" />
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="col-md-4">
+                                            <div class="form-group">
+                                                <label class="form-label">Adhar No</label>
+                                                <input type="number" class="form-control adharNumberField" name="adhar_no" value="" placeholder="Adhar No" />
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <div class="form-group">
+                                                <label class="form-label">Adhar Image Front</label>
+                                                <input type="file" name="adhar_img_front" />
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <div class="form-group">
+                                                <label class="form-label">Adhar Image Back</label>
+                                                <input type="file" name="adhar_img_back" />
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <hr />
+                                    <hr />
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label class="form-label">Specify Your Relation</label>
+                                                <div class="col-md-12">
+                                                    <div class="form-group">
+                                                        <input type="radio" name="relative_relation" id="exampleCheck1" />
+                                                        <label class="form-check-label" for="exampleCheck1">Father</label
+                      >
+                    </div>
+                  </div>
+                  <div class="col-md-12">
+                    <div class="form-group">
+                      <input
+                        type="radio"
+                        name="relative_relation"
+                        class=""
+                        id="exampleCheck1"
+                      />
+                      <label class="form-check-label" for="exampleCheck1"
+                        >Husband</label
+                      >
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="form-group">
+                  <label class="form-label">Name of the relative</label>
+                                                        <input type="text" class="form-control" name="realtive_name" value="" placeholder="Name of the relative" />
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-md-4">
+                                                    <div class="form-group">
+                                                        <div class="form-group">
+                                                            <label class="form-label">Current Status</label>
+                                                            <select class="form-control" style="width: 100%" name="current_status">
+                      <option disabled selected value hidden>
+                        Select Status
+                      </option>
+                      <option value="Independent business person/">
+                        Independent business person
+                      </option>
+                      <option value="Self-employed person">
+                        Self-employed person
+                      </option>
+                      <option
+                        value="Housewife and wish to   become self-employed"
+                      >
+                        Housewife and wish to become self-employed
+                      </option>
+                      <option
+                        value="Not employed but wish to become self-employed"
+                      >
+                        Not employed but wish to become self-employed
+                      </option>
+                      <option value="Retired but wish to become self-employed">
+                        Retired but wish to become self-employed
+                      </option>
+                      <option
+                        value="Working in family business but also wish to become self-employed"
+                      >
+                        Working in family business but also wish to become
+                        self-employed
+                      </option>
+                      <option
+                        value="Any other firm but wish to  become self-employed"
+                      >
+                        Any other firm but wish to become self-employed
+                      </option>
+                    </select>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-4">
+                                                    <div class="form-group">
+                                                        <label class="form-label">Residential Proof Name</label>
+                                                        <input type="text" class="form-control" name="residential_proof_name" value="" placeholder="Address" />
+                                                    </div>
+                                                </div>
+
+                                                <div class="col-md-4">
+                                                    <div class="form-group">
+                                                        <label class="form-label">Residential Proof</label>
+                                                        <input type="file" name="residential_proof" />
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <!-- /.card-body -->
+                                        <div class="card-footer">
+                                            <button type="submit" class="btn btn-sm btn-primary">Submit</button>
+                                        </div>
+                            </form>
+                            </div>
+                            </div>
+    </section>
+    </div>

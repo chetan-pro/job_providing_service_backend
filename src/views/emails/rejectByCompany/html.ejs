@@ -1,0 +1,30 @@
+<%- include('../header') -%>
+    <tr>
+        <td>
+            <table style='border: 0; border-spacing: 0; border-collapse: separate; -mso-table-lspace: 0pt; -mso-table-rspace: 0pt; width: 100%; padding: 0 20px;'>
+                <tr>
+                    <td style='font-family: sans-serif; font-size: 14px; vertical-align: top;'>
+                        <h3 style='font-family: sans-serif; font-size: 14px; font-weight: bold; Margin-bottom: 8px; margin-top: 20px; color: #5A443D;'> Dear <%= locals.username %>,</h3>
+                        <!--  -->
+                        <p style='font-family: sans-serif; font-size: 14px; Margin-top: 0; Margin-bottom: 20px; color: #5A443D; font-weight: 400; line-height: 1.5em;'>
+                            | Thank you for taking the time to consider <%= locals.companyName %>. We wanted to let you know that we have chosen to move forward with a different candidate for the <%= locals.jobTitle %> position.
+
+                            | Our team was impressed by your skills and accomplishments.  We think you could be a good fit for other future openings and will reach out again if we find a good match.
+                            <br>
+                            <br>
+                            | All the Best!
+                        </p>
+                        <h3 style='font-family: sans-serif; font-size: 14px; font-weight: bold; Margin-bottom: 0; margin-top: 20px; color: #5A443D;'>
+                            Thank You <br>
+                            <%= locals.companyName %>
+                        </h3>
+                        
+                        <p style='font-family: sans-serif; font-size: 14px; Margin-top: 0; Margin-bottom: 20px; color: #5A443D; font-weight: 400; line-height: 1.5em;'></p>
+                    </td>
+                </tr>
+            </table>
+        </td>
+    </tr>
+
+    <%- include('../footer') -%>
+

@@ -1,0 +1,715 @@
+<div class="content-wrapper">
+    <section class="content-header">
+        <div class="container-fluid">
+            <div class="row mb-2">
+                <div class="col-sm-6">
+                    <h1>Edit Miscellaneous Role</h1>
+                </div>
+                <div class="col-sm-6">
+                    <ol class="breadcrumb float-sm-right">
+                        <li class="breadcrumb-item">
+                            <a href="/admin/miscellaneous-roles">Miscellaneous Role</a>
+                        </li>
+                        <li class="breadcrumb-item active">Edit Miscellaneous Role</li>
+                    </ol>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <ul class="nav nav-tabs" id="custom-tabs-one-tab" role="tablist">
+        <li class="nav-item">
+            <a class="nav-link active" id="custom-tabs-one-home-tab" data-toggle="pill" href="#custom-tabs-one-home" role="tab" aria-controls="custom-tabs-one-home" aria-selected="true">Edit User Information</a
+      >
+    </li>
+    <li class="nav-item">
+      <a
+        class="nav-link"
+        id="custom-tabs-one-profile-tab"
+        data-toggle="pill"
+        href="#custom-tabs-one-profile"
+        role="tab"
+        aria-controls="custom-tabs-one-profile"
+        aria-selected="false"
+        >Edit User Basic Details</a
+      >
+    </li>
+    <li class="nav-item">
+      <a
+        class="nav-link"
+        id="custom-tabs-one-messages-tab"
+        data-toggle="pill"
+        href="#custom-tabs-one-messages"
+        role="tab"
+        aria-controls="custom-tabs-one-messages"
+        aria-selected="false"
+        >Edit User Bussiness Details</a
+      >
+    </li>
+  </ul>
+
+  <div class="card-body">
+    <div class="tab-content" id="custom-tabs-one-tabContent">
+      <!-- userInfo -->
+      <div
+        class="tab-pane fade active show"
+        id="custom-tabs-one-home"
+        role="tabpanel"
+        aria-labelledby="custom-tabs-one-home-tab"
+      >
+        <section class="content">
+          <div class="container-fluid">
+            <div class="card card-primary">
+              <div class="card-header">
+                <h3 class="card-title">Edit Miscellaneous Role</h3>
+              </div>
+              <div>
+                <% if(message != '') { %>
+                <div class="p-3">
+                  <div
+                    class="alert mb-0"
+                    style="
+                      background-color: rgb(141, 228, 141);
+                      border: none;
+                      color: rgb(2, 120, 28);
+                    "
+                    role="alert"
+                  >
+                    <%= message %>
+                  </div>
+                </div>
+
+                <% } else if(error != ''){ %>
+                <div class="p-3">
+                  <div
+                    class="alert alert-dismissible mb-0"
+                    style="
+                      background-color: rgb(237 183 183);
+                      border: none;
+                      color: rgb(120 2 2);
+                    "
+                    role="alert"
+                  >
+                    <%= error %>
+                    <button
+                      type="button"
+                      class="close"
+                      data-dismiss="alert"
+                      aria-label="Close"
+                    >
+                      <span aria-hidden="true">&times;</span>
+                    </button>
+                  </div>
+                </div>
+                <% } %>
+
+                <form
+                  method="post"
+                  action="/admin/edit-miscellaneous-role/<%= alldata.id %>"
+                  enctype="multipart/form-data"
+                >
+                  <div class="card-body">
+                    <div class="row mt-3">
+                      <div class="col-md-6">
+                        <div class="form-group">
+                          <label class="form-label">Name</label>
+                          <input
+                            type="text"
+                            class="form-control"
+                            name="name"
+                            value="<%= alldata.name %>"
+                            placeholder="name"
+                          />
+                        </div>
+                      </div>
+                      <div class="col-md-6">
+                        <div class="form-group">
+                          <label class="form-label">Email</label>
+                          <input
+                            type="email"
+                            class="form-control"
+                            name="email"
+                            value="<%= alldata.email %>"
+                            placeholder="email"
+                          />
+                        </div>
+                      </div>
+                    </div>
+                    <div class="row">
+                      <div class="col-md-6">
+                        <div class="form-group">
+                          <label class="form-label">Designation</label>
+                          <input
+                            type="text"
+                            class="form-control"
+                            name="your_designation"
+                            value="<%= alldata.your_designation %>"
+                            placeholder="Designation"
+                          />
+                        </div>
+                      </div>
+                      <div class="col-md-6">
+                        <div class="form-group">
+                          <label class="form-label">Mobile Number</label>
+                          <input
+                            type="number"
+                            class="form-control mobileNumberField"
+                            name="mobile"
+                            value="<%= alldata.mobile %>"
+                            placeholder="Mobile no."
+                          />
+                        </div>
+                      </div>
+                    </div>
+                    <div class="row">
+                      <div class="col-md-6">
+                        <div class="form-group">
+                          <label class="form-label"
+                            >Date of birth (DD/MM/YYYY)</label
+                          >
+                          <input
+                            type="text"
+                            class="form-control"
+                            name="dob"
+                            value="<%= moment(alldata.dob).format('YYYY-MM-DD') %>"
+                            placeholder="Date of birth"
+                          />
+                        </div>
+                      </div>
+                      <div class="col-md-6">
+                        <div class="form-group">
+                          <label class="form-label">Pin code</label>
+                          <input
+                            type="text"
+                            class="form-control pincodeNumberField"
+                            name="pin_code"
+                            id="pincode-text-field"
+                            value="<%= alldata.pin_code %>"
+                            placeholder="Pin code"
+                          />
+                        </div>
+                      </div>
+                    </div>
+
+                    <div class="row">
+                      <div class="col-md-6">
+                        <div class="form-group">
+                          <label class="form-label">State</label>
+                          <select
+                            class="form-control select2bs4"
+                            style="width: 100%"
+                            id="state-dropdown"
+                            name="state_id"
+                          >
+                            <option value="<%= alldata.state.id %>">
+                              <%= alldata.state.name %>
+                            </option>
+                            <% statedata.forEach((state) => { %>
+
+                            <option value="<%= state.id %>">
+                              <%= state.name %>
+                            </option>
+                            <% }) %>
+                          </select>
+                        </div>
+                      </div>
+                      <!-- /.col -->
+                      <div class="col-md-6">
+                        <div class="form-group">
+                          <label class="form-label">City</label>
+                          <select
+                            class="form-control select2bs4"
+                            style="width: 100%"
+                            id="city-dropdown"
+                            name="city_id"
+                          >
+                            <option value="<%= alldata.city_id%>">
+                              <%= alldata.city.name %>
+                            </option>
+                          </select>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="row">
+                      <div class="col-md-6">
+                        <div class="form-group">
+                          <%= console.log(alldata.image) %>
+                          <label>Service Provider image Link</label> <br />
+                          <a href="/assets/images/user/<%= alldata.image %>">
+                            <%= alldata.image %>
+                          </a>
+</div>
+</div>
+<div class="col-md-6">
+    <div class="form-group">
+        <label>Service Provider image</label> <br />
+        <input type="file" value="<%= alldata.image %>" name="image" />
+    </div>
+</div>
+</div>
+
+<div class="row">
+    <div class="col-md-6">
+        <div class="form-group">
+            <label>Gender</label>
+            <select class="form-control" style="width: 100%" name="gender">
+                            <option value="<%= alldata.gender %>">
+                              <%= alldata.gender %>
+                            </option>
+                            <option value="male">Male</option>
+                            <option value="female">Female</option>
+                            <option value="transgender">Trans-Gender</option>
+                          </select>
+        </div>
+    </div>
+    <div class="col-md-6">
+        <div class="form-group">
+            <label>status</label>
+            <select class="form-control select2bs4" style="width: 100%" name="status">
+                            <option value="<%= alldata.status %>" selected>
+                              <% if(alldata.status === 0) { %> Inactive <% }
+                              else if(alldata.status === 1) { %> Active <% } %>
+                            </option>
+                            <option value="1">Active</option>
+                            <option value="0">InActive</option>
+                          </select>
+        </div>
+    </div>
+    <div class="col-md-6">
+        <div class="form-group">
+            <label>approved by admin</label>
+            <select class="form-control select2bs4" style="width: 100%" name="admin_approved">
+                            <option
+                              value="<%= alldata.admin_approved %>"
+                              selected
+                            >
+                              <% if(alldata.admin_approved == 0) { %>
+                              Disapproved <% } else if(alldata.admin_approved ==
+                              1) { %> Approved <% } %>
+                            </option>
+                            <option value="1">Approved</option>
+                            <option value="0">Disapproved</option>
+                          </select>
+        </div>
+    </div>
+</div>
+</div>
+<!-- /.card-body -->
+<div class="card-footer">
+    <button type="submit" class="btn btn-sm btn-primary">
+                      Submit
+                    </button>
+</div>
+</form>
+</div>
+</div>
+</div>
+</section>
+</div>
+
+<!-- user basic info -->
+<div class="tab-pane fade" id="custom-tabs-one-profile" role="tabpanel" aria-labelledby="custom-tabs-one-profile-tab">
+    <section class="content">
+        <div class="container-fluid">
+            <div class="card card-success">
+                <div class="card-header">
+                    <h3 class="card-title">Edit User Basic Details</h3>
+                </div>
+                <div>
+                    <% if(message != '') { %>
+                        <div class="p-3">
+                            <div class="alert mb-0" style="
+                      background-color: rgb(141, 228, 141);
+                      border: none;
+                      color: rgb(2, 120, 28);
+                    " role="alert">
+                                <%= message %>
+                            </div>
+                        </div>
+
+                        <% } else if(error != ''){ %>
+                            <div class="p-3">
+                                <div class="alert alert-dismissible mb-0" style="
+                      background-color: rgb(237 183 183);
+                      border: none;
+                      color: rgb(120 2 2);
+                    " role="alert">
+                                    <%= error %>
+                                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                      <span aria-hidden="true">&times;</span>
+                    </button>
+                                </div>
+                            </div>
+                            <% } %>
+                                <% if(alldata.userInfo) { %>
+                                    <form method="post" action="/admin/edit-miscellaneous-basic-details/<%= alldata.id %>" enctype="multipart/form-data">
+                                        <div class="card-body">
+                                            <div class="row">
+                                                <div class="col-md-4">
+                                                    <div class="form-group">
+                                                        <label class="form-label">Residence No</label>
+                                                        <input type="number" class="form-control" name="residence_no" value="<%= alldata.userInfo.residence_no %>" placeholder="Residence No" />
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-4">
+                                                    <div class="form-group">
+                                                        <label class="form-label">Office No</label>
+                                                        <input type="number" class="form-control" name="office_no" value="<%= alldata.userInfo.office_no  %>" placeholder="Office No" />
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-4">
+                                                    <div class="form-group">
+                                                        <label class="form-label">Whatsapp No</label>
+                                                        <input type="number" class="form-control" name="whatsapp_no" value="<%= alldata.userInfo.whatsapp_no  %>" placeholder="Whatsapp No" />
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-md-4">
+                                                    <div class="form-group">
+                                                        <label class="form-label">Pan No</label>
+                                                        <input type="text" class="form-control panNumberField" name="pan_no" value="<%= alldata.userInfo.pan_no %>" placeholder="Pan No" />
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-4">
+                                                    <div class="form-group">
+                                                        <label class="form-label">Pan Image Front</label>
+                                                        <input type="file" name="pan_img_front" />
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-4">
+                                                    <div class="form-group">
+                                                        <label class="form-label">Pan Image Back</label>
+                                                        <input type="file" name="pan_img_back" />
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="row">
+                                                <div class="col-md-4">
+                                                    <div class="form-group">
+                                                        <label class="form-label">Adhar No</label>
+                                                        <input type="number" class="form-control adharNumberField" name="adhar_no" value="<%= alldata.userInfo.adhar_no %>" placeholder="Adhar No" />
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-4">
+                                                    <div class="form-group">
+                                                        <label class="form-label">Adhar Image Front</label>
+                                                        <input type="file" name="adhar_img_front" />
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-4">
+                                                    <div class="form-group">
+                                                        <label class="form-label">Adhar Image Back</label>
+                                                        <input type="file" name="adhar_img_back" />
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <hr />
+
+                                            <div class="row">
+                                                <div class="col-md-6">
+                                                    <div class="form-group">
+                                                        <label class="form-label">Specify Your Relation</label
+                          >
+                          <div class="col-md-12">
+                            <div class="form-group">
+                              <input
+                                type="radio"
+                                name="relative_relation"
+                                id="exampleCheck1"
+                              />
+                              <label
+                                class="form-check-label"
+                                for="exampleCheck1"
+                                >Father</label
+                              >
+                            </div>
+                          </div>
+                          <div class="col-md-12">
+                            <div class="form-group">
+                              <input
+                                type="radio"
+                                name="relative_relation"
+                                class=""
+                                id="exampleCheck1"
+                              />
+                              <label
+                                class="form-check-label"
+                                for="exampleCheck1"
+                                >Husband</label
+                              >
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="col-md-6">
+                        <div class="form-group">
+                          <label class="form-label">Name of the relative</label>
+                                                        <input type="text" class="form-control" name="realtive_name" value="<%= alldata.userInfo.realtive_name %>" placeholder="Occupation 2" />
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-md-4">
+                                                    <div class="form-group">
+                                                        <div class="form-group">
+                                                            <label class="form-label">Current Status</label>
+                                                            <select class="form-control" style="width: 100%" name="current_status">
+                              <option disabled selected value hidden>
+                                Select Status
+                              </option>
+                              <option value="Independent business person/">
+                                Independent business person
+                              </option>
+                              <option value="Self-employed person">
+                                Self-employed person
+                              </option>
+                              <option
+                                value="Housewife and wish to   become self-employed"
+                              >
+                                Housewife and wish to become self-employed
+                              </option>
+                              <option
+                                value="Not employed but wish to become self-employed"
+                              >
+                                Not employed but wish to become self-employed
+                              </option>
+                              <option
+                                value="Retired but wish to become self-employed"
+                              >
+                                Retired but wish to become self-employed
+                              </option>
+                              <option
+                                value="Working in family business but also wish to become self-employed"
+                              >
+                                Working in family business but also wish to
+                                become self-employed
+                              </option>
+                              <option
+                                value="Any other firm but wish to  become self-employed"
+                              >
+                                Any other firm but wish to become self-employed
+                              </option>
+                            </select>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-4">
+                                                    <div class="form-group">
+                                                        <label class="form-label">Residential Proof Name</label
+                          >
+                          <input
+                            type="text"
+                            class="form-control"
+                            name="residential_address"
+                            value="<%= alldata.userInfo.residential_proof_name %>"
+                            placeholder="Address"
+                          />
+                        </div>
+                      </div>
+
+                      <div class="col-md-4">
+                        <div class="form-group">
+                          <label class="form-label">Residential Proof</label>
+                                                        <input type="file" name="residential_proof" />
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <!-- /.card-body -->
+                                        <div class="card-footer">
+                                            <button type="submit" class="btn btn-sm btn-primary">
+                      Submit
+                    </button>
+                                        </div>
+                                    </form>
+                                    <% } %>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>
+
+<!-- user bussiness info -->
+<div class="tab-pane fade" id="custom-tabs-one-messages" role="tabpanel" aria-labelledby="custom-tabs-one-messages-tab">
+    <section class="content">
+        <div class="container-fluid">
+            <div class="card card-info">
+                <div class="card-header">
+                    <h3 class="card-title">Edit User Bussiness Details</h3>
+                </div>
+                <div>
+                    <% if(message != '') { %>
+                        <div class="p-3">
+                            <div class="alert mb-0" style="
+                      background-color: rgb(141, 228, 141);
+                      border: none;
+                      color: rgb(2, 120, 28);
+                    " role="alert">
+                                <%= message %>
+                            </div>
+                        </div>
+
+                        <% } else if(error != ''){ %>
+                            <div class="p-3">
+                                <div class="alert alert-dismissible mb-0" style="
+                      background-color: rgb(237 183 183);
+                      border: none;
+                      color: rgb(120 2 2);
+                    " role="alert">
+                                    <%= error %>
+                                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                      <span aria-hidden="true">&times;</span>
+                    </button>
+                                </div>
+                            </div>
+                            <% } %>
+                                <% if(alldata.currentBussiness) { %>
+                                    <form method="post" action="/admin/edit-miscellaneous-bussiness-details/<%= alldata.id %>" enctype="multipart/form-data">
+                                        <div class="card-body">
+                                            <div class="row">
+                                                <div class="col-md-4">
+                                                    <div class="form-group">
+                                                        <label class="form-label">Current Bussiness</label>
+                                                        <input type="text" class="form-control" name="current_bussiness" value="<%= alldata.currentBussiness.current_bussiness %>" placeholder="Current Bussiness" />
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-4">
+                                                    <div class="form-group">
+                                                        <label class="form-label">Bussiness Type</label>
+                                                        <input type="text" class="form-control" name="bussiness_type" value="<%= alldata.currentBussiness.bussiness_type %>" placeholder="Bussiness Type" />
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-4">
+                                                    <div class="form-group">
+                                                        <label class="form-label">Bussiness Name</label>
+                                                        <input type="text" class="form-control" name="bussiness_name" value="<%= alldata.currentBussiness.bussiness_name %>" placeholder="Bussiness Name" />
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-md-4">
+                                                    <div class="form-group">
+                                                        <label class="form-label">Address</label>
+                                                        <input type="text" class="form-control" name="address" value="<%= alldata.currentBussiness.address %>" placeholder="Address" />
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-4">
+                                                    <div class="form-group">
+                                                        <label class="form-label">State</label>
+                                                        <select class="form-control select2bs4" style="width: 100%" id="states-dropdown" name="state_id">
+                            <option
+                              value="<%= alldata.currentBussiness.state.id %>"
+                            >
+                              <%= alldata.currentBussiness.state.name %>
+                            </option>
+
+                            <% statedata.forEach((state) => { %>
+                            <option value="<%= state.id %>">
+                              <%= state.name %>
+                            </option>
+                            <% }) %>
+                          </select>
+                                                    </div>
+                                                </div>
+                                                <!-- /.col -->
+                                                <div class="col-md-4">
+                                                    <div class="form-group">
+                                                        <label class="form-label">City</label>
+                                                        <select class="form-control select2bs4" style="width: 100%" id="citys-dropdown" name="city_id">
+                            <option
+                              value="<%= alldata.currentBussiness.city.id %>"
+                            >
+                              <%= alldata.currentBussiness.city.id %>
+                            </option>
+                          </select>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-md-4">
+                                                    <div class="form-group">
+                                                        <label class="form-label">Pincode</label>
+                                                        <input type="number" class="form-control" name="pincode" value="<%= alldata.currentBussiness.pincode %>" placeholder="Pin code" />
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-4">
+                                                    <div class="form-group">
+                                                        <label class="form-label">Bussiness Years</label>
+                                                        <input type="number" class="form-control" value="<%= alldata.currentBussiness.bussiness_years %>" name="bussiness_years" placeholder="eg. 4" />
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-4">
+                                                    <div class="form-group">
+                                                        <label class="form-label">dimensions</label>
+                                                        <input value="<%= alldata.currentBussiness.dimensions %>" type="text" class="form-control" name="dimensions" placeholder="12 x 24" />
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-md-4">
+                                                    <div class="form-group">
+                                                        <label class="form-label">Bussiness Img</label>
+                                                        <input type="file" class="form-control" name="bussiness_img" value="<%= alldata.currentBussiness.bussiness_img %>" placeholder="Bussiness Img" />
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-4">
+                                                    <div class="form-group">
+                                                        <label class="form-label">Infrastructure Available</label
+                          >
+                          <input
+                            type="text"
+                            class="form-control"
+                            name="infrastructure_available"
+                            value="<%= alldata.currentBussiness.infrastructure_available %>"
+                            placeholder="table, fan , chair"
+                          />
+                        </div>
+                      </div>
+                      <div class="col-md-4">
+                        <div class="form-group">
+                          <label class="form-label">Current Income(PA)</label>
+                                                        <input type="text" class="form-control" name="current_income_pa" value="<%= alldata.currentBussiness.current_income_pa %>" placeholder="eg. 12000" />
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <hr />
+                                            <div class="row">
+                                                <div class="col-md-4">
+                                                    <div class="form-group">
+                                                        <label class="form-label">No of Customers</label>
+                                                        <input type="number" class="form-control" name="no_customers" value="<%= alldata.currentBussiness.no_customers %>" placeholder="No of Customers" />
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-4">
+                                                    <div class="form-group">
+                                                        <label class="form-label">Is it popular ?</label>
+                                                        <input type="text" class="form-control" name="popular" value="<%= alldata.currentBussiness.popular %>" placeholder="Yes/No" />
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-4">
+                                                    <div class="form-group">
+                                                        <label class="form-label">Customers Served</label>
+                                                        <input type="number" class="form-control" name="customers_served" value="<%= alldata.currentBussiness.customers_served %>" placeholder="130,140" />
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <!-- /.card-body -->
+                                        <div class="card-footer">
+                                            <button type="submit" class="btn btn-sm btn-primary">
+                      Submit
+                    </button>
+                                        </div>
+                                    </form>
+                                    <% } %>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>
+</div>
+</div>
+</div>

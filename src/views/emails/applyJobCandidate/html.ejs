@@ -1,0 +1,30 @@
+<%- include('../header') -%>
+    <tr>
+        <td>
+            <table style='border: 0; border-spacing: 0; border-collapse: separate; -mso-table-lspace: 0pt; -mso-table-rspace: 0pt; width: 100%; padding: 0 20px;'>
+                <tr>
+                    <td style='font-family: sans-serif; font-size: 14px; vertical-align: top;'>
+                        <h3 style='font-family: sans-serif; font-size: 14px; font-weight: bold; Margin-bottom: 8px; margin-top: 20px; color: #5A443D;'> 
+                            Dear <%= locals.username %>
+                            <br>
+                            Greetings from <%= locals.appName %> 
+                        </h3>
+                        <p style='font-family: sans-serif; font-size: 14px; Margin-top: 0; Margin-bottom: 20px; color: #5A443D; font-weight: 400; line-height: 1.5em;'>
+                            You Have Applied for a Job  <%= locals.jobTitle %> <%= locals.companyName%> for Location  <%= locals.city %> ,<%= locals.state %>
+                            <br>
+                            Recruiters will contact you soon. Further details will be communicated to you via mail.
+                            For any other query please visit our website www.hindustaanjobs.com
+                            OR Contact Us : +91-7000415297, 7247506019
+                        </p>
+                        <h3 style='font-family: sans-serif; font-size: 14px; font-weight: bold; Margin-bottom: 0; margin-top: 20px; color: #5A443D;'>
+                            Thank You <br>
+                            <%= locals.appName %>
+                        </h3>
+                    </td>
+                </tr>
+            </table>
+        </td>
+    </tr>
+
+    <%- include('../footer') -%>
+

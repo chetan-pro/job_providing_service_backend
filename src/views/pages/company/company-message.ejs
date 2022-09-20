@@ -1,0 +1,79 @@
+<div class="content-wrapper">
+    <section class="content-header">
+        <div class="container-fluid">
+            <div class="row mb-2">
+                <div class="col-sm-6">
+                    <h1>Company Chat Messages</h1>
+                </div>
+                <div class="col-sm-6">
+                    <ol class="breadcrumb float-sm-right">
+                        <li class="breadcrumb-item"><a href="/admin/company">Company List</a></li>
+                        <li class="breadcrumb-item"><a href="/admin/company/view-chats-company/<%= id %>">Company Chat
+                                List</a></li>
+                        <li class="breadcrumb-item active">Company Chat Messages</li>
+                    </ol>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="content">
+        <div class="container-fluid">
+            <div class="card card-primary card-outline direct-chat direct-chat-primary">
+                <div class="card-header">
+                    <h3 class="card-title">Direct Chat</h3>
+                    <div class="card-tools">
+                        <button type="button" class="btn btn-tool" data-card-widget="collapse">
+                            <i class="fas fa-minus"></i>
+                        </button>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <div class="direct-chat-messages">
+                        <% data.rows[0].Chats.forEach(singleChat => { %>
+                            <% if( singleChat.user_id != userid){ %>
+                            <div class="direct-chat-msg">
+                                <div class="direct-chat-infos clearfix">
+                                    <span class="direct-chat-name float-left">
+                                        <% if(data.rows[0].senderInfo.id != userid) { %>
+                                            <%= data.rows[0].senderInfo.name %>
+                                        <% } else { %>
+                                            <%= data.rows[0].receiverInfo.name %>
+                                        <% } %>
+                                    </span>
+                                    <span class="direct-chat-timestamp float-right">23 Jan 2:00 pm</span>
+                                </div>
+                                <img class="direct-chat-img"
+                                    src="https://images.unsplash.com/photo-1529665253569-6d01c0eaf7b6?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1385&q=80"
+                                    alt="Message User Image">
+                                <div class="direct-chat-text">
+                                    <%= singleChat.message %>
+                                </div>
+                            </div>
+                            <% } else{ %>
+                            <div class="direct-chat-msg right">
+                                <div class="direct-chat-infos clearfix">
+                                    <span class="direct-chat-name float-right">
+                                        <% if(data.rows[0].senderInfo.id != userid) { %>
+                                            <%= data.rows[0].receiverInfo.name %>
+                                        <% } else { %>
+                                            <%= data.rows[0].senderInfo.name %>
+                                        <% } %>
+                                    </span>
+                                    <span class="direct-chat-timestamp float-left">23 Jan 2:05 pm</span>
+                                </div>
+                                <img class="direct-chat-img"
+                                    src="https://images.unsplash.com/photo-1529665253569-6d01c0eaf7b6?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1385&q=80"
+                                    alt="Message User Image">
+                                <div class="direct-chat-text">
+                                    <%= singleChat.message %>
+                                </div>
+                            </div>
+                            <% } %>
+                        <% })  %>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </section>
+</div>

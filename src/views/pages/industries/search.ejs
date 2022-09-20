@@ -1,0 +1,87 @@
+<div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <section class="content-header">
+        <div class="container-fluid">
+            <div class="row mb-2">
+                <div class="col-sm-6">
+                    <h1>Industry Table</h1>
+                </div>
+                <div class="col-sm-6">
+                    <ol class="breadcrumb float-sm-right">
+                        <li class="breadcrumb-item"><a href="#">Home</a></li>
+                        <li class="breadcrumb-item active">DataTables</li>
+                    </ol>
+                </div>
+            </div>
+        </div><!-- /.container-fluid -->
+    </section>
+
+    <!-- Main content -->
+    <section class="content">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-12">
+                    <div class="card">
+                        <div class="card-header">
+                            
+                            <div class=" d-flex justify-content-between align-items-center">
+                                <form action="/admin/industries/search" method="get">
+                                    <div class="input-group">
+                                        <input type="search" name="name" class="form-control form-control-lg" placeholder="Search here !">
+                                        <div class="input-group-append">
+                                            <button type="submit" class="btn btn-lg btn-default">
+                                                <i class="fa fa-search"></i>
+                                            </button>
+                                        </div>
+                                    </div>
+                                </form>
+                                <a href="/admin/industries/create" class="btn btn-sm btn-primary">Add Industry</a>
+                            </div>
+                            
+                        </div>
+                        <!-- /.card-header -->
+                        <div class="card-body">
+                            <% if(data != 0){ %>
+                                <table id="example2" class="table table-bordered table-hover">
+                                    <thead>
+                                        <tr>
+                                            <th>S no.</th>
+                                            <th>Industry Name</th>
+                                            <th>Status</th>
+                                            <th>Actions</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <% data.forEach((data, index) => { %>
+                                            <tr>
+                                                <td><%= index+1 %></td>
+                                                <td><%= data.name %></td>
+                                                <td></td>
+                                                <td> 
+                                                    <a href="/admin/industries/edit/<%= data.id %>" class="btn btn-sm btn-outline-primary">Edit</a> &nbsp;
+                                                    <a href="/admin/industries/delete/<%= data.id %>" class="btn btn-sm btn-outline-danger">Delete</a>
+                                                </td>
+                                            </tr>
+                                        <%} ) %>
+                                    </tbody>
+                                </table>
+                            <% } else { %>
+                                <h3 class="text-center">No data found !</h3>
+                            <% } %>
+    
+                        </div>
+                        <!-- /.card-body -->
+                    </div>
+                    <!-- /.card -->
+
+                    <!-- /.card -->
+                </div>
+                <!-- /.col -->
+            </div>
+            <!-- /.row -->
+        </div>
+        <!-- /.container-fluid -->
+    </section>
+    <!-- /.content -->
+</div>
+

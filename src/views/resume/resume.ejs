@@ -1,0 +1,499 @@
+<%- include('../partials/resume/header.ejs') -%>
+
+<style>
+    @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700;800;900&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', SansSerif;
+}
+
+hr {
+    margin: 2rem 0 1rem;
+    opacity: 0.5;
+    margin: 2rem 0 1rem;
+}
+
+/* body {
+    background-color: #b5b4b4;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+} */
+
+.container {
+    position: relative;
+    width: 100%;
+    max-width: 1000px;
+    min-height: 1000px;
+    background-color: #fff;
+    /* margin: 50px; */
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    box-shadow: 0 35px 55px rgba(0, 0, 0, 0.1);
+}
+
+.container .left_Side {
+    position: relative;
+    color: #fff;
+}
+
+.profileText {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-bottom: 15px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.profileText .imgBx {
+    position: relative;
+    width: 22rem;
+    height: 21rem;
+    overflow: hidden;
+}
+
+.profileText .imgBx img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.photo {
+    width: 100%;
+    height: auto;
+}
+
+.contactInfo {
+    padding: 28px 40px;
+    background-color: rgb(82, 82, 82);
+    text-align: left;
+}
+
+.title {
+    color: #fff;
+    text-transform: uppercase;
+    font-weight: 500;
+    margin-bottom: 20px;
+    font-size: 22px;
+}
+
+.contactInfo ul {
+    position: relative;
+}
+
+.contactInfo ul li {
+    list-style: none;
+    position: relative;
+    margin: 16px 0;
+    cursor: pointer;
+}
+
+.contactInfo ul li .icon {
+    display: inline-block;
+    width: 30px;
+    font-size: 18px;
+    border: 1px solid #fff;
+    text-align: center;
+    border-radius: 50%;
+}
+
+.contactInfo ul li span {
+    font-weight: 300;
+    margin-left: 3px;
+}
+
+.tag {
+    font-weight: 600;
+}
+
+.links {
+    font-weight: 500;
+    margin-top: 5px;
+}
+
+.container .right_Side {
+    position: relative;
+    background-color: #fff;
+    /* padding-left: 1rem; */
+}
+
+.right_Side hr{
+    margin: 3rem 0 1rem;
+}
+
+.info {
+    background-color: #eee;
+    padding: 2rem 2rem 3rem;
+    margin-left: 1rem;
+}
+
+.title2 {
+    text-transform: uppercase;
+    font-size: 3rem;
+    font-weight: 500;
+    letter-spacing: 1px;
+}
+
+.title3 {
+    font-size: 1.4rem;
+    margin-top: -10px;
+    font-weight: 300;
+}
+
+.aboutme {
+    margin-top: 1rem;
+    font-size: 30px;
+    font-weight: 500;
+}
+
+.info p {
+    color: #081921;
+    margin-top: 6px;
+    font-size: 15px;
+}
+
+.about {
+    padding: 2rem 3rem;
+}
+
+.about:last-child {
+    margin-bottom: 0;
+}
+
+.about .box {
+    display: flex;
+    flex-direction: row;
+    margin: 20px 0;
+}
+
+.about .box .year_company {
+    min-width: 150px;
+}
+
+.about .text {
+    display: flex;
+}
+
+.about .box .year_company h5 {
+    text-transform: uppercase;
+    font-weight: 600;
+    font-size: 17px;
+}
+
+.about .box .text h4 {
+    text-transform: uppercase;
+    font-size: 17px;
+}
+
+.about .box .text h5 {
+    font-size: 17px;
+    font-weight: 500;
+}
+
+.title4 {
+    font-size: 24px;
+    font-weight: 600;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+}
+
+.language .percent {
+    position: relative;
+    height: 12px;
+    width: 8rem;
+    background-color: #dadada;
+    margin-top: 5px;
+    margin-left: 19px;
+}
+
+.language ul {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+}
+
+.language ul li {
+    list-style: none;
+    color: black;
+    font-weight: 500;
+    margin: 10px 0;
+    display: contents;
+}
+
+.skills {
+    padding: 0 1rem 1rem;
+    margin-top: 10px;
+}
+
+.progress {
+    display: flex;
+    margin-top: 8px;
+}
+
+.progress .text {
+    font-size: 18px;
+    font-weight: 400;
+    text-transform: uppercase;
+}
+
+progress::-webkit-progress-bar {
+    background-color: #eeeeee;
+}
+
+progress::-webkit-progress-value {
+    background: rgb(83, 85, 83);
+}
+
+
+.order-track-step {
+    /* display: flex; */
+    height: 7rem;
+}
+
+.order-track-status {
+    margin-right: 1.5rem;
+    position: relative;
+}
+
+.order-track-status-dot {
+    display: block;
+    width: 1rem;
+    height: 1rem;
+    border-radius: 50%;
+    background: #000;
+}
+
+.order-track-status-line {
+    display: block;
+    margin: 0 auto;
+    width: 1px;
+    height: 7rem;
+    background: #878685;
+}
+
+/* @media (max-width: 1000px) {
+    .container {
+        margin: 10px;
+        grid-template-columns: repeat(1, 1fr);
+    }
+}
+
+@media (max-width: 600px) {
+    .about .box {
+        flex-direction: column;
+    }
+
+    .about .box .year_company {
+        margin-bottom: 5px;
+    }
+
+    .photo {
+        width: 100%;
+        height: auto;
+    }
+} */
+</style>
+    <div class="container">
+        <div class="left_Side">
+            <div class="profileText">
+                <div class="imgBx">
+                    <img class="photo" src=<%= 'https://hindustan-jobs.hackerkernel.com/assets/images/user/' + data.image %>>
+                </div>
+            </div>
+
+            <div class="contactInfo">
+                <h3 class="title">Contact</h3>
+                <ul>
+                    <% if(data.city.name && data.state.name ){ %>
+                        <li>
+                            <span class="icon"><i class="fa fa-map-marker" aria-hidden="true"></i></span>
+                            <span class="text">
+                                <%= data.city.name +' , '+ data.state.name %>
+                            </span>
+                        </li>
+                    <% } %>
+                    <% if(data.contact){ %>
+                        <li>
+                            <span class="icon"><i class="fa fa-phone" aria-hidden="true"></i></span>
+                            <span class="text">+91 <%= data.contact %></span>
+                        </li>
+                    <% } %>
+                        
+                    <% if(data.email){ %>
+                        <li>
+                            <span class="icon"><i class="fa fa-envelope-o" aria-hidden="true"></i></span>
+                            <span class="text"><%= data.email %></span>
+                        </li>
+                    <% } %>
+                    
+                    <% if(data.portfolio){ %>
+                        <li>
+                            <span class="icon"><i class="fa fa-globe" aria-hidden="true"></i></span>
+                            <span class="text"><%= data.portfolio %></span>
+                        </li>        
+                    <% } %>
+                </ul>
+                <hr />
+
+                <h3 class="title">FOLLOW ME</h3>
+                <ul>
+                    <% if(data.facebook){ %>     
+                        <li>
+                            <h4 class="tag">FACEBOOK</h4>
+                            <h5 class="links"><%= data.facebook %></h5>
+                        </li>
+                    <% } %>
+                    <% if(data.instagram){ %>     
+                        <li>
+                            <h4 class="tag">INSTAGRAM</h4>
+                            <h5 class="links"><%= data.instagram %></h5>
+                        </li>
+                    <% } %>
+                    <% if(data.twitter){ %>     
+                        <li>
+                            <h4 class="tag">TWITTER</h4>
+                            <h5 class="links"><%= data.twitter %></h5>
+                        </li>
+                    <% } %>
+
+                    <% if(data.behance){ %>     
+                        <li>
+                            <h4 class="tag">BEHANCE</h4>
+                            <h5 class="links"><%= data.behance %></h5>
+                        </li>
+                    <% } %>
+                  
+                </ul>
+                <hr />
+
+                <% if(data.resume_references.length > 0){ %>
+                    <h3 class="title">REFERENCE</h3>
+                    <ul>
+                        <% data.resume_references.forEach((ref) => { %>
+                            <li>
+                                <h4 class="tag"><%= ref.title %></h4>
+                                <h5 class="links"><%= ref.designation %></h5>
+                                <h5 class="links">phone: <%= ref.phone %></h5>
+                                <h5 class="links">E_mail: <%= ref.email %></h5>
+                            </li>
+                        <% }) %>
+                    </ul>
+                    <hr />
+                <% } %>
+                <% if(data.resume_hobbies.length > 0){ %>
+                    <h3 class="title">HOBBIES</h3>
+                    <ul>
+                        <% data.resume_hobbies.forEach((hoby) => { %>
+                            <li>
+                                <h5 class="links"><%= hoby.hobbyName %></h5>
+                            </li>
+                        <% }) %>
+                    </ul>
+                <% } %>
+
+
+            </div>
+        </div>
+        <div class="right_Side">
+            <div class="info">
+                <h2 class="title2"><%= data.name %></h2>
+                <h5 class="title3"><%= data.designation %></h5>
+                <h3 class="aboutme">ABOUT ME</h3>
+                <p><%= data.description %>
+                </p>
+            </div>
+            <div class="about">
+                <% if(data.resume_educations.length > 0){ %>
+                    <h3 class="title4">EDUCATION</h3>
+                    <% data.resume_educations.forEach((education) => { %>
+                        <div class="box">
+                            <div class="year_company">
+                                <h5><%= education.from + ' - ' + education.to %></h5>  
+                            </div>
+                            <div class="text">
+                                <div class="prograss-bar">
+                                    <div class="order-track-step">
+                                        <div class="order-track-status">
+                                            <span class="order-track-status-dot"></span>
+                                            <span class="order-track-status-line"></span>
+                                        </div>
+        
+                                    </div>
+        
+                                </div>
+                                <div class="infor">
+                                    <h4><%= education.title %></h4>
+                                    <!-- <h5>Senior UX Developer </h5> -->
+                                    <p><%= education.description %></p>
+                                </div>
+                            </div>
+                        </div>
+                    <% }) %>
+                <% } %>
+
+                        
+                <% if(data.resume_experiences.length > 0){ %>
+                    <h3 class="title4">Experience</h3>
+                    <% data.resume_experiences.forEach((experience) => { %>
+                        <div class="box">
+                            <div class="year_company">
+                                <h5><%= experience.from + ' - ' + experience.to %></h5>
+                            </div>
+                            <div class="text">
+                                <div class="prograss-bar">
+                                    <div class="order-track-step">
+                                        <div class="order-track-status">
+                                            <span class="order-track-status-dot"></span>
+                                            <span class="order-track-status-line"></span>
+                                        </div>
+        
+                                    </div>
+        
+                                </div>
+                                <div class="infor">
+                                    <h4><%= experience.title %> </h4>
+                                    <h5><%= experience.designation %></h5>
+                                    <p><%= experience.description %></p>
+                                </div>
+                            </div>
+                        </div>
+                    <% }) %>
+                <% } %>
+
+
+                <hr />
+                <% if(data.resume_skills.length > 0){ %>
+                    <div class="language">
+                        <h3 class="title4">skills</h3>
+                        <div class="skills">
+                            <% data.resume_skills.forEach((skill) => { %>
+                                <div class="progress">
+                                    <ul>
+                                        <li>
+                                            <span class="text"><%= skill.SkillSubCategory.name %></span>
+                                            <progress class="percent" value="<%= skill.rating * 20 %>" max="100"> <%= skill.rating * 20 %>% </progress>
+                                        </li>
+                                    </ul>
+                                </div>
+                            <% }) %>
+                        </div>
+                    </div>
+                <% } %>
+
+            </div>
+
+        </div>
+    </div>
+
+<%- include('../partials/resume/footer.ejs') -%>
+
+
+
+

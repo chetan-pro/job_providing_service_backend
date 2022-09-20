@@ -1,0 +1,214 @@
+<div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <div class="content-header">
+        <div class="container-fluid">
+            <div class="row mb-2">
+                <div class="col-sm-6">
+                    <h1 class="m-0">Dashboard</h1>
+                </div>
+                <!-- /.col -->
+                <div class="col-sm-6">
+                    <ol class="breadcrumb float-sm-right">
+                        <li class="breadcrumb-item"><a href="#">Home</a></li>
+                        <li class="breadcrumb-item active">Dashboard</li>
+                    </ol>
+                </div>
+                <!-- /.col -->
+            </div>
+            <!-- /.row -->
+        </div>
+        <!-- /.container-fluid -->
+    </div>
+    <!-- /.content-header -->
+
+    <!-- Main content -->
+    <section class="content">
+        <div class="container-fluid">
+
+            <% var style = ['bg-success','bg-info','bg-warning','bg-danger','bg-secondary','bg-primary','bg-light', 'bg-dark'] %>
+                <% var icon = ['ion-ion-bag','ion-stats-bars','ion-person-add','ion-pie-graph','ion-ribbon-b','ion-trophy','ion-bowtie','ion-clipboard'] %>
+                    <!-- Small boxes (Stat box) -->
+                    <div class="row">
+                        <% data.forEach((companyDets,index) =>{ %>
+                            <% if(companyDets.userRoleTableRole){ %>
+                                <div class="col-lg-3 col-6">
+                                    <!-- small box -->
+                                    <a href="/admin/<%= companyDets.userRoleTableRole %>" class="small-box <%= style[index]%>">
+                                        <div class="inner">
+                                            <h3>
+                                                <%= companyDets.count %>
+                                            </h3>
+                                            <p>
+                                                <%= companyDets.userRoleTableRole %> Registered</p>
+                                        </div>
+                                        <div class="icon">
+                                            <i class="ion <%= icon[index]%>"></i>
+                                        </div>
+                                        <!-- <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a> -->
+                                    </a>
+                                </div>
+                                <% if(companyDets.profile_active){ %>
+                                    <div class="col-lg-3 col-6">
+                                        <!-- small box -->
+                                        <a href="/admin/<%= companyDets.userRoleTableRole %>" class="small-box <%= style[index]%>">
+                                            <div class="inner">
+                                                <h3>
+                                                    <%= companyDets.profile_active %>
+                                                </h3>
+                                                <p>
+                                                    Active Profile
+                                                    <%= companyDets.userRoleTableRole %>
+                                                </p>
+                                            </div>
+                                            <div class="icon">
+                                                <i class="ion <%= icon[index]%>"></i>
+                                            </div>
+                                            <!-- <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a> -->
+                                        </a>
+                                    </div>
+                                    <% } %>
+                                        <% if(companyDets.account_active){ %>
+                                            <div class="col-lg-3 col-6">
+                                                <!-- small box -->
+                                                <a href="/admin/<%= companyDets.userRoleTableRole %>" class="small-box <%= style[index]%>">
+                                                    <div class="inner">
+                                                        <h3>
+                                                            <%= companyDets.account_active %>
+                                                        </h3>
+                                                        <p>
+                                                            Active Account
+                                                            <%= companyDets.userRoleTableRole %>
+                                                        </p>
+                                                    </div>
+                                                    <div class="icon">
+                                                        <i class="ion <%= icon[index]%>"></i>
+                                                    </div>
+                                                    <!-- <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a> -->
+                                                </a>
+                                            </div>
+                                            <% } %>
+                                                <% if(companyDets.account_inactive){ %>
+                                                    <div class="col-lg-3 col-6">
+                                                        <!-- small box -->
+                                                        <% var isMiscellaneousUser = companyDets.userRoleTableRole=='ADVISOR'||companyDets.userRoleTableRole=='CM'||companyDets.userRoleTableRole=='BC'||companyDets.userRoleTableRole=='FSE'  %>
+                                                            <a href="/admin/<%= companyDets.userRoleTableRole%>" class="small-box <%= style[index]%>">
+                                                                <div class="inner">
+                                                                    <h3>
+                                                                        <%= companyDets.account_inactive %>
+                                                                    </h3>
+                                                                    <p>
+                                                                        InActive Account
+                                                                        <%= companyDets.userRoleTableRole %>
+                                                                    </p>
+                                                                </div>
+                                                                <div class="icon">
+                                                                    <i class="ion <%= icon[index]%>"></i>
+                                                                </div>
+                                                                <!-- <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a> -->
+                                                            </a>
+                                                    </div>
+                                                    <% } %>
+                                                        <% } %>
+                                                            <% }) %>
+                                                                <% jobPostCount.forEach((jobDets,index) =>{ %>
+                                                                    <% if(jobDets.job_type_id == 1){ %>
+                                                                        <div class="col-lg-3 col-6">
+                                                                            <!-- small box -->
+                                                                            <a href="/admin/company" class="small-box bg-info">
+                                                                                <div class="inner">
+                                                                                    <h3>
+                                                                                        <%= jobDets.count %>
+                                                                                    </h3>
+                                                                                    <p> Private Jobs Posted</p>
+                                                                                </div>
+                                                                                <div class="icon">
+                                                                                    <i class="ion  ion-pie-graph"></i>
+                                                                                </div>
+                                                                                <!-- <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a> -->
+                                                                            </a>
+                                                                        </div>
+                                                                        <% }else if(jobDets.job_type_id == 2) { %>
+                                                                            <div class="col-lg-3 col-6">
+                                                                                <!-- small box -->
+                                                                                <a href="/admin/get-job-post-govt" class="small-box bg-success">
+                                                                                    <div class="inner">
+                                                                                        <h3>
+                                                                                            <%= jobDets.count %>
+                                                                                        </h3>
+                                                                                        <p> Government Jobs Posted</p>
+                                                                                    </div>
+                                                                                    <div class="icon">
+                                                                                        <i class="ion ion-bowtie"></i>
+                                                                                    </div>
+                                                                                    <!-- <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a> -->
+                                                                                </a>
+                                                                            </div>
+                                                                            <% } %>
+                                                                                <% }) %>
+                    </div>
+
+
+
+                    <!-- ./col -->
+                    <!-- /.row -->
+                    <!-- Main row -->
+                    <div class="row">
+                        <!-- Left col -->
+                        <section class="col-lg-7 connectedSortable">
+
+                    </div>
+                    <!-- /.card -->
+
+                    <div class="card">
+                        <div class="card-header">
+                            Details
+                        </div>
+                        <table id="example2" class="table table-bordered table-hover">
+                            <thead>
+                                <tr>
+                                    <th>S no.</th>
+                                    <th>User Role Type</th>
+                                    <th>Registrees Currently Subscribed</th>
+                                    <th>New Registrees Added Last Month</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <% registered.forEach((registerDets,index) =>{ %>
+                                    <tr>
+                                        <td>
+                                            <%= index+1 %>
+                                        </td>
+                                        <td>
+                                            <%= registerDets.userRoleTableRole %>
+                                        </td>
+                                        <td>
+                                            <%=registerDets.registrees_currently_on_subscription%>
+                                        </td>
+                                        <td>
+                                            <%=registerDets.new_registrees_added_last_month%>
+                                        </td>
+                                    </tr>
+                                    <% }) %>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    </section>
+                    <!-- /.Left col -->
+                    <!-- right col (We are only adding the ID to make the widgets sortable)-->
+                    <section class="col-lg-5 connectedSortable">
+
+
+        </div>
+        <!-- /.card-body -->
+</div>
+<!-- /.card -->
+</section>
+<!-- right col -->
+</div>
+<!-- /.row (main row) -->
+</div>
+<!-- /.container-fluid -->
+</section>
+<!-- /.content -->
+</div>

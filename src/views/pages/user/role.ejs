@@ -1,0 +1,143 @@
+<div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <section class="content-header">
+        <div class="container-fluid">
+            <div class="row mb-2">
+                <div class="col-sm-6">
+                    <h1>Industries Table </h1>
+
+
+                </div>
+                <div class="col-sm-6">
+                    <ol class="breadcrumb float-sm-right">
+                        <li class="breadcrumb-item" ><a href="#" style="color: #979090;">Home</a></li>
+                        <li class="breadcrumb-item" ><a href="/admin/industries">Industries list</a></li>
+                    </ol>
+                </div>
+            </div>
+        </div>
+        <!-- /.container-fluid -->
+    </section>
+
+    <!-- Main content -->
+    <section class="content">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-12">
+                    <div class="card">
+                        <div class="card-header">
+
+                            <div class="row">
+                                <div class="col-6">
+                                    <form action="/admin/user/roletype" method="post">
+                                        <div class="input-group">
+                                            <input type="text" class="form-control form-control-lg" name="search"
+                                                placeholder="Search here !">
+                                            <div class="input-group-append">
+                                                <button type="submit" class="btn btn-lg btn-default">
+                                                    <i class="fa fa-search"></i>
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+                                <div class="col-6">
+                                    <form action="/admin/user/roletype" method="post">
+                                        <div class="input-group">
+
+                                            <div class="input-group-append">
+                                                <button type="submit" class="btn btn-lg btn-default">
+                                                    <i class="fa fa-search"></i>
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+
+                        </div>
+                        <!-- /.card-header -->
+                       
+                        <div>
+
+                         
+                                <div class="card-body">
+                                    <table id="example2" class="table table-bordered table-hover">
+                                        <thead>
+                                            <tr>
+                                                <th>S no.</th>
+                                                <th>Industries Name</th>
+                                                <th>Status</th>
+                                                <th>Actions</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <% data.forEach((data, index)=> { %>
+                                                <tr>
+                                                    
+                                                    <td>
+                                                        <%= index + 1 + ((pageNo - 1) * limit) %>
+                                                    </td>
+                                                  
+                                                    
+                                                    <td>
+                                                        <%= data.name %>
+                                                    </td>
+                                                    <td></td>
+                                                    <td>
+                                                        <a href="/admin/industries/edit/<%= data.id %>"
+                                                            class="btn btn-sm btn-outline-primary">Edit</a> &nbsp;
+                                                        <button class="btn btn-sm btn-outline-danger"
+                                                            data-toggle="modal"
+                                                            data-target="#exampleModalCenter">Delete</button>
+
+                                                    </td>
+                                                </tr>
+
+
+                                                <div class="modal fade" id="exampleModalCenter" tabindex="-1"
+                                                    role="dialog" aria-labelledby="exampleModalCenterTitle"
+                                                    aria-hidden="true">
+                                                    <div class="modal-dialog modal-dialog-centered" role="document">
+                                                        <div class="modal-content">
+                                                            <div class="modal-header">
+                                                                <h5 class="modal-title" id="exampleModalLongTitle">Do
+                                                                    you really want to delete this data ?</h5>
+                                                                <button type="button" class="close" data-dismiss="modal"
+                                                                    aria-label="Close">
+                                                                    <span aria-hidden="true">&times;</span>
+                                                                </button>
+                                                            </div>
+                                                            <div class="modal-footer">
+                                                                <button type="button" class="btn btn-outline-secondary"
+                                                                    data-dismiss="modal">Close</button>
+                                                                <a href="/admin/industries/delete/<%= data.id %>"
+                                                                    class="btn btn-outline-danger">Delete</a>
+
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                            <%} ) %>
+                                        </tbody>
+                                    </table>
+                                </div>
+                           
+                                   
+                        </div>
+
+                      
+
+                                <!-- /.card-body -->
+                    </div>
+                    <!-- /.card -->
+
+                    <!-- /.card -->
+                </div>
+                <!-- /.col -->
+            </div>
+            <!-- /.row -->
+        </div>
+        <!-- /.container-fluid -->
+    </section>
+    <!-- /.content -->
+</div>

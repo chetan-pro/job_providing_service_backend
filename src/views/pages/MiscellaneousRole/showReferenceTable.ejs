@@ -1,0 +1,151 @@
+<div class="content-wrapper">
+    <section class="content-header">
+        <div class="container-fluid">
+            <div class="row mb-2">
+                <div class="col-sm-6">
+                    <h1>Miscellaneous User Reference's</h1>
+                </div>
+                <div class="col-sm-6">
+                    <ol class="breadcrumb float-sm-right">
+                        <li class="breadcrumb-item active">Miscellaneous User list</li>
+                    </ol>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="content">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-12">
+                    <div class="card">
+                        <div>
+                            <% if(message != 0) { %>
+                            <div class="p-3">
+                                <div class="alert mb-0"
+                                    style="background-color: rgb(188 252 188); border: none; color: rgb(2, 120, 28);"
+                                    role="alert">
+                                    <%= message %>
+                                </div>
+                            </div>
+        
+                            <% } else if(error != 0){ %>
+                            <div class="p-3">
+                                <div class="alert mb-0"
+                                    style="background-color: rgb(237 183 183); border: none; color: rgb(120 2 2);"
+                                    role="alert">
+                                    <%= error %>
+                                </div>
+                            </div>
+                            <% } %>
+                        </div>
+                        <% if(data.data.length > 0) { %>
+                            <div class="card-body">
+                                <div class="row">
+                                    <% if(data.total_commission){ %>
+                                        <div class="col-sm-2 m-2 col-4">
+                                          <div class="small-box  bg-info">
+                                            <div class="inner">
+                                              <h3><%= '₹ ' + data.total_commission %></h3>
+                                              <p>Total Commission</p>
+                                            </div>
+                                          </div>
+                                        </div>
+                                      <% } %>
+    
+                                      <% if(data.newCommission){ %>
+                                        <div class="col-sm-2 m-2 col-4">
+                                          <div class="small-box  bg-primary">
+                                            <div class="inner">
+                                              <h3><%= '₹ ' + data.newCommission %></h3>
+                                              <p>Latest Commission</p>
+                                            </div>
+                                          </div>
+                                        </div>
+                                      <% } %>
+    
+                                      <% if(data.total_number_registrees){ %>
+                                        <div class="col-sm-2 m-2 col-4">
+                                          <div class="small-box  bg-success">
+                                            <div class="inner">
+                                              <h3><%= data.total_number_registrees %></h3>
+                                              <p>Total Registrees</p>
+                                            </div>
+                                          </div>
+                                        </div>
+                                      <% } %>
+    
+                                      <% if(data.total_bussiness_correspondence){ %>
+                                        <div class="col-sm-2 m-2 col-4">
+                                          <div class="small-box  bg-gradient-info">
+                                            <div class="inner">
+                                              <h3><%= data.total_bussiness_correspondence %></h3>
+                                              <p>Total BC's Registered</p>
+                                            </div>
+                                          </div>
+                                        </div>
+                                      <% } %>
+
+                                      <div class="mt-5 mx-2">
+                                      <a href="/admin/miscellaneous-commission-details/<%= data.user_id %>">
+                                        <div class="btn btn-sm bg-info">
+                                          View Commission details
+                                        </div>  
+                                      </a>
+                                   </div>
+
+                                    <div class="mt-5">
+                                      <a href="/admin/miscellaneous-user-registered-users/<%= data.user_id %>">
+                                        <div class="btn btn-sm bg-info">
+                                          View Registered User's
+                                        </div>  
+                                      </a>
+                                   </div>
+                                </div>
+
+                                    <table id="example2" class="table table-bordered table-hover">
+                                        <thead>
+
+                                            <tr>
+                                                <th>S no.</th>
+                                                <th>Registree's Role</th>
+                                                <th>Total No. of Registree's</th>
+                                                <th>Registrees Currently On Subscription</th>
+                                                <th>New Registrees Added Last Month</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <% data.data.forEach((data, index)=> { %>
+                                                <tr>                    
+                                                    <td>
+                                                        <%= index + 1%>
+                                                    </td>                                                    
+                                                    <td>
+                                                        <%= data.user_role_type %>
+                                                    </td>
+                                                    <td>
+                                                        <%= data.count %>
+                                                    </td>
+
+                                                    <td>
+                                                        <%= data.registrees_currently_on_subscription %>
+                                                    </td>
+                                                    <td>
+                                                       <%=  data.new_registrees_added_last_month %>
+                                                    </td>
+                                                </tr>
+
+                                            <%} ) %>
+                                        </tbody>
+                                    </table>
+                            </div>
+                        <% } %>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>
+
+
+

@@ -1,0 +1,209 @@
+<div class="content-wrapper">
+    <section class="content-header">
+        <div class="container-fluid">
+            <div class="row mb-2">
+                <div class="col-sm-6">
+                    <h1>Job Post Detail</h1>
+                </div>
+                <div class="col-sm-6">
+                    <ol class="breadcrumb float-sm-right">
+                        <li class="breadcrumb-item">
+                            <a href="/admin/company">Company</a>
+                        </li>
+                        <li class="breadcrumb-item">
+                            <a href="/admin/company/get-all-job-post/<%= userID %>">Get All Jobs</a
+              >
+            </li>
+            <li class="breadcrumb-item active">Job Post Detail</li>
+          </ol>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="content">
+    <div class="card">
+      <div class="card-header row">
+        <div class="col-9">
+          <h3 class="card-title">Job Post Detail</h3>
+        </div>
+        <div class="col-3">
+          <a
+            href="/admin/company/job-post-detail/questions/<%= alldata.id %>"
+            style="margin-right: auto"
+            class="btn btn-sm btn-outline-primary"
+            >See Questions & Answers</a
+          >
+        </div>
+      </div>
+      <div class="card-body">
+        <div class="container px-4" style="font-size: 18px">
+          <h4 style="text-align: center; color: grey">Basic Details</h4>
+          <hr />
+          <div class="row">
+            <div class="col-6">
+              <div class="row">
+                <div class="col-md-6 text-muted">Job Post:</div>
+                <div class="col-md-6"><%= alldata.name %></div>
+              </div>
+            </div>
+            <div class="col-6">
+              <div class="row">
+                <div class="col-md-6 text-muted">Job Title :</div>
+                <div class="col-md-6"><%= alldata.job_title %></div>
+              </div>
+            </div>
+          </div>
+
+          <hr />
+          <div class="row">
+            <div class="col-6">
+              <div class="row">
+                <div class="col-md-6 text-muted">Industry Name :</div>
+                <div class="col-md-6"><%= alldata.Industry.name %></div>
+              </div>
+            </div>
+            <div class="col-6">
+              <div class="row">
+                <div class="col-md-6 text-muted">Sector Name :</div>
+                <div class="col-md-6"><%= alldata.Sector.name %></div>
+              </div>
+            </div>
+          </div>
+
+          <hr />
+          <div class="row">
+            <div class="col-6">
+              <div class="row">
+                <div class="col-md-6 text-muted">Employement Type :</div>
+                <div class="col-md-6"><%= alldata.employment_type %></div>
+              </div>
+            </div>
+            <div class="col-6">
+              <div class="row">
+                <div class="col-md-6 text-muted">Contract Type :</div>
+                <div class="col-md-6"><%= alldata.contract_type %></div>
+              </div>
+            </div>
+          </div>
+
+          <hr />
+          <div class="row">
+            <div class="col-6">
+              <div class="row">
+                <div class="col-md-6 text-muted">Contract Duration :</div>
+                <div class="col-md-6"><%= alldata.contract_duration %></div>
+              </div>
+            </div>
+            <div class="col-6">
+              <div class="row">
+                <div class="col-md-6 text-muted">Job Schedule :</div>
+                <div class="col-md-6"><%= alldata.job_schedule %></div>
+              </div>
+            </div>
+          </div>
+
+          <hr />
+          <div class="row">
+            <div class="col-6">
+              <div class="row">
+                <div class="col-md-6 text-muted">Job Timetable :</div>
+                <div class="col-md-6">
+                  <%= alldata.job_time_from %> : <%= alldata.job_time_to %>
+                </div>
+              </div>
+            </div>
+            <div class="col-6">
+              <div class="row">
+                <div class="col-md-6 text-muted">Number Of Positions :</div>
+                <div class="col-md-6"><%= alldata.number_of_position %></div>
+              </div>
+            </div>
+          </div>
+
+          <hr />
+          <div class="row">
+            <!-- <div class="col-6">
+                <div class="row">
+                  <div class="col-md-6 text-muted">Job Description :</div>
+                  <div class="col-md-6"><%= alldata.job_description  %></div>
+                </div>
+            </div> -->
+            <div class="col-6">
+              <div class="row">
+                <div class="col-md-6 text-muted">Salary Details :</div>
+                <div class="col-md-6">
+                  From : <%= alldata.salary_from ? alldata.salary_from : 'Nil'
+                  %> , To : <%= alldata.salary_to ? alldata.salary_to : 'Nil' %>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <hr />
+          <div class="row">
+            <div class="col-md-3 text-muted">Job Description :</div>
+            <div class="col-md-9"><%= alldata.job_description %></div>
+          </div>
+
+          <hr />
+          <div class="row">
+            <div class="col-6">
+              <div class="row">
+                <div class="col-md-6 text-muted">
+                  Applicant Required to submit Resume :
+                </div>
+                <div class="col-md-6">
+                  <% if(alldata.submit_resume === 'Y'){ %> Yes <% } else
+                  if(alldata.submit_resume === 'N'){ %> No <% } else { %>
+                  Optional <% } %>
+                </div>
+              </div>
+            </div>
+            <div class="col-6">
+              <div class="row">
+                <div class="col-md-6 text-muted">Job status :</div>
+                <div class="col-md-6"><%= alldata.job_status %></div>
+              </div>
+            </div>
+          </div>
+
+          <hr />
+          <h4 style="text-align: center; color: grey">Skills Required</h4>
+
+          <hr />
+          <div class="row">
+            <div class="col-6">
+              <div class="row">
+                <div class="col-md-6 text-muted">Experience Required :</div>
+                <div class="col-md-6"><%= alldata.experience_required %></div>
+              </div>
+              <% if (alldata.experience_required=='Y') {%>
+              <div class="row">
+                <div class="col-md-6 text-muted">Experience Required :</div>
+                <div class="col-md-6">
+                  <%= alldata.exp_from %> <%= alldata.exp_from_type %> - <%=
+                  alldata.exp_to %> <%= alldata.exp_to_type %>
+                </div>
+              </div>
+              <%}%>
+            </div>
+            <div class="col-6">
+              <div class="row">
+                <div class="col-md-6 text-muted">Education Required :</div>
+                <div class="col-md-6"><%= alldata.education_required %></div>
+              </div>
+              <% if (alldata.EducationDatum) {%>
+
+              <div class="row">
+                <div class="col-md-6 text-muted">Education Qualification :</div>
+                <div class="col-md-6"><%= alldata.EducationDatum.name %></div>
+              </div>
+              <%}%>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>

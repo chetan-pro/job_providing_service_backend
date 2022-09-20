@@ -1,0 +1,65 @@
+<div class="content-wrapper">
+    <section class="content-header">
+        <div class="container-fluid">
+            <div class="row mb-2">
+                <div class="col-sm-6">
+                    <h1>Create Job Post</h1>
+                </div>
+                <div class="col-sm-6">
+                    <ol class="breadcrumb float-sm-right">
+                        <li class="breadcrumb-item">
+                            <a href="/admin/company">Company list</a>
+                        </li>
+                        <li class="breadcrumb-item">
+                            <a href="/admin/company/get-all-job-post/">Job Post list</a>
+                        </li>
+                        <li class="breadcrumb-item active">Create Job Post</li>
+                    </ol>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="content">
+        <div class="container-fluid">
+            <div class="card card-primary">
+                <div class="card-header">
+                    <h3 class="card-title">Create Job Post</h3>
+                    <button class="btn btn-sm btn-outline-success add_field_button" style="margin-top: 2rem; color: white">
+            Add Another Question
+          </button> &nbsp;
+                </div>
+                <form id="form" method="post" action="/admin/company/job-post/questions/<%= id %>">
+                    <%= console.log(id) %>
+                        <div class="card-body">
+                            <!-- <div class="row">
+                                <div class="col-md-5">
+                                    <div class="form-group">
+                                        <label>Enter Question</label>
+                                        <input id="ques" type="text" class="form-control" name="questions" placeholder="Enter Question" value="<%= formValue && formValue.questions ? formValue.questions :'' %>">
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label>status</label>
+                                        <select class="form-control select2bs4" style="width: 100%;" id="state-dropdown" name="status">
+                                        <option value="1" selected>Active</option>
+                                        <option value="0">Inactive</option>
+                                    </select>
+                                    </div>
+                                </div>
+                                <div class="col-3">
+                                    <button class="btn btn-sm btn-outline-danger remove_field" style="margin-top: 2rem;">
+                                        Remove field</button>
+                                </div>
+                            </div> -->
+                        </div>
+
+                        <div class="card-footer">
+                            <button type="submit" class="btn btn-sm btn-primary">Submit</button>
+                        </div>
+                </form>
+            </div>
+        </div>
+    </section>
+</div>

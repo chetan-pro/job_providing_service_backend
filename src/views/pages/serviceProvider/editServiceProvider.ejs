@@ -1,0 +1,183 @@
+<div class="content-wrapper">
+    <section class="content-header">
+        <div class="container-fluid">
+            <div class="row mb-2">
+                <div class="col-sm-6">
+                    <h1>Edit Service Provider</h1>
+                </div>
+                <div class="col-sm-6">
+                    <ol class="breadcrumb float-sm-right">
+                        <li class="breadcrumb-item">
+                            <a href="/admin/service-provider">Service Provider list</a>
+                        </li>
+                        <li class="breadcrumb-item active">Edit Service Provider</li>
+                    </ol>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="content">
+        <div class="container-fluid">
+            <div class="card card-primary">
+                <div class="card-header">
+                    <h3 class="card-title">Edit Service Provider</h3>
+                </div>
+
+                <div>
+                    <% if(message != '') { %>
+                        <div class="p-3">
+                            <div class="alert mb-0" style="
+                background-color: rgb(141, 228, 141);
+                border: none;
+                color: rgb(2, 120, 28);
+              " role="alert">
+                                <%= message %>
+                            </div>
+                        </div>
+
+                        <% } else if(error != ''){ %>
+                            <div class="p-3">
+                                <div class="alert alert-dismissible mb-0" style="
+                background-color: rgb(237 183 183);
+                border: none;
+                color: rgb(120 2 2);
+              " role="alert">
+                                    <%= error %>
+                                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+                                </div>
+                            </div>
+
+                            <% } %>
+                </div>
+
+                <form method="post" action="/admin/edit-service-provider/<%= alldata.id %>" enctype="multipart/form-data">
+                    <div class="card-body">
+                        <div class="row mt-3">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label class="form-label">Name</label>
+                                    <input type="text" class="form-control" name="name" value="<%= alldata.name %>" placeholder="name" />
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label class="form-label">Email</label>
+                                    <input type="email" class="form-control" name="email" value="<%= alldata.email %>" placeholder="email" />
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label class="form-label">Designation</label>
+                                    <input type="text" class="form-control" name="your_designation" value="<%= alldata.your_designation %>" placeholder="Designation" />
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label class="form-label">Mobile Number</label>
+                                    <input type="number" class="form-control mobileNumberField" name="mobile" value="<%= alldata.mobile %>" placeholder="Mobile no." />
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label class="form-label">Date of birth (DD/MM/YYYY)</label>
+                                    <input type="date" class="form-control" name="dob" value="<%= moment(alldata.dob).format('YYYY-MM-DD') %>" placeholder="Date of birth" />
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label class="form-label">Pin code</label>
+                                    <input type="text" class="form-control pincodeNumberField" id="pincode-text-field" name="pin_code" value="<%= alldata.pin_code %>" placeholder="Pin code" />
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label class="form-label">State</label>
+                                    <select class="form-control select2bs4" style="width: 100%" id="state-dropdown" name="state_id">
+                    <option value="<%= alldata.state.id %>">
+                      <%= alldata.state.name %>
+                    </option>
+                    <% statedata.forEach((state) => { %>
+                    <option value="<%= state.id %>"><%= state.name %></option>
+                    <% }) %>
+                  </select>
+                                </div>
+                            </div>
+                            <!-- /.col -->
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label class="form-label">City</label>
+                                    <select class="form-control select2bs4" style="width: 100%" id="city-dropdown" name="city_id">
+                    <option value="<%= alldata.city_id%>">
+                      <%= alldata.city.name %>
+                    </option>
+                  </select>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label>Service Provider image Link</label> <br />
+                                    <a href="/assets/images/user/<%= alldata.image %>">
+                                        <%= alldata.image %>
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label>Service Provider image</label> <br />
+                                    <input type="file" value="<%= alldata.image%>" name="image" />
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label>Gender</label>
+                                    <select class="form-control" style="width: 100%" name="gender">
+                    <option value="<%= alldata.gender %>">
+                      <%= alldata.gender %>
+                    </option>
+                    <option value="male">Male</option>
+                    <option value="female">Female</option>
+                    <option value="transgender">Trans-Gender</option>
+                  </select>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label>status</label>
+                                    <select class="form-control select2bs4" style="width: 100%" name="status">
+                    <option value="<%= alldata.status %>" selected>
+                      <% if(alldata.status === 0) { %> Inactive <% } else
+                      if(alldata.status === 1) { %> Active <% } %>
+                    </option>
+                    <option value="1">Active</option>
+                    <option value="0">InActive</option>
+                  </select>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- /.card-body -->
+
+                    <div class="card-footer">
+                        <button type="submit" class="btn btn-sm btn-primary">Submit</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </section>
+</div>

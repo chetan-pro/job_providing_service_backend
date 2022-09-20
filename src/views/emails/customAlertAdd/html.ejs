@@ -1,0 +1,41 @@
+<%- include('../header') -%>
+    <tr>
+        <td>
+            <table style='border: 0; border-spacing: 0; border-collapse: separate; -mso-table-lspace: 0pt; -mso-table-rspace: 0pt; width: 100%; padding: 0 20px;'>
+                <tr>
+                    <td style='font-family: sans-serif; font-size: 14px; vertical-align: top;'>
+                        <h3 style='font-family: sans-serif; font-size: 14px; font-weight: bold; Margin-bottom: 8px; margin-top: 20px; color: #5A443D;'> Dear <%= locals.username %> <br> Greetings from <%= locals.appName %></h3>
+
+                        <p style='font-family: sans-serif; font-size: 14px; Margin-top: 0; Margin-bottom: 20px; color: #5A443D; font-weight: 400; line-height: 1.5em;'>
+                            | You have just created a job alert for you, <%= locals.jobRole %> <%= locals.industry %> <%= locals.pinCode %> in the  <%= locals.state %>  in city <%= locals.city %> for <%= locals.companyName %>.
+                            | <%= locals.appName %> soon recommend you the best job search from your preferred work location. This alert will automatically inform the recruiter about your availability. the recruiter will catch you soon.
+                        </p>
+                        
+                        <h3 style='font-family: sans-serif; font-size: 14px; font-weight: bold; Margin-bottom: 0; margin-top: 20px; color: #5A443D;'>
+                            Thank You! <br>
+                            <%= locals.appName %> Team.
+                        </h3>
+                    </td>
+                </tr>
+            </table>
+        </td>
+    </tr>
+
+    <%- include('../footer') -%>
+
+    <!-- Custom alert from Candidate Side
+
+Dear (Name)
+Greetings from HindustaanJobs
+
+
+
+  -->
+
+
+
+
+
+
+
+

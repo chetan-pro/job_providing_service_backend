@@ -1,0 +1,229 @@
+<div class="content-wrapper">
+    <section class="content-header">
+        <div class="container-fluid">
+            <div class="row mb-2">
+                <div class="col-sm-6">
+                    <h1>Local Hunar Table</h1>
+                </div>
+                <div class="col-sm-6">
+                    <ol class="breadcrumb float-sm-right">
+                        <li class="breadcrumb-item active">
+                            <a href="/admin/local-hunar">Local Hunar list</a>
+                        </li>
+                    </ol>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="content">
+        <div class="container-fluid">
+            <div class="card">
+                <div class="card-header">
+                    <div class="d-flex justify-content-between align-items-center">
+                        <form action="/admin/local-hunar" method="get">
+                            <div class="d-flex align-items-center">
+                                <div class="input-group">
+                                    <input type="text" class="form-control form-control-lg" name="search" value="<%= searchVal %>" placeholder="Search here !" />
+                                    <div class="input-group-append">
+                                        <button type="submit" class="btn btn-lg btn-default">
+                      <i class="fa fa-search"></i>
+                    </button>
+                                    </div>
+                                </div>
+                                &nbsp;
+
+                                <div class="input-group">
+                                    <select class="form-control form-control-lg" style="font-size: 17px; color: grey" name="filter">
+                    <% if(filterVal==='' ) { %>
+                    <option value="" selected>select status</option>
+                    <option value="1">Active</option>
+                    <option value="0">InActive</option>
+                    <option value="2">Deleted</option>
+                    <% } else if(Number(filterVal)===0) { %>
+                    <option value="0" selected>InActive</option>
+                    <option value="1">Active</option>
+                    <option value="2">Deleted</option>
+                    <% } else if(Number(filterVal)===1) { %>
+                    <option value="1" selected>Active</option>
+                    <option value="0">InActive</option>
+                    <option value="2">Deleted</option>
+                    <% } else if(Number(filterVal)===2) { %>
+                    <option value="2" selected>Deleted</option>
+                    <option value="0">InActive</option>
+                    <option value="1">Active</option>
+                    <% } %>
+                  </select>
+                                    <div class="input-group-append">
+                                        <button type="submit" class="btn btn-lg btn-default">
+                      <i class="fa fa-search"></i>
+                    </button>
+                                    </div>
+                                </div>
+                                &nbsp;
+
+                                <div class="input-group">
+                                    <select class="form-control form-control-lg" style="font-size: 17px; color: grey" name="sort">
+                    <% if(sortVal == '' || sortVal == 'DESC') { %>
+                    <option selected value="DESC">DESCENDING</option>
+                    <option value="ASC">ASCENDING</option>
+                    <% } else { %>
+                    <option selected value="ASC">ASCENDING</option>
+                    <option value="DESC">DESCENDING</option>
+                    <% } %>
+                  </select>
+                                    <div class="input-group-append">
+                                        <button type="submit" class="btn btn-lg btn-default">
+                      <i class="fa fa-search"></i>
+                    </button>
+                                    </div>
+                                </div>
+                                &nbsp;
+                            </div>
+                        </form>
+
+                        <div>
+                            <a href="/admin/create-local-hunar" class="btn btn-sm btn-primary">Add a Local Hunar</a
+              >&nbsp;
+            </div>
+          </div>
+        </div>
+        <div>
+          <% if(message !=0) { %>
+          <div class="p-3">
+            <div
+              class="alert mb-0"
+              style="
+                background-color: rgb(188 252 188);
+                border: none;
+                color: rgb(2, 120, 28);
+              "
+              role="alert"
+            >
+              <%= message %>
+            </div>
+          </div>
+
+          <% } else if(error !=0){ %>
+          <div class="p-3">
+            <div
+              class="alert mb-0"
+              style="
+                background-color: rgb(237 183 183);
+                border: none;
+                color: rgb(120 2 2);
+              "
+              role="alert"
+            >
+              <%= error %>
+            </div>
+          </div>
+
+          <% } %>
+        </div>
+
+        <% if(data.count !=0) { %>
+
+        <div class="card-body">
+          <table id="example2" class="table table-bordered table-hover">
+            <thead>
+              <tr>
+                <th>S no.</th>
+                <th>Local Hunar Name</th>
+                <th>Account Status</th>
+                <th>Actions</th>
+              </tr>
+            </thead>
+            <tbody>
+              <% data.rows.forEach((data, index)=> { %>
+              <tr>
+                <td><%= index + 1 + ((pageNo - 1) * limit) %></td>
+                <td><%= data.name %></td>
+                <td>
+                  <% if(data.status==0) { %> Inactive <% } else
+                  if(data.status==1) { %> Active <% }else { %> Deleted <% } %>
+                </td>
+
+                <td>
+                  <a
+                    href="/admin/local-hunar-details/<%= data.id %>"
+                    class="btn btn-sm btn-outline-primary"
+                    >View Detail</a
+                  >&nbsp; <% if(data.status==2) { %>
+                  <a
+                    href="/admin/edit-local-hunar/<%= data.id %>"
+                    class="btn btn-sm btn-outline-primary"
+                    >Edit</a
+                  >
+                  &nbsp; <% } else { %>
+                  <a
+                    href="/admin/edit-local-hunar/<%= data.id %>"
+                    class="btn btn-sm btn-outline-primary"
+                    >Edit</a
+                  >
+                  &nbsp;
+                  <a
+                    href="/admin/delete-local-hunar/<%= data.id %>"
+                    class="btn btn-sm btn-outline-danger"
+                    >Delete</a
+                  >
+                  &nbsp; <% } %>
+                </td>
+              </tr>
+
+              <%} ) %>
+            </tbody>
+          </table>
+        </div>
+        <% } %>
+        <div class="col-sm-2 m-2">
+          <div class="row" style="width: 530px; justify-content: space-between">
+            <a href="/admin/candidate-pdf-download/LH?type=excel">
+              <div class="btn btn-sm bg-info">
+                Download Local Hunar Details as Excel
+              </div>
+            </a>
+                            <a href="/admin/candidate-pdf-download/LH">
+                                <div class="btn btn-sm bg-info">
+                                    Download Local Hunar Details as PDF
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="paginationWrapper" style="padding-right: 1rem">
+                        <% if (extra.pages > 0) { %>
+                            <ul class="pagination d-flex justify-content-end">
+                                <% var i=(Number(extra.pageNo)> 5 ? Number(extra.pageNo) - 4 : 1) %>
+                                    <% if (i !==1) { %>
+                                        <li class="page-item disabled">
+                                            <a class="page-link">...</a>
+                                        </li>
+                                        <% } %>
+                                            <% for (; i <=(Number(extra.pageNo) + 4) && i <=
+            extra.pages; i++) { %>
+                                                <% if (i==extra.pageNo) { %>
+                                                    <li class="page-item active">
+                                                        <a class="page-link">
+                                                            <%= i %>
+                                                        </a>
+                                                    </li>
+                                                    <% } else { %>
+                                                        <li class="page-item">
+                                                            <a class="page-link" href="/admin/local-hunar/?page=<%= i %>&search=<%= searchVal %>">
+                                                                <%= i %>
+                                                            </a>
+                                                        </li>
+                                                        <% } %>
+                                                            <% if (i==Number(extra.pageNo) + 4 && i < extra.pages) { %>
+                                                                <li class="page-item disabled">
+                                                                    <a class="page-link">...</a>
+                                                                </li>
+                                                                <% } %>
+                                                                    <% } %>
+                            </ul>
+                            <% } %>
+                    </div>
+                </div>
+            </div>
+    </section>
+    </div>

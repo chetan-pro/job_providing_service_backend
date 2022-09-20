@@ -1,0 +1,132 @@
+<div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <section class="content-header">
+        <div class="container-fluid">
+            <div class="row mb-2">
+                <div class="col-sm-6">
+                    <h1>Service-seeker Detail</h1>
+                </div>
+                <div class="col-sm-6">
+                    <ol class="breadcrumb float-sm-right">
+                        <li class="breadcrumb-item active"><a href="/admin/service-seeker">Service-seeker List</a></li>
+                        <li class="breadcrumb-item active">Service-seeker Detail</li>
+                    </ol>
+                </div>
+            </div>
+        </div>
+        <!-- /.container-fluid -->
+    </section>
+
+    <!-- Main content -->
+    <section class="content">
+
+        <!-- Default box -->
+        <div class="card">
+            <div class="card-header">
+                <div class=" d-flex justify-content-between align-items-center">
+                    <h3 class="card-title">Service-seeker Detail</h3>
+
+                    <div>
+                        <a href="/admin/service-seeker-all-services/<%= id %>" class="btn btn-sm btn-primary">View Requested Services</a>&nbsp;
+                    </div>
+                </div>
+            </div>
+            <div class="card-body">
+                <div class="container px-4 row">
+                    <div class="col-6">
+                        <div class="row mb-2" style="font-size: 18px;">
+                            <div class="col-md-6 text-muted">Service-provider Name:</div>
+                            <div class="col-md-6">
+                                <%= alldata.name ? alldata.name : 'Nil' %>
+                            </div>
+                        </div>
+                        <hr />
+                        <div class="row mb-2">
+                            <div class="col-md-6 text-muted">Email :</div>
+                            <div class="col-md-6">
+                                <%= alldata.email ? alldata.email : 'Nil' %>
+                            </div>
+                        </div>
+                        <hr />
+                        <div class="row mb-2" style="font-size: 18px;">
+                            <div class="col-md-6 text-muted">Gender :</div>
+                            <div class="col-md-6">
+                                <%= alldata.gender ? alldata.gender : 'Nil' %>
+                            </div>
+                        </div>
+                        <hr />
+                        <div class="row mb-2" style="font-size: 18px;">
+                            <div class="col-md-6 text-muted">Pin Code :</div>
+                            <div class="col-md-6">
+                                <%= alldata.pin_code ? alldata.pin_code : 'Nil' %>
+                            </div>
+                        </div>
+                        <hr />
+                        <div class="row mb-2" style="font-size: 18px;">
+                            <div class="col-md-6 text-muted">DOB:</div>
+                            <div class="col-md-6">
+                                <%= alldata.dob ? moment(alldata.dob).format( 'DD-MM-YYYY'): 'Nil' %>
+
+                            </div>
+                        </div>
+
+                        <hr />
+
+                    </div>
+                    <div class="col-5">
+                        <div class="row mb-2" style="font-size: 18px;">
+                            <div class="col-md-6 text-muted">Your Designation :</div>
+                            <div class="col-md-6">
+                                <%= alldata.your_designation ? alldata.your_designation : 'Nil' %>
+                            </div>
+                        </div>
+
+                        <hr />
+                        <div class="row mb-2">
+                            <div class="col-md-6 text-muted">Mobile Number :</div>
+                            <div class="col-md-6">
+                                <%= alldata.mobile ? alldata.mobile : 'Nil' %>
+                            </div>
+                        </div>
+                        <hr />
+                        <div class="row mb-2" style="font-size: 18px;">
+                            <div class="col-md-6 text-muted">State :</div>
+                            <div class="col-md-6">
+                                <%= alldata.state.name ? alldata.state.name : 'Nil' %>
+                            </div>
+                        </div>
+                        <hr />
+                        <div class="row mb-2" style="font-size: 18px;">
+                            <div class="col-md-6 text-muted">City :</div>
+                            <div class="col-md-6">
+                                <%= alldata.city.name ? alldata.city.name : 'Nil' %>
+                            </div>
+                        </div>
+                        <hr />
+                        <div class="row mb-2" style="font-size: 18px;">
+                            <div class="col-md-6 text-muted">Image :</div>
+                            <div class="col-md-6">
+                                <a target="_blank" href="/assets/images/user/<%= alldata.image %>">
+                                    <%= alldata.image ? alldata.image : 'Nil' %>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+
+
+                </div>
+            </div>
+            <!-- /.card-body -->
+            <div class="card-header d-flex justify-content-end align-items-center" ">
+         
+          <h3 class=" card-title m-4 ">Get All Transactions :</h3>
+        <a href="/admin/wallet-transactions/<%=alldata.id%>?user=
+                <%=roleType%>" class="btn btn-sm btn-primary">Transactions
+                    </a>&nbsp;
+            </div>
+        </div>
+        <!-- /.card -->
+
+    </section>
+    <!-- /.content -->
+</div>

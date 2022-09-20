@@ -1,0 +1,197 @@
+<div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <section class="content-header">
+        <div class="container-fluid">
+            <div class="row mb-2">
+                <div class="col-sm-6">
+                    <h1>Subscription Plan Detail</h1>
+                </div>
+                <div class="col-sm-6">
+                    <ol class="breadcrumb float-sm-right">
+                        <li class="breadcrumb-item active">
+                            <a href="/admin/subscription-plans">Subscription Plan List</a>
+                        </li>
+                        <li class="breadcrumb-item active">Subscription Plan Detail</li>
+                    </ol>
+                </div>
+            </div>
+        </div>
+        <!-- /.container-fluid -->
+    </section>
+
+    <!-- Main content -->
+    <section class="content">
+        <!-- Default box -->
+        <div class="card">
+            <div class="card-header">
+                <div class="d-flex justify-content-between align-items-center">
+                    <h3 class="card-title">Subscription Plan Detail</h3>
+
+                    <div>
+                        <a href="/admin/subscription-plan/<%= id %>/subscribed-users" class="btn btn-sm btn-primary">Subscribed Users</a
+            >&nbsp;
+          </div>
+        </div>
+      </div>
+      <div class="card-body">
+        <div class="container px-4 row">
+          <div class="col-6">
+            <div class="row mb-2" style="font-size: 18px">
+              <div class="col-md-6 text-muted">Subscription Plan Name:</div>
+              <div class="col-md-6">
+                <%= alldata.title ? alldata.title : 'Nil' %>
+              </div>
+            </div>
+            <hr />
+            <div class="row mb-2">
+              <div class="col-md-6 text-muted">Description :</div>
+              <div class="col-md-6">
+                <%= alldata.description ? alldata.description : 'Nil' %>
+              </div>
+            </div>
+            <hr />
+            <div class="row mb-2" style="font-size: 18px">
+              <div class="col-md-6 text-muted">User Type :</div>
+              <div class="col-md-6">
+                <% if(alldata.user_role_type == 'JS'){ %> Candidate <% } else
+                if(alldata.user_role_type == 'COMPANY'){ %> Company <% } else
+                if(alldata.user_role_type == 'CS'){ %> Company Staff <% } else
+                if(alldata.user_role_type == 'HSP'){ %> Home Service Provider <%
+                } else if(alldata.user_role_type == 'HSS'){ %> Home Service
+                Seeker <% } else if(alldata.user_role_type == 'LH'){ %> Local
+                Hunar <% } else if(alldata.user_role_type == 'BC'){ %> Business
+                Correspondence <% } else if(alldata.user_role_type ==
+                'ADVISOR'){ %> Advisor <% } else if(alldata.user_role_type ==
+                'STF'){ %> Staff <% } else if(alldata.user_role_type == 'CM'){
+                %> Cluster Manager <% } else if(alldata.user_role_type ==
+                'FSE'){ %> Field Sales Executive <% } else { %> Nil <% } %>
+              </div>
+            </div>
+            <% if(alldata.user_role_type == 'COMPANY'){ %>
+            <hr />
+
+            <div class="row mb-2" style="font-size: 18px">
+              <div class="col-md-6 text-muted">Plan Type Area:</div>
+              <div class="col-md-6"><%= alldata.plan_type_area %></div>
+            </div>
+
+            <hr />
+            <div class="row mb-2" style="font-size: 18px">
+              <div class="col-md-6 text-muted">Plan Sub Type Area:</div>
+              <div class="col-md-6"><%= alldata.plan_sub_type %></div>
+            </div>
+
+            <hr />
+            <div class="row mb-2" style="font-size: 18px">
+              <div class="col-md-6 text-muted">Cv Limit:</div>
+              <div class="col-md-6"><%= alldata.cv_limit %></div>
+            </div>
+            <% } %> <% if(alldata.user_role_type == 'COMPANY'){ %>
+            <hr />
+            <div class="row mb-2" style="font-size: 18px">
+              <div class="col-md-6 text-muted">Email Limit:</div>
+              <div class="col-md-6"><%= alldata.email_limit %></div>
+            </div>
+
+            <hr />
+            <div class="row mb-2" style="font-size: 18px">
+              <div class="col-md-6 text-muted">Job Boosting:</div>
+              <% if(alldata.job_boosting == 'N'){ %>
+              <div class="col-md-6">No</div>
+              <% } %> <% if(alldata.job_boosting == null){ %>
+              <div class="col-md-6">Null</div>
+              <% } %> <% if(alldata.job_boosting == '1'){ %>
+              <div class="col-md-6">One State</div>
+              <% } %>
+            </div>
+            <% } %>
+
+            <hr />
+
+            <div class="row mb-2" style="font-size: 18px">
+              <div class="col-md-6 text-muted">Reffered User amount:</div>
+              <div class="col-md-6">
+                <%= alldata.ref_amount_earned ? alldata.ref_amount_earned : 0 %>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-5">
+            <div class="row mb-2" style="font-size: 18px">
+              <div class="col-md-6 text-muted">Amount :</div>
+              <div class="col-md-6">
+                <%= alldata.amount ? alldata.amount : 'Nil' %>
+              </div>
+            </div>
+            <hr />
+
+            <div class="row mb-2" style="font-size: 18px">
+              <div class="col-md-6 text-muted">Expiry (In days) :</div>
+              <div class="col-md-6">
+                <%= alldata.expiry_days ? alldata.expiry_days : 'Nil' %>
+              </div>
+            </div>
+            <hr />
+
+            <div class="row mb-2" style="font-size: 18px">
+              <div class="col-md-6 text-muted">Status:</div>
+              <div class="col-md-6">
+                <% if(alldata.status == 0) { %> Inactive <% } else if
+                (alldata.status == 1){ %> Active <% } else { %> Deleted <% }%>
+              </div>
+            </div>
+            <hr />
+
+            <div class="row mb-2" style="font-size: 18px">
+              <div class="col-md-6 text-muted">Offer:</div>
+              <div class="col-md-6"><%= alldata.offer %></div>
+            </div>
+
+            <hr />
+
+            <div class="row mb-2" style="font-size: 18px">
+              <div class="col-md-6 text-muted">Discounted Amount:</div>
+              <div class="col-md-6"><%= alldata.discounted_amount %></div>
+            </div>
+
+            <hr />
+            <div class="row mb-2" style="font-size: 18px">
+              <div class="col-md-6 text-muted">Plan Type :</div>
+              <div class="col-md-6">
+                <%= alldata.plan_type.split('_').join(' ') %>
+              </div>
+            </div>
+            <% if(alldata.user_role_type == 'COMPANY'){ %>
+            <hr />
+            <div class="row mb-2" style="font-size: 18px">
+              <div class="col-md-6 text-muted">Job Limit:</div>
+              <div class="col-md-6"><%= alldata.job_limit %></div>
+            </div>
+            <hr />
+            <div class="row mb-2" style="font-size: 18px">
+              <div class="col-md-6 text-muted">Description Limit:</div>
+              <div class="col-md-6"><%= alldata.description_limit %></div>
+            </div>
+
+            <hr />
+            <div class="row mb-2" style="font-size: 18px">
+              <div class="col-md-6 text-muted">Job Boosting Days:</div>
+              <div class="col-md-6"><%= alldata.job_boosting_days %></div>
+            </div>
+            <% } %>
+            <!-- <hr />
+            <div class="row mb-2" style="font-size: 18px">
+              <div class="col-md-6 text-muted">Cashback Amount :</div>
+              <div class="col-md-6">
+                <%= alldata.cashback_amount ? alldata.cashback_amount : 0 %>
+              </div>
+            </div> -->
+          </div>
+        </div>
+      </div>
+      <!-- /.card-body -->
+    </div>
+    <!-- /.card -->
+  </section>
+  <!-- /.content -->
+</div>

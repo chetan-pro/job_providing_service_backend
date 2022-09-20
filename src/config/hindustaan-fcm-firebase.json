@@ -1,0 +1,12 @@
+{
+  "type": "service_account",
+  "project_id": "hindustaan-jobs",
+  "private_key_id": "c31df3b16c3a6bf1dbccdf4fd7f86ccb395b9bef",
+  "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvAIBADANBgkqhkiG9w0BAQEFAASCBKYwggSiAgEAAoIBAQDZz2teuLQs8EwO\nm5O+V/XrcR5edCyz4rPwY0uCnwdtLjHgozL/aSnmxmIj/fvS0X3syWQdZSpLtvoN\nrbMn/fVWNdZJQGrcjd8eJfzugbzQqb9WW8kyhkH8JjtF74DRy4GDQ/6z/W+12wbp\ny2LFl6/W44SPWUa0Zl3gffiRbq0n28/4TnOOfwj2j/JSurOVB26cjcfjg36s4mhu\n8R4zjfTaBHJTyRBwuUoaX9pBvkleRQ94pOwNfZfNTQB96bsqhbt2lrBIUd3iElbz\n4BKP2nvRkU2W/OMo1Aj4Nnp6JBSd2HrOLsYooCt9TQ7kniVpSENsL5YRf5IJto0z\nBTKTg7rfAgMBAAECggEAQ+0+gHNc6XjlV1bonB+Fd7A29uEHQfBtCoaE+Y8L+15B\nOtvanzHWWfy7hZsDaotf2LUz7kDrEGLXl+V4bnvyg7jVg9G9odvy3c2eFGnMj0yo\n+c81L3cUZAUuThCz3Xm4gc32RH7A1Heir834l0PHmF4rLKN8e+1C0KyolP5trPR6\ninQp+wZffXkGYiUt1W1K+tRReSM7jXDiDhtI0DJDo9wUUp/MXv/6R5EnVX7RaO+o\n5UcAi22MB1FAulL0Xkt0g1RFUbRMWr+86oXCL4DZYiW5Yzy0cihYGRfED+lXojWo\nQ9u1h128dkr3nM90CQ9abLQwRqibz2foZhHnGtw6LQKBgQDz2utPj86XdCauWsne\n5xMoGvqs5CuJD4G+xGj3ZPhZOrqRe42vqPc/ZoYLdqalyDF3sHKsj8/u4bVI/5dU\nvc8Yl++xlSSZWqxF1Vbc7cFmNph+36M5PBrOKyP/i+j4v8WanSRNvZEwkcCFE/P1\nXxr30GBN40rQp3WbMPPJ3jab2wKBgQDkqG9qkrJ9uT2pAjX1aDFIDS9f5NMk6I5E\niU3UAhgUoN0xewKhwhxlesxs995hYuwImVJCRCRR0HC7H/WqgNTWWgx/ripKzBlo\n0zMriNJC1AreX5ilNesSPQgx5i2jIno6r++UbiYirnt8eNrTXUJZx8dUHnz4i59O\nyKqq2fiuTQKBgA1W32JlynZMe0U0YDCaUVjzSN0mSh9gQsettNQ7qL4w0T3eFV0T\nkBrev9xmrC0La3FRrKQ15bj6jdElciDHlUmSHiGHuA3PgPb8+ZhyRQ8TU3o1P5eE\n6y51+60h+SeKTgPsLq01/ng6sN5WvhShFDeUJYB9O314e512qw9S4YfbAoGAC34j\ny3mAGy2aWcpQp/sKrxJqlSlNK4e8ztkP3l4Uk8TaGUiTg0ncX4VijP+QX9i3AF+k\ncMw3/xy47c7XbDB5giSYiDpaydOkW05yPffsiYta2H55j6Q8IniK1uc42AA9oIGD\nSzSWGhwm/MSeSw1e7mBKNoIpydxKr40KdvfptekCgYB8AoDv95VdXrVFv2pFay0A\nCfW00+PihMqjB34anfdZaCrWky3/XMqxe3Y36yIxJDk1jYstP4ZMZwsTh1EtMGOn\n9+ZmoYmeqqZRu1wwnFAvsHGbGtJ59txlqUxyBIDdjxyc0BCUFZ6xHrEs3YRRDo9K\nZ4uKU46wmqbrkSWoJhyjSQ==\n-----END PRIVATE KEY-----\n",
+  "client_email": "firebase-adminsdk-khkcv@hindustaan-jobs.iam.gserviceaccount.com",
+  "client_id": "113932984499198834622",
+  "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+  "token_uri": "https://oauth2.googleapis.com/token",
+  "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+  "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/firebase-adminsdk-khkcv%40hindustaan-jobs.iam.gserviceaccount.com"
+}

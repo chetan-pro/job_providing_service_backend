@@ -1,0 +1,83 @@
+<div class="content-wrapper">
+    <section class="content-header">
+        <div class="container-fluid">
+            <div class="row mb-2">
+                <div class="col-sm-6">
+                    <h1>Sector create</h1>
+                </div>
+                <div class="col-sm-6">
+                    <ol class="breadcrumb float-sm-right">
+                        <li class="breadcrumb-item"><a href="/admin/sector" >Sector list</a></li>
+                        <li class="breadcrumb-item active">Sector create</li>
+                        </li>
+                    </ol>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    <section class="content">
+        <div class="container-fluid">
+            <div class="card card-primary">
+                <div class="card-header">
+                    <h3 class="card-title">Create Sector</h3>
+                </div>
+
+                <div>
+                    <% if(message && message != '') { %>
+                    <div class="p-3">
+                        <div class="alert mb-0"
+                            style="background-color: rgb(188 252 188); border: none; color: rgb(2, 120, 28);"
+                            role="alert">
+                            <%= message %>
+                        </div>
+                    </div>
+                    <% } else if(error && error != ''){ %>
+                    <div class="p-3">
+                        <div class="alert mb-0"
+                            style="background-color: rgb(237 183 183); border: none; color: rgb(120 2 2);"
+                            role="alert">
+                            <%= error %>
+                        </div>
+                    </div>
+                    <% } %>
+                </div>
+                <form method="post" action="/admin/create-sector">
+                    <div class="card-body">
+                        <div class="form-group">
+                            <label>Sector name</label>
+                            <input  type="text" class="form-control" name="name" value="<%= formValue && formValue.name ? formValue.name :'' %>">
+                        </div>
+                        <div class="row">
+                            <div class="col-6">
+                                <div class="form-group">
+                                    <label>choose Industry</label>
+                                    <select  class="form-control" name="industry_id" style="width: 100%;">
+                                        <option value="">Select Industry</option>
+                                        <% data.forEach((data) => { %>
+                                            <option value="<%= data.id %>"><%= data.name %></option>
+                                        <% }) %>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-6">
+                                <div class="form-group">
+                                    <label>Industry status</label>
+                                    <select class="form-control select2bs4" style="width: 100%;" name="status">
+                                        <option value="1" selected>Active</option>
+                                        <option value="0">InActive</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="card-footer">
+                        <button type="submit" class="btn btn-sm btn-primary">Submit</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </section>
+</div>

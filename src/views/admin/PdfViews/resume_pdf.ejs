@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+        html {
+            zoom: 0.5;
+        }
+    </style>
+</head>
+
+<body>
+    <table style="width: 100%" style="border: 1px solid black">
+        <thead>
+            <center>
+                <h3 style="border: 1px solid black">Resume Details</h3>
+            </center>
+        </thead>
+        <tbody>
+            <tr>
+                <th>S no.</th>
+                <th>Name</th>
+                <th>Email</th>
+                <th>Pincode</th>
+                <th>State</th>
+                <th>City</th>
+                <th>Skills</th>
+                <th>Reference<br>(Title,Number,Email,Designation)</th>
+                <th>Experience<br>(Title,Description,Designation,From-To)</th>
+                <th>Education<br>(Title,Description,From-To)</th>
+                <th>Hobbies</th>
+            </tr>
+            <% data.rows.forEach((data, index)=> { %>
+                <tr>
+                    <td style="border: 1px solid black; padding: 5px">
+                        <%= index + 1%>
+                    </td>
+                    <td style="border: 1px solid black; padding: 5px">
+                        <%= data.name%>
+                    </td>
+                    <td style="border: 1px solid black; padding: 5px">
+                        <%= data.email%>
+                    </td>
+                    <td style="border: 1px solid black; padding: 5px">
+                        <%= data.pin_code%>
+                    </td>
+                    <td style="border: 1px solid black; padding: 5px">
+                        <%= data.state?data.state.name:''%>
+                    </td>
+                    <td style="border: 1px solid black; padding: 5px">
+                        <%= data.city?data.city.name:''%>
+                    </td>
+                    <td style="border: 1px solid black; padding: 5px">
+                        <%= data.resume_skills.length>0?data.resume_skills[0].SkillSubCategory.name:''%>
+                    </td>
+                    <td style="border: 1px solid black; padding: 5px">
+                        <% data.resume_references.map((value)=>{%>
+                            <%=value.title + ','+ value.phone+ ','+value.email+ ','+value.designation%>
+                                <br>
+                                <%})%>
+                    </td>
+                    <td style="border: 1px solid black; padding: 5px">
+
+                        <% data.resume_experiences.map((value)=>{%>
+                            <%=value.title + ','+ value.description+ ','+value.designation+ ','+value.from+'-'+value.to%>
+                                <br>
+                                <%})%>
+                    </td>
+                    <td style="border: 1px solid black; padding: 5px">
+                        <%= data.resume_educations.map((value)=>{value.title})%>
+                            <% data.resume_educations.map((value)=>{%>
+                                <%=value.title + ','+ value.description+ ','+value.from+'-'+value.to%>
+                                    <br>
+                                    <%})%>
+                    </td>
+                    <td style="border: 1px solid black; padding: 5px">
+                        <%= data.resume_hobbies.map((value)=>value.hobbyName)%>
+                    </td>
+                </tr>
+                <%} ) %>
+        </tbody>
+    </table>
+</body>
+
+</html>

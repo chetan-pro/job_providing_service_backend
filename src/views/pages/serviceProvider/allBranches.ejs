@@ -1,0 +1,198 @@
+<div class="content-wrapper">
+    <section class="content-header">
+        <div class="container-fluid">
+            <div class="row mb-2">
+                <div class="col-sm-6">
+                    <h1>Branches Table</h1>
+                </div>
+                <div class="col-sm-6">
+                    <ol class="breadcrumb float-sm-right">
+                        <li class="breadcrumb-item">
+                            <a href="/admin/service-provider-details/<%= id %>">Service Provider Details</a
+              >
+            </li>
+            <li class="breadcrumb-item active">All Branch List</li>
+          </ol>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="content">
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-12">
+          <div class="card">
+            <div class="card-header">
+              <div class="row">
+                <div class="col-10">
+                  <form
+                    action="/admin/service-provider-all-services/<%= id %>"
+                    method="get"
+                  >
+                    <div class="row">
+                      <div class="col-4">
+                        <div class="input-group">
+                          <input
+                            type="text"
+                            class="form-control form-control-lg"
+                            name="search"
+                            value="<%= searchVal %>"
+                            placeholder="Search here !"
+                          />
+                          <div class="input-group-append">
+                            <button
+                              type="submit"
+                              class="btn btn-lg btn-default"
+                            >
+                              <i class="fa fa-search"></i>
+                            </button>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="col-4">
+                        <div class="input-group">
+                          <select
+                            class="form-control form-control-lg"
+                            style="font-size: 17px; color: grey"
+                            name="filter"
+                          >
+                            <option value="">Select Status</option>
+                            <option value="Y">Active</option>
+                            <option value="N">Inactive</option>
+                          </select>
+                          <div class="input-group-append">
+                            <button
+                              type="submit"
+                              class="btn btn-lg btn-default"
+                            >
+                              <i class="fa fa-search"></i>
+                            </button>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </form>
+                  <br />
+                  <div
+                    style="
+                      flex-direction: row !important;
+                      display: flex;
+                      justify-content: end;
+                    "
+                  >
+                    <a
+                      href="/admin/add-branch?provider_id=<%= id %>"
+                      class="btn btn-sm btn-secondary"
+                      >Add Branch</a
+                    >
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <% if(message != '') { %>
+            <div class="p-3">
+              <div
+                class="alert mb-0"
+                style="
+                  background-color: rgb(141, 228, 141);
+                  border: none;
+                  color: rgb(2, 120, 28);
+                "
+                role="alert"
+              >
+                <%= message %>
+              </div>
+            </div>
+            > <% } else if(error != '') { %>
+            <div class="p-3">
+              <div
+                class="alert mb-0"
+                style="
+                  background-color: rgb(233, 153, 153);
+                  border: none;
+                  color: rgb(120 2 2);
+                "
+                role="alert"
+              >
+                <%= error %>
+              </div>
+            </div>
+            <% } else {%>
+            <div class="card-body">
+              <table id="example2" class="table table-bordered table-hover">
+                <thead>
+                  <tr>
+                    <th>S no.</th>
+                    <th>Branch Name</th>
+                    <th>Address</th>
+                    <th>Pincode</th>
+                    <th>State</th>
+                    <th>City</th>
+                    <th>Actions</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <% data.forEach((data, index) => { %>
+                  <tr>
+                    <td><%= index + 1 + ((pageNo - 1) * limit) %></td>
+                    <td><%= data.shop_name %></td>
+                    <td><%= data.address1 %></td>
+                    <td><%= data.pin_code %></td>
+                    <td><%= data.state.name %></td>
+                    <td><%= data.city.name %></td>
+                    <td>
+                      <a
+                        href="/admin/delete-branch/<%= data.id %>"
+                        class="btn btn-sm btn-outline-danger"
+                        >Delete</a
+                      >&nbsp;
+                    </td>
+                  </tr>
+                  <%} ) %>
+                </tbody>
+              </table>
+            </div>
+            <% } %>
+
+            <div class="paginationWrapper" style="padding-right: 1rem">
+              <% if (extra.pages> 0) { %>
+              <ul class="pagination d-flex justify-content-end">
+                <% var i=(Number(extra.pageNo) > 5 ? Number(extra.pageNo) - 4 :
+                1) %> <% if (i !==1) { %>
+                <li class="page-item disabled">
+                  <a class="page-link">...</a>
+                        </li>
+                        <% } %>
+                            <% for (; i <=(Number(extra.pageNo) + 4) && i
+                <=extra.pages; i++) { %>
+                                <% if (i==extra.pageNo) { %>
+                                    <li class="page-item active">
+                                        <a class="page-link">
+                                            <%= i %>
+                                        </a>
+                                    </li>
+                                    <% } else { %>
+                                        <li class="page-item">
+                                            <a class="page-link" href="/admin/service-provider-all-services/<%= id %>/?page=<%= i %>&search=<%= searchVal %>">
+                                                <%= i %>
+                                            </a>
+                                        </li>
+                                        <% } %>
+                                            <% if (i==Number(extra.pageNo) + 4 && i < extra.pages) {
+                %>
+                                                <li class="page-item disabled">
+                                                    <a class="page-link">...</a>
+                                                </li>
+                                                <% } %>
+                                                    <% } %>
+                                                        </ul>
+                                                        <% } %>
+                </div>
+            </div>
+        </div>
+</div>
+</div>
+</section>
+</div>

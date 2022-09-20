@@ -1,0 +1,103 @@
+<div class="content-wrapper">
+    <section class="content-header">
+        <div class="container-fluid">
+            <div class="row mb-2">
+                <div class="col-sm-6">
+                    <h1>Service Provider Table </h1>
+                </div>
+                <div class="col-sm-6">
+                    <ol class="breadcrumb float-sm-right">
+                        <li class="breadcrumb-item active">Service Provider list</li>
+  
+                    </ol>
+                </div>
+            </div>
+        </div>
+    </section>
+  
+    <section class="content">
+        <div class="container-fluid">
+            
+                    <div class="card card-primary">
+                      <div class="card-header">
+                        <h3 class="card-title">Service Provider Verify</h3>
+                      </div>
+  
+                        <div>
+                            <% if(message != 0) { %>
+                            <div class="p-3">
+                                <div class="alert mb-0"
+                                    style="background-color: rgb(188 252 188); border: none; color: rgb(2, 120, 28);"
+                                    role="alert">
+                                    <%= message %>
+                                </div>
+                            </div>
+        
+                            <% } else if(error != 0){ %>
+                            <div class="p-3">
+                                <div class="alert mb-0"
+                                    style="background-color: rgb(237 183 183); border: none; color: rgb(120 2 2);"
+                                    role="alert">
+                                    <%= error %>
+                                </div>
+                            </div>
+        
+                            <% } %>
+                        </div>
+                       
+                
+                            <div class="row" style="padding: 3rem;">
+                              <div class="col-3"></div>
+                              <div class="col-6">
+                                <div class="card">
+                                  <div class="card-body login-card-body rounded">
+                                    <p class="login-box-msg">
+                                      E-mail verification.
+                                      Enter the code we just sent on your E-mail 
+                                    </p>
+                          
+                                    <form action="/admin/verify-home-service-provider" method="post">
+                                      <div class="input-group mb-3">
+                                          <input type="email" class="form-control" placeholder="Email"
+                                          value="<%= formValue && formValue.email ? formValue.email :'' %>" name="email">
+                                          <div class="input-group-append">
+                                              <div class="input-group-text">
+                                                  <span class="fas fa-envelope"></span>
+                                              </div>
+                                          </div>
+                                      </div>
+                  
+                                      <div class="input-group mb-3">
+                                          <input type="text" class="form-control" placeholder="Enter OTP"
+                                          value="<%= formValue && formValue.otp ? formValue.otp :'' %>" name="otp">
+                                          <div class="input-group-append">
+                                              <div class="input-group-text">
+                                                  <span class="fas fa-envelope"></span>
+                                              </div>
+                                          </div>
+                                      </div>
+                  
+                                      
+                                      <div class="row">
+                                          <div class="col-12">
+                                              <button type="submit" class="btn btn-primary btn-block">Verify</button>
+                                          </div>
+                                      </div>
+                                  </form>
+                                  </div>
+                                </div>
+                              </div>
+                              <div class="col-3"></div>
+                            </div>
+                           
+                        
+  
+  
+                    </div>
+  
+                    
+                
+        </div>
+    </section>
+  </div>
+  

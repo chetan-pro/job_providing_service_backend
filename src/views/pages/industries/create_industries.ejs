@@ -1,0 +1,67 @@
+<div class="content-wrapper">
+    <section class="content-header">
+        <div class="container-fluid">
+            <div class="row mb-2">
+                <div class="col-sm-6">
+                    <h1>Industry create</h1>
+                </div>
+                <div class="col-sm-6">
+                    <ol class="breadcrumb float-sm-right">
+                        <li class="breadcrumb-item"><a href="/admin/industry">Industry list</a></li>
+                        <li class="breadcrumb-item active">Industry create</li>
+                        </li>
+                    </ol>
+                </div>
+            </div>
+    </section>
+
+    <section class="content">
+        <div class="container-fluid">
+            <div class="card card-primary">
+                <div class="card-header">
+                    <h3 class="card-title">Create Industry</h3>
+                </div>
+                <div>
+                    <% if(message && message != '') { %>
+                    <div class="p-3">
+                        <div class="alert mb-0"
+                            style="background-color: rgb(188 252 188); border: none; color: rgb(2, 120, 28);"
+                            role="alert">
+                            <%= message %>
+                        </div>
+                    </div>
+                    <% } else if(error && error != ''){ %>
+                    <div class="p-3">
+                        <div class="alert mb-0"
+                            style="background-color: rgb(237 183 183); border: none; color: rgb(120 2 2);" role="alert">
+                            <%= error %>
+                        </div>
+                    </div>
+                    <% } %>
+                </div>
+
+                <form method="post" action="/admin/create-industry">
+                    <div class="card-body">
+                        <div class="form-group">
+                            <label>Industry name</label>
+                            <input  type="text" class="form-control"
+                                value="<%= formValue && formValue.name ? formValue.name :'' %>" name="name"
+                                placeholder="Enter Industry">
+                        </div>
+                        <div class="form-group">
+                            <label>Industry status</label>
+                            <select class="form-control select2bs4" style="width: 100%;" name="status">
+                                <option value="1" selected>Active</option>
+                                <option value="0">InActive</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="card-footer">
+                        <button type="submit" class="btn btn-sm btn-primary">Submit</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </section>
+</div>

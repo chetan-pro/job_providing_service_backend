@@ -1,0 +1,705 @@
+<div class="content-wrapper">
+    <section class="content-header">
+        <div class="container-fluid">
+            <div class="row mb-2">
+                <div class="col-sm-6">
+                    <h1>Update Job Post</h1>
+                </div>
+                <div class="col-sm-6">
+                    <ol class="breadcrumb float-sm-right">
+                        <li class="breadcrumb-item">
+                            <a href="/admin/company">Company list</a>
+                        </li>
+                        <li class="breadcrumb-item">
+                            <a href="/admin/company/get-all-job-post/<%= id %>">Job Post list</a
+              >
+            </li>
+            <li class="breadcrumb-item active">Update Job Post</li>
+          </ol>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="content">
+    <div class="container-fluid">
+      <div class="card card-primary">
+        <div class="card-header">
+          <h3 class="card-title">Update Job Post</h3>
+        </div>
+
+        <div>
+          <% if(message != '') { %>
+          <div class="p-3">
+            <div
+              class="alert mb-0"
+              style="
+                background-color: rgb(141, 228, 141);
+                border: none;
+                color: rgb(2, 120, 28);
+              "
+              role="alert"
+            >
+              <%= message %>
+            </div>
+          </div>
+
+          <% } else if(error != ''){ %>
+          <div class="p-3">
+            <div
+              class="alert alert-dismissible mb-0"
+              style="
+                background-color: rgb(237 183 183);
+                border: none;
+                color: rgb(120 2 2);
+              "
+              role="alert"
+            >
+              <%= error %>
+              <button
+                type="button"
+                class="close"
+                data-dismiss="alert"
+                aria-label="Close"
+              >
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+          </div>
+
+          <% } %>
+        </div>
+
+        <form method="post" action="/admin/company/edit-job-post/<%= id %>">
+          <div class="card-body">
+            <div class="row">
+              <div class="col-md-6">
+                <div class="form-group">
+                  <label>Job Name</label>
+                  <input
+                    type="text"
+                    class="form-control"
+                    name="name"
+                    placeholder="Job name"
+                    value="<%= alldata.name %>"
+                  />
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="form-group">
+                  <label>Job Role Type</label>
+                  <select
+                    class="form-control select2bs4"
+                    style="width: 100%"
+                    id="state-dropdown"
+                    name="job_role_type_id"
+                  >
+                    <option value="<%= jobRoleTypeValue.id %>">
+                      <%= jobRoleTypeValue.name %>
+                    </option>
+                    <% jobRoleType.forEach((roleType) => { %>
+                    <option value="<%= roleType.id %>">
+                      <%= roleType.name %>
+                    </option>
+                    <% }) %>
+                  </select>
+                </div>
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="col-md-6">
+                <div class="form-group">
+                  <label>Job title</label>
+                  <input
+                    type="text"
+                    class="form-control"
+                    name="job_title"
+                    placeholder="Job title"
+                    value="<%= alldata.job_title %>"
+                  />
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="form-group">
+                  <label>Employment Type</label>
+                  <select
+                    class="form-control select2bs4"
+                    style="width: 100%"
+                    id="state-dropdown"
+                    name="employment_type"
+                  >
+                    <option value="<%= alldata.employment_type %>">
+                      <% if(alldata.employment_type === 'full_time'){ %> Full
+                      Time <% } else if(alldata.employment_type ===
+                      'part_time'){ %> Part Time <% } else
+                      if(alldata.employment_type === 'intern'){ %> Internship <%
+                      } else if(alldata.employment_type === 'both'){ %> Both <%
+                      } else { %> Employment Type <% } %>
+                    </option>
+                    <option value="full_time">Full Time</option>
+                    <option value="part_time">Part Time</option>
+                    <option value="intern">Internship</option>
+                    <option value="both">Both</option>
+                  </select>
+                </div>
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="col-md-6">
+                <div class="form-group">
+                  <label>Select Industry</label>
+                  <select
+                    class="form-control select2bs4"
+                    style="width: 100%"
+                    id="industry-dropdown"
+                    name="industry_id"
+                  >
+                    <option value="<%= industryValue.id %>">
+                      <%= industryValue.name %>
+                    </option>
+                    <% industry.forEach((industry) => { %>
+                    <option value="<%= industry.id %>">
+                      <%= industry.name %>
+                    </option>
+                    <% }) %>
+                  </select>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="form-group">
+                  <label>Select Sector</label>
+                  <select
+                    class="form-control select2bs4"
+                    style="width: 100%"
+                    id="sector-dropdown"
+                    name="sector_id"
+                  >
+                    <option value="<%= sectorValue.id %>">
+                      <%= sectorValue.name %>
+                    </option>
+                  </select>
+                </div>
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="col-md-6">
+                <div class="form-group">
+                  <label>Contract Type</label>
+                  <select
+                    class="form-control select2bs4"
+                    style="width: 100%"
+                    id="contract-type-job"
+                    name="contract_type"
+                  >
+                    <option value="<%= alldata.contract_type %>">
+                      <% if(alldata.contract_type === 'contracted'){ %>
+                      contracted <% } else if(alldata.contract_type ===
+                      'intern'){ %> Internship <% } else
+                      if(alldata.contract_type === 'fresher'){ %> Fresher <% }
+                      else if(alldata.contract_type === 'other'){ %> Other <% }
+                      else { %> Contract Type <% } %>
+                    </option>
+                    <option value="contracted">contracted</option>
+                    <option value="intern">Internship</option>
+                    <option value="fresher">Fresher</option>
+                    <option value="other">Other</option>
+                  </select>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="col-md-6">
+                  <div class="form-group" id="otherContractType">
+                    <label>Other Contract Type</label>
+                    <input
+                      type="text"
+                      class="form-control"
+                      name="contract_other_type"
+                      value="<%= alldata.contract_other_type ? alldata.contract_other_type :'' %>"
+                      placeholder="Other Contract Type"
+                    />
+                  </div>
+                  <div class="form-group" id="durationContract">
+                    <label>Contract Duration</label>
+                    <input
+                      type="number"
+                      class="form-control pincodeNumberField"
+                      name="contract_duration"
+                      id="pincode-text-field"
+                      value="<%= alldata.contract_duration %>"
+                      placeholder="Contact Duration"
+                    />
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="col-md-6">
+                <div class="form-group">
+                  <label>Job Schedule</label>
+                  <select
+                    class="form-control select2bs4"
+                    style="width: 100%"
+                    name="job_schedule"
+                  >
+                    <option value="<%= alldata.job_schedule %>">
+                      <% if(alldata.contract_type === 'contracted'){ %> Morning
+                      shift <% } else if(alldata.job_schedule ===
+                      'morning_shift'){ %> Night Shift <% } else
+                      if(alldata.job_schedule === 'night_shift'){ %> Flexible
+                      Shift <% } else if(alldata.job_schedule === 'flexible'){
+                      %> Other <% } else if(alldata.job_schedule ===
+                      'monday_to_friday'){ %> Monday to Friday <% } else
+                      if(alldata.job_schedule === 'weekend'){ %> Weekend <% }
+                      else if(alldata.job_schedule === 'other'){ %> Other <% }
+                      else { %> Job Schedule <% } %>
+                    </option>
+                    <option value="morning_shift">Morning shift</option>
+                    <option value="night_shift">Night Shift</option>
+                    <option value="flexible">Flexible Shift</option>
+                    <option value="monday_to_friday">Monday to Friday</option>
+                    <option value="weekend">Weekend</option>
+                    <option value="other">Other</option>
+                  </select>
+                </div>
+              </div>
+              <div class="col-md-6"></div>
+            </div>
+
+            <div class="row">
+              <div class="col-md-6">
+                <div class="form-group">
+                  <label>Job Time From</label>
+                  <input
+                    type="time"
+                    class="form-control"
+                    name="job_time_from"
+                    value="<%= alldata.job_time_from %>"
+                    placeholder="Job Time From"
+                  />
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="form-group">
+                  <label>Job Time To</label>
+                  <input
+                    type="time"
+                    class="form-control"
+                    name="job_time_to"
+                    value="<%= alldata.job_time_to %>"
+                    placeholder="Job Time To"
+                  />
+                </div>
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="col-md-6">
+                <div class="form-group">
+                  <label>State</label>
+                  <select
+                    class="form-control select2bs4"
+                    style="width: 100%"
+                    id="state-dropdown"
+                    name="state_id"
+                  >
+                    <option value="<%= stateValue.id %>">
+                      <%= stateValue.name %>
+                    </option>
+                    <% statedata.forEach((state) => { %>
+                    <option value="<%= state.id %>"><%= state.name %></option>
+                    <% }) %>
+                  </select>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="form-group">
+                  <label>City</label>
+                  <select
+                    class="form-control select2bs4"
+                    style="width: 100%"
+                    id="city-dropdown"
+                    name="city_id"
+                  >
+                    <option value="<%= cityValue.id %>">
+                      <%= cityValue.name %>
+                    </option>
+                  </select>
+                </div>
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="col-md-6">
+                <div class="form-group">
+                  <label>Pin Code</label>
+                  <input
+                    type="text"
+                    class="form-control"
+                    name="pin_code"
+                    value="<%= alldata.pin_code %>"
+                    placeholder="Pin Code"
+                  />
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="form-group">
+                  <label>Number of Position</label>
+                  <input
+                    type="text"
+                    class="form-control"
+                    name="number_of_position"
+                    value="<%= alldata.number_of_position %>"
+                    placeholder="Number of Position"
+                  />
+                </div>
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="col-md-6">
+                <div class="form-group">
+                  <label>Work From Home</label>
+                  <select
+                    class="form-control select2bs4"
+                    style="width: 100%"
+                    id="state-dropdown"
+                    name="work_from_home"
+                  >
+                    <option value="<%= alldata.work_from_home %>">
+                      <% if(alldata.work_from_home === 'Y'){ %> Yes <% } else
+                      if(alldata.work_from_home === 'N'){ %> No <% } else
+                      if(alldata.work_from_home === 'TEMP'){ %> Temporary <% }
+                      else { %> Work From Home <% } %>
+                    </option>
+                    <option value="Y">Yes</option>
+                    <option value="N">No</option>
+                    <option value="TEMP">Temporary</option>
+                  </select>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="form-group">
+                  <label>Job Description</label>
+                  <input
+                    type="text"
+                    class="form-control"
+                    name="job_description"
+                    value="<%= alldata.job_description %>"
+                    placeholder="Job Description"
+                  />
+                </div>
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="col-md-6">
+                <div class="form-group">
+                  <label>Salary Amount Type</label>
+                  <select
+                    class="form-control select2bs4"
+                    style="width: 100%"
+                    id="salaryType"
+                    name="salary_type"
+                  >
+                    <option value="<%= alldata.salary_type %>">
+                      <% if(alldata.salary_type === 'amount_in_range'){ %>
+                      Amount in Range <% } else if(alldata.salary_type ===
+                      'fixed_amount'){ %> Fixed Amount <% } else
+                      if(alldata.salary_type === 'upto_amount'){ %> Upto Amount
+                      <% } else { %> Salary Amount Type <% } %>
+                    </option>
+                    <option value="amount_in_range">Amount in Range</option>
+                    <option value="fixed_amount">Fixed Amount</option>
+                    <option value="upto_amount">Upto Amount</option>
+                  </select>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="form-group">
+                  <label>Salary Paid Type</label>
+                  <select
+                    class="form-control select2bs4"
+                    style="width: 100%"
+                    id="state-dropdown"
+                    name="paid_type"
+                  >
+                    <option value="<%= alldata.paid_type %>">
+                      <% if(alldata.paid_type === 'PA'){ %> Amount in Range <% }
+                      else if(alldata.paid_type === 'PH'){ %> Fixed Amount <% }
+                      else { %> Salary Paid Type <% } %>
+                    </option>
+                    <option value="PA">Annual</option>
+                    <option value="PH">Hour</option>
+                  </select>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-6" id="amountInRange">
+              <div class="row">
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <label>Salary from</label>
+                    <input
+                      type="number"
+                      class="form-control mobileNumberField"
+                      name="salary_from"
+                      value="<%= formValue && formValue.salary_from ? formValue.salary_from :'' %>"
+                      placeholder="Salary from"
+                    />
+                  </div>
+                </div>
+
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <label>Salary to</label>
+                    <input
+                      type="number"
+                      class="form-control mobileNumberField"
+                      name="salary_to"
+                      value="<%= formValue && formValue.salary_to ? formValue.salary_to :'' %>"
+                      placeholder="Salary to"
+                    />
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-md-6" id="amountNotInRange">
+              <div class="row">
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <label>Salary</label>
+                    <input
+                      type="number"
+                      class="form-control mobileNumberField"
+                      name="salary"
+                      value="<%= formValue && formValue.salary ? formValue.salary :'' %>"
+                      placeholder="Salary"
+                    />
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="col-md-6">
+                <div class="form-group">
+                  <label>Experience Required</label>
+                  <select
+                    class="form-control select2bs4"
+                    style="width: 100%"
+                    id="experienceRequired"
+                    name="experience_required"
+                  >
+                    <option value="<%= alldata.experience_required %>">
+                      <% if(alldata.experience_required === 'Y'){ %> Yes <% }
+                      else if(alldata.experience_required === 'N'){ %> No <% }
+                      else { %> Experience Required <% } %>
+                    </option>
+                    <option value="Y">Yes</option>
+                    <option value="N">No</option>
+                  </select>
+                </div>
+              </div>
+            </div>
+            <div class="row" id="experienceField">
+              <div class="col-md-6">
+                <div class="row">
+                  <div class="col-md-6">
+                    <div class="form-group">
+                      <label>Exp From</label>
+                      <input
+                        type="text"
+                        class="form-control"
+                        name="exp_from"
+                        value="<%= formValue && formValue.exp_from ? formValue.exp_from :'' %>"
+                        placeholder="Exp From"
+                      />
+                    </div>
+                  </div>
+                  <div class="col-md-6">
+                    <div class="form-group">
+                      <label>Exp From Type</label>
+                      <select
+                        class="form-control select2bs4"
+                        style="width: 100%"
+                        id="state-dropdown"
+                        name="exp_from_type"
+                      >
+                        <option value="">Select Exp From Type</option>
+                        <option value="year">Year</option>
+                        <option value="M">Month</option>
+                      </select>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="row">
+                  <div class="col-md-6">
+                    <div class="form-group">
+                      <label>Exp to</label>
+                      <input
+                        type="text"
+                        class="form-control"
+                        name="exp_to"
+                        value="<%= formValue && formValue.exp_to ? formValue.exp_to :'' %>"
+                        placeholder="Exp to"
+                      />
+                    </div>
+                  </div>
+                  <div class="col-md-6">
+                    <div class="form-group">
+                      <label>Exp to Type</label>
+                      <select
+                        class="form-control select2bs4"
+                        style="width: 100%"
+                        id="state-dropdown"
+                        name="exp_to_type"
+                      >
+                        <option value="">Select Exp to Type</option>
+                        <option value="year">Year</option>
+                        <option value="M">Month</option>
+                      </select>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="col-md-6">
+                <div class="form-group">
+                  <label>Education Required</label>
+                  <select
+                    class="form-control select2bs4"
+                    style="width: 100%"
+                    id="educationRequired"
+                    name="education_required"
+                  >
+                    <option value="<%= alldata.education_required %>">
+                      <% if(alldata.education_required === 'Y'){ %> Yes <% }
+                      else if(alldata.education_required === 'N'){ %> No <% }
+                      else { %> Education Required <% } %>
+                    </option>
+                    <option value="Y">Yes</option>
+                    <option value="N">No</option>
+                  </select>
+                </div>
+              </div>
+              <div class="col-md-6" id="educationOption">
+                <div class="form-group">
+                  <label>Education</label>
+                  <select
+                    class="form-control select2bs4"
+                    style="width: 100%"
+                    id="state-dropdown"
+                    name="education_id"
+                  >
+                    <option value="">Select Education</option>
+                    <% education.forEach((education) => { %>
+                    <option value="<%= education.id %>">
+                      <%= education.name %>
+                    </option>
+                    <% }) %>
+                  </select>
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-6">
+                <div class="form-group">
+                  <label>Submit Resume</label>
+                  <select
+                    class="form-control select2bs4"
+                    style="width: 100%"
+                    id="state-dropdown"
+                    name="submit_resume"
+                  >
+                    <option value="<%= alldata.submit_resume %>">
+                      <% if(alldata.submit_resume === 'Y'){ %> Yes <% } else
+                      if(alldata.submit_resume === 'N'){ %> No <% } else
+                      if(alldata.submit_resume === 'Option'){ %> Optional <% }
+                      else { %> Submit Resume <% } %>
+                    </option>
+                    <option value="Y">Yes</option>
+                    <option value="N">No</option>
+                    <option value="Option">Optional</option>
+                  </select>
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-6">
+                <div class="form-group">
+                  <label>Job status</label>
+                  <select
+                    class="form-control select2bs4"
+                    style="width: 100%"
+                    id="state-dropdown"
+                    name="job_status"
+                  >
+                    <option value="<%= alldata.job_status %>">
+                      <% if(alldata.job_status === 'OPEN'){ %> Open <% } else
+                      if(alldata.job_status === 'CLOSE'){ %> Close <% } else {
+                      %> Job status <% } %>
+                    </option>
+                    <option value="OPEN">Open</option>
+                    <option value="CLOSE">Close</option>
+                  </select>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="form-group">
+                  <label>Email</label>
+                  <input
+                    type="email"
+                    class="form-control"
+                    name="email"
+                    value="<%= alldata.email %>"
+                    placeholder="Email"
+                  />
+                </div>
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="col-md-6">
+                <div class="form-group">
+                  <label>status</label>
+                  <select
+                    class="form-control select2bs4"
+                    style="width: 100%"
+                    id="state-dropdown"
+                    name="status"
+                  >
+                    <option value="<%= alldata.status %>">
+                      <%= console.log(typeof Number(alldata.job_status)) %> <%=
+                      console.log(typeof 1) %> <% if(Number(alldata.job_status)
+                      === 1){ %> Active <% } else if(Number(alldata.job_status)
+                      === 0){ %> Inactive <% } else { %> status <% } %>
+                    </option>
+                    <option value="1">Active</option>
+                    <option value="0">Inactive</option>
+                  </select>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="form-group"></div>
+              </div>
+            </div>
+          </div>
+          <!-- /.card-body -->
+
+          <div class="card-footer">
+            <button type="submit" class="btn btn-sm btn-primary">Submit</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </section>
+</div>

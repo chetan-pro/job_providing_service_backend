@@ -1,0 +1,278 @@
+<div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <section class="content-header">
+        <div class="container-fluid">
+            <div class="row mb-2">
+                <div class="col-sm-6">
+                    <h1>Subscription Plan create</h1>
+                </div>
+                <div class="col-sm-6">
+                    <ol class="breadcrumb float-sm-right">
+                        <li class="breadcrumb-item"><a href="/admin/subscription-plans">Plans list</a></li>
+                        <li class="breadcrumb-item active">Plan Create</li>
+                        </li>
+                    </ol>
+                </div>
+            </div>
+        </div>
+        <!-- /.container-fluid -->
+    </section>
+    <section class="content">
+        <div class="container-fluid">
+            <div class="card card-primary">
+                <div class="card-header">
+                    <h3 class="card-title">Create Plan</h3>
+                </div>
+
+                <div>
+                    <% if(message != '') { %>
+                        <div class="p-3">
+                            <div class="alert mb-0" style="background-color: rgb(141, 228, 141); border: none; color: rgb(2, 120, 28);" role="alert">
+                                <%= message %>
+                                    </d iv>
+                            </div>
+
+                            <% } else if(error != ''){ %>
+                                <div class="p-3">
+                                    <div class="alert mb-0" style="background-color: rgb(233, 153, 153); border: none; color: rgb(120 2 2);" role="alert">
+                                        <%= error %>
+                                    </div>
+                                </div>
+
+                                <% } %>
+
+                        </div>
+
+                        <!-- /.card-header -->
+                        <!-- form start -->
+
+                        <form method="post" action="/admin/create-subscription-plan">
+                            <div class="container">
+                                <div class="row mt-3">
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label class="form-label">Title</label>
+                                            <input type="text" required class="form-control" value="<%= formValue && formValue.title ? formValue.title :'' %>" placeholder="Plan Title" name="title">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label class="form-label">User Role Type</label>
+                                            <select id="user-role-type-subscription" class="form-control select2bs4" required style="width: 100%;" value="<%= formValue && formValue.user_role_type ? formValue.user_role_type :'' %>" name="user_role_type">
+                                            <option value="" selected>Select user role type</option>
+                                            <% allRoles.forEach(function(role){ %>
+                                                <option value="<%= role.role_type%>" ><%=role.name.toUpperCase()%></option>
+                                            <% })%>
+                                        </select>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="row mt-3">
+                                    <div class="col-md-12">
+                                        <div class="form-group">
+                                            <label class="form-label">Plan Description</label>
+                                            <textarea class="form-control" name="description" placeholder="Plan Descriptiion" cols="20" rows="5"></textarea>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="row mt-3">
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label class="form-label">Amount</label>
+                                            <input type="number" required class="form-control" value="<%= formValue && formValue.amount ? formValue.amount :'' %>" placeholder="Plan Amount" name="amount">
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label class="form-label">Offer</label>
+                                            <input type="text" class="form-control" value="" placeholder="offer" name="offer">
+                                        </div>
+                                    </div>
+
+
+
+                                </div>
+
+                                <div class="row mt-3">
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label class="form-label">Discounted Amount</label>
+                                            <input type="number" class="form-control" value="<%= formValue && formValue.discounted_amount ? formValue.discounted_amount :'' %>" placeholder="Discount Amount" name="discounted_amount">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label class="form-label">Plan Status</label>
+                                            <select class="form-control select2bs4" required style="width: 100%;" value="<%= formValue && formValue.status ? formValue.status :'' %>" name="status">
+                                            <option value="1" selected>Active</option>
+                                            <option value="0" >Inactive</option>
+                                          </select>
+                                        </div>
+                                    </div>
+
+                                </div>
+
+                                <div class="row mt-3">
+
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label class="form-label">Plan Type</label>
+                                            <select class="form-control select2bs4" required style="width: 100%;" value="<%= formValue && formValue.plan_type ? formValue.plan_type :'' %>" name="plan_type">
+                                            <option value="" > Select Plan Type </option>
+                                            <% for(var val in SUBSCRIPTION_PLAN_TYPE){ %>
+                                                <option value="<%= SUBSCRIPTION_PLAN_TYPE[val] %>" ><%= SUBSCRIPTION_PLAN_TYPE[val].split("_").join(" ")  %></option>
+                                            <% } %>    
+                                        </select>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label class="form-label">Expire in (days)</label>
+                                            <input type="number" required class="form-control" value="<%= formValue && formValue.expiry_days ? formValue.expiry_days :'' %>" placeholder="Plan Expiry" name="expiry_days">
+                                        </div>
+                                    </div>
+
+                                </div>
+
+                                <div class="row">
+                                    <!-- <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label class="form-label">Refer amount (referred User) </label>
+                                            <input type="number" required class="form-control" value="<%= formValue && formValue.ref_amount_earned ? formValue.ref_amount_earned :'' %>" placeholder="Refer amount @ 200,300" name="ref_amount_earned">
+                                        </div>
+                                    </div> -->
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label class="form-label">CashBack amount (User)</label>
+                                            <input type="number" required class="form-control" value="<%= formValue && formValue.cashback_amount ? formValue.cashback_amount :'' %>" placeholder="cashback amount @ 30,40" name="cashback_amount">
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="row mt-3">
+                                    <div id="job-limit-subscription" class="col-md-6">
+                                        <div class="form-group">
+                                            <label class="form-label">Job Limit</label>
+                                            <input type="number" class="form-control" value="0" placeholder="Job Limit" name="job_limit">
+                                        </div>
+                                    </div>
+                                    <div id="description-limit-subscription" class="col-md-6">
+                                        <div class="form-group">
+                                            <label class="form-label">Description Limit</label>
+                                            <input type="number" class="form-control" value="0" placeholder="Description Limit" name="description_limit">
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="row mt-3">
+                                    <div id="offer-type-subscription" class="col-md-6">
+                                        <div class="form-group">
+                                            <label class="form-label">Offer Type</label>
+                                            <select class="form-control select2bs4" style="width: 100%;" value="" name="offer_type">
+                                        <option selected value=" " > Select Plan Type </option>
+                                            <% for(var value in SUBSCRIPTION_OFFER_TYPE){ %>
+                                                <option value="<%= SUBSCRIPTION_OFFER_TYPE[value] %>" ><%= SUBSCRIPTION_OFFER_TYPE[value].split("_").join(" ") %></option>
+                                            <% }  %>
+                                        </select>
+                                        </div>
+                                    </div>
+
+                                    <div id="plan-type-area-subscription" class="col-md-6">
+                                        <div class="form-group">
+                                            <label class="form-label">Plan Type Area</label>
+                                            <select class="form-control select2bs4" style="width: 100%;" value=" " name="plan_type_area">
+                                            <option value=" " selected > Select Plan Type Area </option>
+                                            <% for(var val in SUBSCRIPTION_PLAN_TYPE_AREA){ %>
+                                                <option value="<%= SUBSCRIPTION_PLAN_TYPE_AREA[val] %>" ><%= SUBSCRIPTION_PLAN_TYPE_AREA[val].split("_").join(" ")  %></option>
+                                            <% } %>
+                                        </select>
+
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="row mt-3">
+                                    <div id="plan-type-sub-area-subscription" class="col-md-6">
+                                        <div class="form-group">
+                                            <label class="form-label">Plan Sub Type</label>
+                                            <select class="form-control select2bs4" style="width: 100%;" value=" " name="plan_sub_type">
+                                            <option value=" "  selected > Select Sub Type</option>
+                                            <% for(var val in SUBSCRIPTION_PLAN_SUB_TYPE){ %>
+                                                <option value="<%= SUBSCRIPTION_PLAN_SUB_TYPE[val] %>" ><%= SUBSCRIPTION_PLAN_SUB_TYPE[val].split("_").join(" ")  %></option>
+                                            <% } %>  
+                                        </select>
+                                        </div>
+                                    </div>
+                                    <div id="cv-limit-subscription" class="col-md-6">
+                                        <div class="form-group">
+                                            <label class="form-label">CV Limit</label>
+                                            <input type="number" class="form-control" selected value="0" placeholder="CV Limit" name="cv_limit">
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="row mt-3">
+                                    <div id="connected-metro-plan-subscription" class="col-md-4">
+                                        <div class="form-group">
+                                            <label class="form-label">Connected Free Metro Plan Id</label>
+                                            <select class="form-control select2bs4" style="width: 100%;" name="connected_free_metro_plan_id">
+                                            <option selected value="0" >Select Plan</option>
+                                            <% connectedPlansMetro.forEach(plan =>{ %>
+                                                <option value="<%= plan.id %>"><%= plan.title %></option>
+                                            <% }) %>    
+                                        </select>
+                                        </div>
+                                    </div>
+                                    <div id="connected-non-metro-plan-subscription" class="col-md-4">
+                                        <div class="form-group">
+                                            <label class="form-label">Connected Free Non Metro Plan Id</label>
+                                            <select class="form-control select2bs4" style="width: 100%;" name="connected_free_non_metro_plan_id">
+                                            <option selected value="0" >Select Plan</option>
+                                            <% connectedPlansNonMetro.forEach(plan =>{ %>
+                                                <option value="<%= plan.id %>"><%= plan.title %></option>
+                                            <% }) %>    
+                                        </select>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-4">
+                                        <div id="email-limit-subscription" class="form-group">
+                                            <label class="form-label">Email Limit</label>
+                                            <input type="number" class="form-control" selected value="0" placeholder="Email Limit" name="email_limit">
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="row mt-3">
+                                    <div id="job-boosting-subscription" class="col-md-6">
+                                        <div class="form-group">
+                                            <label class="form-label">Job Boosting</label>
+                                            <select class="form-control select2bs4" style="width: 100%;" value="<%= formValue && formValue.job_boosting ? formValue.job_boosting :'' %>" name="job_boosting">
+                                            <option selected value="" > Select Boosting </option>
+                                            <% for(var value in BOOSTING_TYPE){ %>
+                                                <option value="<%= BOOSTING_TYPE[value] %>" ><%= value.split("_").join(" ") %></option>
+                                            <% }  %>
+                                        </select>
+                                        </div>
+                                    </div>
+                                    <div id="job-boosting-days-subscription" class="col-md-6">
+                                        <div class="form-group">
+                                            <label class="form-label">Job Boosting Days</label>
+                                            <input type="number" class="form-control" selected value="0" placeholder="eg. 0 , 1 ,7" name="job_boosting_days">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- /.card-body -->
+                            <div class="card-footer">
+                                <button type="submit" class="btn btn-sm btn-primary">Submit</button>
+                            </div>
+                        </form>
+                </div>
+            </div>
+    </section>
+    </div>

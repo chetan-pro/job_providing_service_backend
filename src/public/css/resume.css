@@ -1,0 +1,293 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700;800;900&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', SansSerif;
+}
+
+hr {
+    margin: 2rem 0 1rem;
+    opacity: 0.5;
+    margin: 2rem 0 1rem;
+}
+
+/* body {
+    background-color: #b5b4b4;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+} */
+
+.container {
+    position: relative;
+    width: 100%;
+    max-width: 1000px;
+    min-height: 1000px;
+    background-color: #fff;
+    /* margin: 50px; */
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    box-shadow: 0 35px 55px rgba(0, 0, 0, 0.1);
+}
+
+.container .left_Side {
+    position: relative;
+    color: #fff;
+}
+
+.profileText {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-bottom: 15px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.profileText .imgBx {
+    position: relative;
+    width: 22rem;
+    height: 21rem;
+    overflow: hidden;
+}
+
+.profileText .imgBx img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.photo {
+    width: 100%;
+    height: auto;
+}
+
+.contactInfo {
+    padding: 28px 40px;
+    background-color: rgb(82, 82, 82);
+    text-align: left;
+}
+
+.title {
+    color: #fff;
+    text-transform: uppercase;
+    font-weight: 500;
+    margin-bottom: 20px;
+    font-size: 22px;
+}
+
+.contactInfo ul {
+    position: relative;
+}
+
+.contactInfo ul li {
+    list-style: none;
+    position: relative;
+    margin: 16px 0;
+    cursor: pointer;
+}
+
+.contactInfo ul li .icon {
+    display: inline-block;
+    width: 30px;
+    font-size: 18px;
+    border: 1px solid #fff;
+    text-align: center;
+    border-radius: 50%;
+}
+
+.contactInfo ul li span {
+    font-weight: 300;
+    margin-left: 3px;
+}
+
+.tag {
+    font-weight: 600;
+}
+
+.links {
+    font-weight: 500;
+    margin-top: 5px;
+}
+
+.container .right_Side {
+    position: relative;
+    background-color: #fff;
+    /* padding-left: 1rem; */
+}
+
+.right_Side hr{
+    margin: 3rem 0 1rem;
+}
+
+.info {
+    background-color: #eee;
+    padding: 2rem 2rem 3rem;
+    margin-left: 1rem;
+}
+
+.title2 {
+    text-transform: uppercase;
+    font-size: 3rem;
+    font-weight: 500;
+    letter-spacing: 1px;
+}
+
+.title3 {
+    font-size: 1.4rem;
+    margin-top: -10px;
+    font-weight: 300;
+}
+
+.aboutme {
+    margin-top: 1rem;
+    font-size: 30px;
+    font-weight: 500;
+}
+
+.info p {
+    color: #081921;
+    margin-top: 6px;
+    font-size: 15px;
+}
+
+.about {
+    padding: 2rem 3rem;
+}
+
+.about:last-child {
+    margin-bottom: 0;
+}
+
+.about .box {
+    display: flex;
+    flex-direction: row;
+    margin: 20px 0;
+}
+
+.about .box .year_company {
+    min-width: 150px;
+}
+
+.about .text {
+    display: flex;
+}
+
+.about .box .year_company h5 {
+    text-transform: uppercase;
+    font-weight: 600;
+    font-size: 17px;
+}
+
+.about .box .text h4 {
+    text-transform: uppercase;
+    font-size: 17px;
+}
+
+.about .box .text h5 {
+    font-size: 17px;
+    font-weight: 500;
+}
+
+.title4 {
+    font-size: 24px;
+    font-weight: 600;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+}
+
+.language .percent {
+    position: relative;
+    height: 12px;
+    width: 8rem;
+    background-color: #dadada;
+    margin-top: 5px;
+    margin-left: 19px;
+}
+
+.language ul {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+}
+
+.language ul li {
+    list-style: none;
+    color: black;
+    font-weight: 500;
+    margin: 10px 0;
+    display: contents;
+}
+
+.skills {
+    padding: 0 1rem 1rem;
+    margin-top: 10px;
+}
+
+.progress {
+    display: flex;
+    margin-top: 8px;
+}
+
+.progress .text {
+    font-size: 18px;
+    font-weight: 400;
+    text-transform: uppercase;
+}
+
+progress::-webkit-progress-bar {
+    background-color: #eeeeee;
+}
+
+progress::-webkit-progress-value {
+    background: rgb(83, 85, 83);
+}
+
+
+.order-track-step {
+    /* display: flex; */
+    height: 7rem;
+}
+
+.order-track-status {
+    margin-right: 1.5rem;
+    position: relative;
+}
+
+.order-track-status-dot {
+    display: block;
+    width: 1rem;
+    height: 1rem;
+    border-radius: 50%;
+    background: #000;
+}
+
+.order-track-status-line {
+    display: block;
+    margin: 0 auto;
+    width: 1px;
+    height: 7rem;
+    background: #878685;
+}
+
+@media (max-width: 1000px) {
+    .container {
+        margin: 10px;
+        grid-template-columns: repeat(1, 1fr);
+    }
+}
+
+@media (max-width: 600px) {
+    .about .box {
+        flex-direction: column;
+    }
+
+    .about .box .year_company {
+        margin-bottom: 5px;
+    }
+}

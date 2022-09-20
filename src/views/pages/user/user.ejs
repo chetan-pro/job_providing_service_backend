@@ -1,0 +1,131 @@
+<div class="content-wrapper">
+    <section class="content-header">
+        <div class="container-fluid">
+            <div class="row mb-2">
+                <div class="col-sm-6">
+                    <h1>User Table </h1>
+                  
+                </div>
+                <div class="col-sm-6">
+                    <ol class="breadcrumb float-sm-right">
+                        <li class="breadcrumb-item" ><a href="#" style="color: #979090;">Home</a></li>
+                        <li class="breadcrumb-item" ><a href="/admin/user">User list</a></li>
+                    </ol>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="content">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-12">
+                    <div class="card">
+                      
+
+                        <% if(message != 0) { %>
+                            <div class="p-3">
+                                <div class="alert mb-0"  style="background-color: rgb(233, 153, 153); border: none; color: rgb(120 2 2);" role="alert">
+                                    <%= message %>
+                                </div>
+                            </div>
+                        <% } else { %>
+                            <div class="card-body">
+                                <table id="example2" class="table table-bordered table-hover">
+                                    <thead>
+                                        <tr>
+                                            <th>S no.</th>
+                                            <th>User Name</th>
+                                            <th>Status</th>
+                                            <th>Actions</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <% data.rows.forEach((data, index)=> { %>
+                                            <tr>
+                                                
+                                                <td>
+                                                    <%= index + 1 + ((pageNo - 1) * limit) %>
+                                                </td>
+                                              
+                                                <td>
+                                                    <%= data.name %>
+                                                </td>
+                                                <td></td>
+                                                <td>
+                                                    <a href="/admin/user/edit/<%= data.id %>"
+                                                        class="btn btn-sm btn-outline-primary">Edit</a> &nbsp;
+                                                    <button class="btn btn-sm btn-outline-danger"
+                                                        data-toggle="modal"
+                                                        data-target="#exampleModalCenter">Delete</button>
+
+                                                </td>
+                                            </tr>
+
+
+                                            <div class="modal fade" id="exampleModalCenter" tabindex="-1"
+                                                role="dialog" aria-labelledby="exampleModalCenterTitle"
+                                                aria-hidden="true">
+                                                <div class="modal-dialog modal-dialog-centered" role="document">
+                                                    <div class="modal-content">
+                                                        <div class="modal-header">
+                                                            <h5 class="modal-title" id="exampleModalLongTitle">Do
+                                                                you really want to delete this data ?</h5>
+                                                            <button type="button" class="close" data-dismiss="modal"
+                                                                aria-label="Close">
+                                                                <span aria-hidden="true">&times;</span>
+                                                            </button>
+                                                        </div>
+                                                        <div class="modal-footer">
+                                                            <button type="button" class="btn btn-outline-secondary"
+                                                                data-dismiss="modal">Close</button>
+                                                            <a href="/admin/user/delete/<%= data.id %>"
+                                                                class="btn btn-outline-danger">Delete</a>
+
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                        <%} ) %>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <% } %>
+
+                        <div class="paginationWrapper" style="padding-right: 1rem;">
+                            <% if (extra.pages> 0) { %>
+                                <ul class="pagination d-flex justify-content-end">
+                                  
+                                                <% var i=(Number(extra.pageNo) > 5 ? Number(extra.pageNo) - 4 : 1) %>
+                                                    <% if (i !==1) { %>
+                                                        <li class="page-item disabled">
+                                                            <a class="page-link">...</a></li>
+                                                    <% } %>
+                                                    <% for (; i <=(Number(extra.pageNo) + 4) && i <=extra.pages; i++) { %>
+                                                        <% if (i==extra.pageNo) { %>
+                                                            <li class="page-item active">
+                                                                <a class="page-link"><%= i %></a>
+                                                            </li>
+                                                        <% } else { %>
+                                                            <li class="page-item">
+                                                                <a class="page-link"
+                                                                    href="/admin/user/?page=<%= i %>">
+                                                                                <%= i %> </a>
+                                                            </li>
+                                                        <% } %>
+                                                        <% if (i==Number(extra.pageNo) + 4 && i < extra.pages) { %>
+                                                            <li class="page-item disabled">
+                                                                <a class="page-link">...</a></li>
+                                                        <% } %>
+                                                    <% } %>
+                                   
+                                </ul>
+                            <% } %>
+                            </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+</div>

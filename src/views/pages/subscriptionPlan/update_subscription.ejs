@@ -1,0 +1,94 @@
+<div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <section class="content-header">
+        <div class="container-fluid">
+            <div class="row mb-2">
+                <div class="col-sm-6">
+                    <h1>Subscription Plan Update</h1>
+                </div>
+                <div class="col-sm-6">
+                    <ol class="breadcrumb float-sm-right">
+                        <li class="breadcrumb-item"><a href="/admin/subscription-plans">Plans list</a></li>
+                        <li class="breadcrumb-item active">Update Plan</li>
+                    </ol>
+                </div>
+            </div>
+        </div>
+        <!-- /.container-fluid -->
+    </section>
+
+    <section class="content">
+        <div class="container-fluid">
+            <div class="card card-primary">
+                <div class="card-header">
+                    <h3 class="card-title">Update Plans</h3>
+                </div>
+
+
+                <!-- /.card-header -->
+                <!-- form start -->
+                <form method="post" action="/admin/edit-subscription-plan/<%= alldata.id %>">
+                    <div class="card-body">
+                        <div class="row mt-3">
+                            <div class="col-6">
+                                <div class="form-group">
+                                    <label for="exampleInputEmail1">Plan title</label>
+                                    <input type="text" class="form-control" name="title" value='<%= alldata.title %>'>
+                                </div>
+                            </div>
+                            <div class="col-6">
+                                <div class="form-group">
+                                    <label for="exampleInputEmail1">Plan Description</label>
+                                    <input type="text" class="form-control" name="description" value='<%= alldata.description %>'>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row mt-3">
+                            <div class="col-6">
+                                <div class="form-group">
+                                    <label for="exampleInputEmail1">Plan Amount</label>
+                                    <input type="text" class="form-control" name="amount" value='<%= alldata.amount %>'>
+                                </div>
+                            </div>
+                            <div class="col-6">
+                                <div class="form-group">
+                                    <label for="exampleInputEmail1">Plan Expiry</label>
+                                    <input type="text" class="form-control" name="expiry_days" value='<%= alldata.expiry_days %>'>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row mt-3">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label class="form-label">User Role Type</label>
+                                    <select class="form-control select2bs4" required style="width: 100%;" name="user_role_type">
+                                        <% allRoles.forEach(function(role){ %>
+                                            <option value="<%=role.role_type%>" <%= alldata.user_role_type == role.role_type ? 'selected' : '' %> ><%=role.name.toUpperCase()%></option>
+                                     <% })%>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label class="form-label">Plan Status</label>
+                                    <select class="form-control select2bs4" required style="width: 100%;" name="status">
+                                        <option value="1" selected>Active</option>
+                                        <option value="2" >Deleted</option>
+                                        <option value="0" >Inactive</option>
+                                      </select>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- /.card-body -->
+
+                    <div class="card-footer">
+                        <button type="submit" class="btn btn-sm btn-primary">Submit</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </section>
+</div>

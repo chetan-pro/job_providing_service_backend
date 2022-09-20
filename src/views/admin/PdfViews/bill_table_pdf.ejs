@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+        html {
+            zoom: 0.5;
+        }
+    </style>
+</head>
+
+<body>
+    <table style="width: 100%" style="border: 1px solid black">
+        <thead>
+            <center>
+                <h3 style="border: 1px solid black">Claim Bill</h3>
+            </center>
+        </thead>
+        <tbody>
+            <tr>
+                <th style="border: 1px solid black">Bill no.</th>
+                <th style="border: 1px solid black">BC name</th>
+                <th style="border: 1px solid black">BC code</th>
+                <th style="border: 1px solid black">Bill period</th>
+                <th style="border: 1px solid black">Bill apply date</th>
+                <th style="border: 1px solid black">Bill amount</th>
+                <th style="border: 1px solid black">Bill status</th>
+            </tr>
+            <% data.rows.forEach((data, index)=> { %>
+                <tr>
+                    <td style="border: 1px solid black">
+                        <%=index+1%>
+                    </td>
+                    <td style="border: 1px solid black">
+                        <%=data.Users[0].name%>
+                    </td>
+                    <td style="border: 1px solid black">
+                        <%=data.Users[0].referrer_code%>
+                    </td>
+                    <%var from = moment(data.start_date).format( 'DD-MM-YYYY')%>
+                        <%var to
+          = moment(data.createdAt).format( 'DD-MM-YYYY')%>
+                            <td style="border: 1px solid black">
+                                <%= moment(to, 'DD-MM-YYYY').startOf('day').diff(moment(from,
+            'DD-MM-YYYY').startOf('day'), 'days')%>days
+                            </td>
+                            <td style="border: 1px solid black">
+                                <%= moment(data.createdAt).format( 'DD-MM-YYYY')%>
+                            </td>
+                            <td style="border: 1px solid black">
+                                <%=data.amount%>
+                            </td>
+                            <td style="border: 1px solid black">
+                                <%= data.status==='p'?'Pending':data.status==='r'?'Reject':'Success'
+            %>
+                            </td>
+                </tr>
+                <%})%>
+        </tbody>
+    </table>
+</body>
+
+</html>
